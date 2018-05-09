@@ -40,8 +40,10 @@ public class SimpleJavaClientGenerator extends AbstractJavaMapperGenerator {
         interfaze.setVisibility(JavaVisibility.PUBLIC);
         commentGenerator.addJavaFileComment(interfaze);
 
+        //在表配置中获取根接口
         String rootInterface = introspectedTable.getTableConfigurationProperty(PropertyRegistry.ANY_ROOT_INTERFACE);
         if (!stringHasValue(rootInterface)) {
+        	//如果获取不到就在JavaClient配置中获取根接口属性值
             rootInterface = context.getJavaClientGeneratorConfiguration().getProperty(PropertyRegistry.ANY_ROOT_INTERFACE);
         }
 

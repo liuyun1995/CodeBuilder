@@ -1,5 +1,6 @@
 package com.liuyun.builder.api.dom.java;
 
+//基础类型包装类
 public class PrimitiveTypeWrapper extends FullyQualifiedJavaType {
     private static PrimitiveTypeWrapper booleanInstance;
     private static PrimitiveTypeWrapper byteInstance;

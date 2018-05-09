@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Parameter {
-    private String name;
-    private FullyQualifiedJavaType type;
-    private boolean isVarargs;
-
-    private List<String> annotations;
+    private String name;                   //参数名
+    private FullyQualifiedJavaType type;   //参数类型
+    private boolean isVarargs;            //是否是可变参数
+    private List<String> annotations;      //注释集合
 
     public Parameter(FullyQualifiedJavaType type, String name, boolean isVarargs) {
         super();
@@ -50,20 +49,16 @@ public class Parameter {
 
     public String getFormattedContent(CompilationUnit compilationUnit) {
         StringBuilder sb = new StringBuilder();
-
         for (String annotation : annotations) {
             sb.append(annotation);
             sb.append(' ');
         }
-
         sb.append(JavaDomUtils.calculateTypeName(compilationUnit, type));
-
         sb.append(' ');
         if (isVarargs) {
             sb.append("... "); 
         }
         sb.append(name);
-
         return sb.toString();
     }
 

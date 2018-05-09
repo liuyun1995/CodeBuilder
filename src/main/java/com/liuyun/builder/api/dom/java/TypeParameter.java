@@ -5,10 +5,8 @@ import java.util.List;
 
 //类型参数
 public class TypeParameter {
-
-    private String name;
-
-    private List<FullyQualifiedJavaType> extendsTypes;
+    private String name;                                  //类型参数名
+    private List<FullyQualifiedJavaType> extendsTypes;    //继承类型集合
 
     public TypeParameter(String name) {
         this(name, new ArrayList<FullyQualifiedJavaType>());
@@ -30,10 +28,8 @@ public class TypeParameter {
 
     public String getFormattedContent(CompilationUnit compilationUnit) {
         StringBuilder sb = new StringBuilder();
-
         sb.append(name);
         if (!extendsTypes.isEmpty()) {
-
             sb.append(" extends "); 
             boolean addAnd = false;
             for (FullyQualifiedJavaType type : extendsTypes) {
@@ -45,7 +41,6 @@ public class TypeParameter {
                 sb.append(JavaDomUtils.calculateTypeName(compilationUnit, type));
             }
         }
-
         return sb.toString();
     }
 

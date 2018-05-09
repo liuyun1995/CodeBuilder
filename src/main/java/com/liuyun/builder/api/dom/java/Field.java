@@ -3,11 +3,12 @@ package com.liuyun.builder.api.dom.java;
 import com.liuyun.builder.api.dom.OutputUtil;
 
 public class Field extends JavaElement {
-    private FullyQualifiedJavaType type;
-    private String name;
-    private String initializationString;
-    private boolean isTransient;
-    private boolean isVolatile;
+	
+    private FullyQualifiedJavaType type;     //字段类型
+    private String name;                     //字段名
+    private String initializationString;     //初始化字符串
+    private boolean isTransient;            //是否是transient
+    private boolean isVolatile;             //是否是volatile
 
     public Field() {
         this("foo", FullyQualifiedJavaType.getIntInstance()); 

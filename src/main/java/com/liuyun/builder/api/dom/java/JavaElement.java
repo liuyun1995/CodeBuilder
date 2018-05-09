@@ -7,22 +7,17 @@ import com.liuyun.builder.api.dom.OutputUtil;
 
 //Java文件元素
 public abstract class JavaElement {
-
-    /** The java doc lines. */
+	
     private List<String> javaDocLines;
-
-    /** The visibility. */
+    
     private JavaVisibility visibility = JavaVisibility.DEFAULT;
-
-    /** The is static. */
+    
     private boolean isStatic;
-
-    /** The is final. */
+    
     private boolean isFinal;
-
-    /** The annotations. */
+    
     private List<String> annotations;
-
+    
     public JavaElement() {
         super();
         javaDocLines = new ArrayList<String>();
@@ -38,47 +33,42 @@ public abstract class JavaElement {
         this.visibility = original.visibility;
     }
 
-    /**
-     * Gets the java doc lines.
-     *
-     * @return Returns the javaDocLines.
-     */
+    //获取JavaDoc行
     public List<String> getJavaDocLines() {
         return javaDocLines;
     }
 
-    /**
-     * Adds the java doc line.
-     *
-     * @param javaDocLine
-     *            the java doc line
-     */
+    //添加JavaDoc行
     public void addJavaDocLine(String javaDocLine) {
         javaDocLines.add(javaDocLine);
     }
 
+    //获取注解
     public List<String> getAnnotations() {
         return annotations;
     }
 
+    //添加注解
     public void addAnnotation(String annotation) {
         annotations.add(annotation);
     }
     
+    //获取访问标志
     public JavaVisibility getVisibility() {
         return visibility;
     }
     
+    //设置访问标志
     public void setVisibility(JavaVisibility visibility) {
         this.visibility = visibility;
     }
     
-    
+    //添加SuppressWarnings注解
     public void addSuppressTypeWarningsAnnotation() {
         addAnnotation("@SuppressWarnings(\"unchecked\")"); 
     }
     
-    
+    //添加格式化JavaDoc
     public void addFormattedJavadoc(StringBuilder sb, int indentLevel) {
         for (String javaDocLine : javaDocLines) {
             OutputUtil.javaIndent(sb, indentLevel);
@@ -87,7 +77,7 @@ public abstract class JavaElement {
         }
     }
     
-    
+    //添加格式化注释
     public void addFormattedAnnotations(StringBuilder sb, int indentLevel) {
         for (String annotation : annotations) {
             OutputUtil.javaIndent(sb, indentLevel);
@@ -96,22 +86,22 @@ public abstract class JavaElement {
         }
     }
     
-    
+    //是否是final类型
     public boolean isFinal() {
         return isFinal;
     }
     
-    
+    //设置为final类型
     public void setFinal(boolean isFinal) {
         this.isFinal = isFinal;
     }
     
-    
+    //是否是static类型
     public boolean isStatic() {
         return isStatic;
     }
     
-    
+    //设置为static类型
     public void setStatic(boolean isStatic) {
         this.isStatic = isStatic;
     }

@@ -103,9 +103,9 @@ public class MyBatisGeneratorConfigurationParser {
     	Context context = new Context();
     	configuration.addContext(context);
     	Properties attributes = parseAttributes(node);
-    	//设置id属性
         String id = attributes.getProperty("id"); 
         context.setId(id);
+        
         //解析context的子结点
         NodeList nodeList = node.getChildNodes();
         for (int i = 0; i < nodeList.getLength(); i++) {

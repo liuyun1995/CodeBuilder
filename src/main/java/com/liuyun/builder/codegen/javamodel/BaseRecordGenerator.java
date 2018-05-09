@@ -4,9 +4,12 @@ import static com.liuyun.builder.internal.utils.JavaBeansUtil.getJavaBeansField;
 import static com.liuyun.builder.internal.utils.JavaBeansUtil.getJavaBeansGetter;
 import static com.liuyun.builder.internal.utils.JavaBeansUtil.getJavaBeansSetter;
 import static com.liuyun.builder.internal.utils.messages.Messages.getString;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
+import com.liuyun.builder.api.CommentGenerator;
 import com.liuyun.builder.api.FullyQualifiedTable;
 import com.liuyun.builder.api.IntrospectedColumn;
 import com.liuyun.builder.api.Plugin;
@@ -33,14 +36,14 @@ public class BaseRecordGenerator extends AbstractJavaGenerator {
         FullyQualifiedTable table = introspectedTable.getFullyQualifiedTable();
         progressCallback.startTask(getString("Progress.8", table.toString())); 
         Plugin plugins = context.getPlugins();
-//      CommentGenerator commentGenerator = context.getCommentGenerator();
+        CommentGenerator commentGenerator = context.getCommentGenerator();
 
         //获取java类型
         FullyQualifiedJavaType type = new FullyQualifiedJavaType(introspectedTable.getBaseRecordType());
         //获取类头部信息
         TopLevelClass topLevelClass = new TopLevelClass(type);
         topLevelClass.setVisibility(JavaVisibility.PUBLIC);
-//      commentGenerator.addJavaFileComment(topLevelClass);
+        commentGenerator.addJavaFileComment(topLevelClass);
 
         //获取父类, 若不为空则设置父类信息
         FullyQualifiedJavaType superClass = getSuperClass();
@@ -48,7 +51,7 @@ public class BaseRecordGenerator extends AbstractJavaGenerator {
             topLevelClass.setSuperClass(superClass);
             topLevelClass.addImportedType(superClass);
         }
-//      commentGenerator.addModelClassComment(topLevelClass, introspectedTable);
+        commentGenerator.addModelClassComment(topLevelClass, introspectedTable);
 
         List<IntrospectedColumn> introspectedColumns = getColumnsInThisClass();
 
@@ -57,9 +60,9 @@ public class BaseRecordGenerator extends AbstractJavaGenerator {
             if (includeBLOBColumns()) {
                 addParameterizedConstructor(topLevelClass, introspectedTable.getAllColumns());
             }
-//          if (!introspectedTable.isImmutable()) {
-//              addDefaultConstructor(topLevelClass);
-//          }
+            if (!introspectedTable.isImmutable()) {
+                addDefaultConstructor(topLevelClass);
+            }
         }
 
         //获取根类型

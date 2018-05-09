@@ -66,9 +66,7 @@ public class SelectMethodGenerator extends AbstractJavaMapperMethodGenerator {
         }
     }
 
-    public void addMapperAnnotations(Interface interfaze, Method method) {
-    }
+    public void addMapperAnnotations(Interface interfaze, Method method) {}
 
-    public void addExtraImports(Interface interfaze) {
-    }
+    public void addExtraImports(Interface interfaze) {}
 }

@@ -2,20 +2,29 @@ package com.liuyun.builder.internal;
 
 import static com.liuyun.builder.internal.utils.StringUtil.stringHasValue;
 import static com.liuyun.builder.internal.utils.messages.Messages.getString;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.liuyun.builder.api.CommentGenerator;
 import com.liuyun.builder.api.FullyQualifiedTable;
 import com.liuyun.builder.api.IntrospectedColumn;
 import com.liuyun.builder.api.IntrospectedTable;
 import com.liuyun.builder.api.JavaFormatter;
+import com.liuyun.builder.api.JavaTypeResolver;
+import com.liuyun.builder.api.Plugin;
 import com.liuyun.builder.api.XmlFormatter;
 import com.liuyun.builder.api.dom.DefaultJavaFormatter;
 import com.liuyun.builder.api.dom.DefaultXmlFormatter;
 import com.liuyun.builder.codegen.core.IntrospectedTableImpl;
 import com.liuyun.builder.config.PropertyRegistry;
+import com.liuyun.builder.config.label.CommentGeneratorConfiguration;
 import com.liuyun.builder.config.label.Context;
+import com.liuyun.builder.config.label.JavaTypeResolverConfiguration;
+import com.liuyun.builder.config.label.PluginConfiguration;
 import com.liuyun.builder.config.label.TablesConfiguration;
+import com.liuyun.builder.internal.types.JavaTypeResolverDefaultImpl;
 
 //对象生成工厂
 public class ObjectFactory {
@@ -47,7 +56,7 @@ public class ObjectFactory {
                 clazz = Class.forName(type, true, classLoader);
                 return clazz;
             } catch (Throwable e) {
-                // ignore - fail safe below
+                // ignore
             }
         }
         return internalClassForName(type);
@@ -72,7 +81,7 @@ public class ObjectFactory {
             ClassLoader cl = Thread.currentThread().getContextClassLoader();
             clazz = Class.forName(type, true, cl);
         } catch (Exception e) {
-            // ignore - failsafe below
+            // ignore
         }
         if (clazz == null) {
             clazz = Class.forName(type, true, ObjectFactory.class.getClassLoader());
@@ -109,34 +118,34 @@ public class ObjectFactory {
         return answer;
     }
 
-//    //创建Java类型转换器
-//    public static JavaTypeResolver createJavaTypeResolver(Context context, List<String> warnings) {
-//        JavaTypeResolverConfiguration config = context.getJavaTypeResolverConfiguration();
-//        String type;
-//        if (config != null && config.getConfigurationType() != null) {
-//            type = config.getConfigurationType();
-//            if ("DEFAULT".equalsIgnoreCase(type)) { 
-//                type = JavaTypeResolverDefaultImpl.class.getName();
-//            }
-//        } else {
-//            type = JavaTypeResolverDefaultImpl.class.getName();
-//        }
-//        JavaTypeResolver answer = (JavaTypeResolver) createInternalObject(type);
-//        answer.setWarnings(warnings);
-//        if (config != null) {
-//            answer.addConfigurationProperties(config.getProperties());
-//        }
-//        answer.setContext(context);
-//        return answer;
-//    }
+    //创建Java类型转换器
+    public static JavaTypeResolver createJavaTypeResolver(Context context, List<String> warnings) {
+        JavaTypeResolverConfiguration config = context.getJavaTypeResolverConfiguration();
+        String type;
+        if (config != null && config.getConfigurationType() != null) {
+            type = config.getConfigurationType();
+            if ("DEFAULT".equalsIgnoreCase(type)) { 
+                type = JavaTypeResolverDefaultImpl.class.getName();
+            }
+        } else {
+            type = JavaTypeResolverDefaultImpl.class.getName();
+        }
+        JavaTypeResolver answer = (JavaTypeResolver) createInternalObject(type);
+        answer.setWarnings(warnings);
+        if (config != null) {
+            answer.addConfigurationProperties(config.getProperties());
+        }
+        answer.setContext(context);
+        return answer;
+    }
 
-//    //创建插件
-//    public static Plugin createPlugin(Context context, PluginConfiguration pluginConfiguration) {
-//        Plugin plugin = (Plugin) createInternalObject(pluginConfiguration.getConfigurationType());
-//        plugin.setContext(context);
-//        plugin.setProperties(pluginConfiguration.getProperties());
-//        return plugin;
-//    }
+    //创建插件
+    public static Plugin createPlugin(Context context, PluginConfiguration pluginConfiguration) {
+        Plugin plugin = (Plugin) createInternalObject(pluginConfiguration.getConfigurationType());
+        plugin.setContext(context);
+        plugin.setProperties(pluginConfiguration.getProperties());
+        return plugin;
+    }
 
     //创建Java格式器
     public static JavaFormatter createJavaFormatter(Context context) {
@@ -182,6 +191,23 @@ public class ObjectFactory {
     public static IntrospectedColumn createIntrospectedColumn(Context context) {
         IntrospectedColumn answer = (IntrospectedColumn) createInternalObject(IntrospectedColumn.class.getName());
         answer.setContext(context);
+        return answer;
+    }
+    
+    //创建注释生成器
+    public static CommentGenerator createCommentGenerator(Context context) {
+        CommentGeneratorConfiguration config = context.getCommentGeneratorConfiguration();
+        CommentGenerator answer;
+        String type;
+        if (config == null || config.getConfigurationType() == null) {
+            type = DefaultCommentGenerator.class.getName();
+        } else {
+            type = config.getConfigurationType();
+        }
+        answer = (CommentGenerator) createInternalObject(type);
+        if (config != null) {
+            answer.addConfigurationProperties(config.getProperties());
+        }
         return answer;
     }
     

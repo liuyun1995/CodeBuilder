@@ -1,30 +1,28 @@
 package com.liuyun.builder.codegen.javamodel;
 
-import static org.mybatis.generator.internal.util.JavaBeansUtil.getJavaBeansField;
-import static org.mybatis.generator.internal.util.JavaBeansUtil.getJavaBeansGetter;
-import static org.mybatis.generator.internal.util.JavaBeansUtil.getJavaBeansSetter;
-import static org.mybatis.generator.internal.util.messages.Messages.getString;
+import static com.liuyun.builder.internal.utils.JavaBeansUtil.getJavaBeansField;
+import static com.liuyun.builder.internal.utils.JavaBeansUtil.getJavaBeansGetter;
+import static com.liuyun.builder.internal.utils.JavaBeansUtil.getJavaBeansSetter;
+import static com.liuyun.builder.internal.utils.messages.Messages.getString;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.mybatis.generator.api.dom.java.CompilationUnit;
-import org.mybatis.generator.api.dom.java.Field;
-import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
-import org.mybatis.generator.api.dom.java.JavaVisibility;
-import org.mybatis.generator.api.dom.java.Method;
-import org.mybatis.generator.api.dom.java.Parameter;
-import org.mybatis.generator.api.dom.java.TopLevelClass;
-
 import com.liuyun.builder.api.CommentGenerator;
 import com.liuyun.builder.api.FullyQualifiedTable;
 import com.liuyun.builder.api.IntrospectedColumn;
 import com.liuyun.builder.api.Plugin;
+import com.liuyun.builder.api.dom.java.CompilationUnit;
+import com.liuyun.builder.api.dom.java.Field;
+import com.liuyun.builder.api.dom.java.FullyQualifiedJavaType;
+import com.liuyun.builder.api.dom.java.JavaVisibility;
+import com.liuyun.builder.api.dom.java.Method;
+import com.liuyun.builder.api.dom.java.Parameter;
+import com.liuyun.builder.api.dom.java.TopLevelClass;
 import com.liuyun.builder.codegen.core.AbstractJavaGenerator;
 import com.liuyun.builder.codegen.core.RootClassInfo;
 
 //生成JavaModel包含所有键
 public class SimpleModelGenerator extends AbstractJavaGenerator {
-
+	
     public SimpleModelGenerator() {
         super();
     }

@@ -90,10 +90,12 @@ public class FullyQualifiedJavaType implements Comparable<FullyQualifiedJavaType
         return sb.toString();
     }
 
+    //获取没有类型参数的全限定名
     public String getFullyQualifiedNameWithoutTypeParameters() {
         return baseQualifiedName;
     }
     
+    //获取导入集合
     public List<String> getImportList() {
         List<String> answer = new ArrayList<String>();
         if (isExplicitlyImported()) {
@@ -101,8 +103,6 @@ public class FullyQualifiedJavaType implements Comparable<FullyQualifiedJavaType
             if (index == -1) {
                 answer.add(calculateActualImport(baseQualifiedName));
             } else {
-                // an inner class is specified, only import the top
-                // level class
                 StringBuilder sb = new StringBuilder();
                 sb.append(packageName);
                 sb.append('.');
@@ -116,6 +116,7 @@ public class FullyQualifiedJavaType implements Comparable<FullyQualifiedJavaType
         return answer;
     }
 
+    //计算实际导入
     private String calculateActualImport(String name) {
         String answer = name;
         if (this.isArray()) {
@@ -127,6 +128,7 @@ public class FullyQualifiedJavaType implements Comparable<FullyQualifiedJavaType
         return answer;
     }
 
+    //获取包名
     public String getPackageName() {
         return packageName;
     }
@@ -163,6 +165,7 @@ public class FullyQualifiedJavaType implements Comparable<FullyQualifiedJavaType
         return sb.toString();
     }
 
+    //获取简短名称
     public String getShortNameWithoutTypeArguments() {
         return baseShortName;
     }
@@ -189,10 +192,12 @@ public class FullyQualifiedJavaType implements Comparable<FullyQualifiedJavaType
         return getFullyQualifiedName();
     }
 
+    //是否是基本类型
     public boolean isPrimitive() {
         return primitive;
     }
 
+    //获取基础类型包装类
     public PrimitiveTypeWrapper getPrimitiveTypeWrapper() {
         return primitiveTypeWrapper;
     }
@@ -271,28 +276,37 @@ public class FullyQualifiedJavaType implements Comparable<FullyQualifiedJavaType
         return getFullyQualifiedName().compareTo(other.getFullyQualifiedName());
     }
 
+    //添加类型参数
     public void addTypeArgument(FullyQualifiedJavaType type) {
         typeArguments.add(type);
     }
 
     private void parse(String fullTypeSpecification) {
+    	//去除前后空格
         String spec = fullTypeSpecification.trim();
+        //是否是？开头
         if (spec.startsWith("?")) { 
             wildcardType = true;
+            //裁去？并去掉前后空格
             spec = spec.substring(1).trim();
+            //是否是"extends "开头
             if (spec.startsWith("extends ")) { 
                 boundedWildcard = true;
                 extendsBoundedWildcard = true;
-                spec = spec.substring(8);  // "extends ".length()
+                //裁去"extends "
+                spec = spec.substring(8);
+            //是否是"super "开头
             } else if (spec.startsWith("super ")) { 
                 boundedWildcard = true;
                 extendsBoundedWildcard = false;
-                spec = spec.substring(6);  // "super ".length()
+                //裁去"super "
+                spec = spec.substring(6);
             } else {
                 boundedWildcard = false;
             }
             parse(spec);
         } else {
+        	//获取"<"的位置
             int index = fullTypeSpecification.indexOf('<');
             if (index == -1) {
                 simpleParse(fullTypeSpecification);
@@ -308,11 +322,16 @@ public class FullyQualifiedJavaType implements Comparable<FullyQualifiedJavaType
         }
     }
 
+    //简单解析
     private void simpleParse(String typeSpecification) {
         baseQualifiedName = typeSpecification.trim();
-        if (baseQualifiedName.contains(".")) { 
+        //是否包含"."
+        if (baseQualifiedName.contains(".")) {
+        	//获取包名
             packageName = getPackage(baseQualifiedName);
+            //获取简短名称
             baseShortName = baseQualifiedName.substring(packageName.length() + 1);
+            //再检测"."的位置
             int index = baseShortName.lastIndexOf('.');
             if (index != -1) {
                 baseShortName = baseShortName.substring(index + 1);
@@ -357,6 +376,7 @@ public class FullyQualifiedJavaType implements Comparable<FullyQualifiedJavaType
         }
     }
 
+    //解析泛型
     private void genericParse(String genericSpecification) {
         int lastIndex = genericSpecification.lastIndexOf('>');
         if (lastIndex == -1) {
@@ -396,14 +416,17 @@ public class FullyQualifiedJavaType implements Comparable<FullyQualifiedJavaType
 
     //根据全限定类名获取包名
     private static String getPackage(String baseQualifiedName) {
+    	//获取最后位置的"."
         int index = baseQualifiedName.lastIndexOf('.');
         return baseQualifiedName.substring(0, index);
     }
 
+    //是否是数组
     public boolean isArray() {
         return isArray;
     }
 
+    //获取类型参数
     public List<FullyQualifiedJavaType> getTypeArguments() {
         return typeArguments;
     }

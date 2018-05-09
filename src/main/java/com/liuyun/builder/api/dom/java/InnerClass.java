@@ -76,7 +76,6 @@ public class InnerClass extends JavaElement {
     public void setSuperClass(String superClassType) {
         this.superClass = new FullyQualifiedJavaType(superClassType);
     }
-
     
     public List<InnerClass> getInnerClasses() {
         return innerClasses;
@@ -102,11 +101,9 @@ public class InnerClass extends JavaElement {
         this.typeParameters.add(typeParameter);
     }
     
-    
     public List<InitializationBlock> getInitializationBlocks() {
         return initializationBlocks;
     }
-    
     
     public void addInitializationBlock(InitializationBlock initializationBlock) {
         initializationBlocks.add(initializationBlock);
@@ -246,7 +243,6 @@ public class InnerClass extends JavaElement {
         return sb.toString();
     }
     
-    
     public Set<FullyQualifiedJavaType> getSuperInterfaceTypes() {
         return superInterfaceTypes;
     }
@@ -256,26 +252,21 @@ public class InnerClass extends JavaElement {
         superInterfaceTypes.add(superInterface);
     }
     
-    
     public List<Method> getMethods() {
         return methods;
     }
-    
     
     public void addMethod(Method method) {
         methods.add(method);
     }
     
-    
     public FullyQualifiedJavaType getType() {
         return type;
     }
     
-    
     public boolean isAbstract() {
         return isAbstract;
     }
-    
     
     public void setAbstract(boolean isAbtract) {
         this.isAbstract = isAbtract;

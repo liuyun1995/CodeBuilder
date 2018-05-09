@@ -14,6 +14,7 @@ import com.liuyun.builder.config.label.JavaMapperConfiguration;
 import com.liuyun.builder.config.label.JavaModelConfiguration;
 import com.liuyun.builder.config.label.TablesConfiguration;
 import com.liuyun.builder.config.label.XmlMapperConfiguration;
+import com.liuyun.builder.internal.rules.ConditionalModelRules;
 import com.liuyun.builder.internal.rules.Rules;
 
 //逆向表
@@ -80,7 +81,7 @@ public abstract class IntrospectedTable {
         internalAttributes = new HashMap<IntrospectedTable.InternalAttribute, String>();
     }
 
-    //-------------------------------------------------getter和setter-----------------------------------------
+    //-----------------------------------------getter和setter------------------------------------------
 
     //获取tablesConfiguration
     public TablesConfiguration getTableConfiguration() {
@@ -452,6 +453,7 @@ public abstract class IntrospectedTable {
         calculateXmlMapperAttributes();        //计算XmlMapper属性
         //根据类型获取不同的规则实例
         rules = new ConditionalModelRules(this);
+        context.getPlugins().initialized(this);
     }
     
     //计算JavaModel属性

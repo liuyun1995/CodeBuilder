@@ -61,9 +61,7 @@ public class DeleteMethodGenerator extends AbstractJavaMapperMethodGenerator {
         }
     }
 
-    public void addMapperAnnotations(Method method) {
-    }
+    public void addMapperAnnotations(Method method) {}
 
-    public void addExtraImports(Interface interfaze) {
-    }
+    public void addExtraImports(Interface interfaze) {}
 }
