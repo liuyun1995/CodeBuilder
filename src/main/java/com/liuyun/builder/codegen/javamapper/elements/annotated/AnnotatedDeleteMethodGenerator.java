@@ -1,17 +1,16 @@
 package com.liuyun.builder.codegen.javamapper.elements.annotated;
 
 import static com.liuyun.builder.api.dom.OutputUtil.javaIndent;
-import static org.mybatis.generator.codegen.util.FormatUtil.getEscapedColumnName;
-import static org.mybatis.generator.codegen.util.FormatUtil.getParameterClause;
-import static org.mybatis.generator.internal.util.StringUtil.escapeStringForJava;
+import static com.liuyun.builder.codegen.util.FormatUtil.getEscapedColumnName;
+import static com.liuyun.builder.codegen.util.FormatUtil.getParameterClause;
+import static com.liuyun.builder.internal.utils.StringUtil.escapeStringForJava;
 
 import java.util.Iterator;
 
-import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
-import org.mybatis.generator.api.dom.java.Interface;
-import org.mybatis.generator.api.dom.java.Method;
-
 import com.liuyun.builder.api.IntrospectedColumn;
+import com.liuyun.builder.api.dom.java.FullyQualifiedJavaType;
+import com.liuyun.builder.api.dom.java.Interface;
+import com.liuyun.builder.api.dom.java.Method;
 import com.liuyun.builder.codegen.javamapper.elements.DeleteMethodGenerator;
 
 public class AnnotatedDeleteMethodGenerator extends

@@ -1,14 +1,12 @@
 package com.liuyun.builder.config.label;
 
-import static org.mybatis.generator.internal.util.EqualsUtil.areEqual;
-import static org.mybatis.generator.internal.util.HashCodeUtil.SEED;
-import static org.mybatis.generator.internal.util.HashCodeUtil.hash;
-import static org.mybatis.generator.internal.util.StringUtil.composeFullyQualifiedTableName;
-import static org.mybatis.generator.internal.util.StringUtil.stringHasValue;
-import static org.mybatis.generator.internal.util.messages.Messages.getString;
-
+import static com.liuyun.builder.internal.utils.EqualsUtil.areEqual;
+import static com.liuyun.builder.internal.utils.HashCodeUtil.SEED;
+import static com.liuyun.builder.internal.utils.HashCodeUtil.hash;
+import static com.liuyun.builder.internal.utils.StringUtil.composeFullyQualifiedTableName;
+import static com.liuyun.builder.internal.utils.StringUtil.stringHasValue;
+import static com.liuyun.builder.internal.utils.messages.Messages.getString;
 import java.util.List;
-
 import com.liuyun.builder.api.dom.xml.Attribute;
 import com.liuyun.builder.api.dom.xml.XmlElement;
 import com.liuyun.builder.config.PropertyHolder;

@@ -1,10 +1,8 @@
 package com.liuyun.builder.config.label;
 
-import static org.mybatis.generator.internal.util.StringUtil.stringHasValue;
-import static org.mybatis.generator.internal.util.messages.Messages.getString;
-
+import static com.liuyun.builder.internal.utils.StringUtil.stringHasValue;
+import static com.liuyun.builder.internal.utils.messages.Messages.getString;
 import java.util.List;
-
 import com.liuyun.builder.api.dom.xml.Attribute;
 import com.liuyun.builder.api.dom.xml.XmlElement;
 import com.liuyun.builder.config.PropertyHolder;

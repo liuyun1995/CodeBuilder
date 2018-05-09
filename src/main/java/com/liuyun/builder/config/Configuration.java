@@ -1,18 +1,15 @@
 package com.liuyun.builder.config;
 
-import static org.mybatis.generator.internal.util.StringUtil.stringHasValue;
-import static org.mybatis.generator.internal.util.messages.Messages.getString;
-
+import static com.liuyun.builder.internal.utils.StringUtil.stringHasValue;
+import static com.liuyun.builder.internal.utils.messages.Messages.getString;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.mybatis.generator.config.label.Context;
-import org.mybatis.generator.exception.InvalidConfigurationException;
-
 import com.liuyun.builder.api.dom.xml.Attribute;
 import com.liuyun.builder.api.dom.xml.Document;
 import com.liuyun.builder.api.dom.xml.XmlElement;
 import com.liuyun.builder.codegen.util.XmlConstants;
+import com.liuyun.builder.config.label.Context;
+import com.liuyun.builder.exception.InvalidConfigurationException;
 
 //配置代表类
 public class Configuration {

@@ -21,6 +21,7 @@ public class SimpleXMLMapperGenerator extends AbstractXmlMapperGenerator {
         super();
     }
 
+    //获取xml标签元素
     protected XmlElement getSqlMapElement() {
         FullyQualifiedTable table = introspectedTable.getFullyQualifiedTable();
         progressCallback.startTask(getString("Progress.12", table.toString())); 
@@ -91,4 +92,5 @@ public class SimpleXMLMapperGenerator extends AbstractXmlMapperGenerator {
         }
         return document;
     }
+    
 }

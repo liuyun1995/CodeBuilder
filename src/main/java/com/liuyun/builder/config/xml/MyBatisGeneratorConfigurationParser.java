@@ -1,20 +1,15 @@
 package com.liuyun.builder.config.xml;
 
-import static org.mybatis.generator.internal.util.StringUtil.stringHasValue;
-import static org.mybatis.generator.internal.util.messages.Messages.getString;
-
+import static com.liuyun.builder.internal.utils.StringUtil.stringHasValue;
+import static com.liuyun.builder.internal.utils.messages.Messages.getString;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Properties;
-
-import org.mybatis.generator.exception.XMLParserException;
-import org.mybatis.generator.internal.ObjectFactory;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
 import com.liuyun.builder.config.Configuration;
 import com.liuyun.builder.config.label.Context;
 import com.liuyun.builder.config.label.JDBCConnectionConfiguration;
@@ -22,6 +17,8 @@ import com.liuyun.builder.config.label.JavaMapperConfiguration;
 import com.liuyun.builder.config.label.JavaModelConfiguration;
 import com.liuyun.builder.config.label.TablesConfiguration;
 import com.liuyun.builder.config.label.XmlMapperConfiguration;
+import com.liuyun.builder.exception.XMLParserException;
+import com.liuyun.builder.internal.ObjectFactory;
 
 //配置解析器
 public class MyBatisGeneratorConfigurationParser {

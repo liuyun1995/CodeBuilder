@@ -1,18 +1,13 @@
 package com.liuyun.builder.config.label;
 
-import static org.mybatis.generator.internal.util.StringUtil.composeFullyQualifiedTableName;
-import static org.mybatis.generator.internal.util.StringUtil.stringHasValue;
-import static org.mybatis.generator.internal.util.messages.Messages.getString;
+import static com.liuyun.builder.internal.utils.StringUtil.composeFullyQualifiedTableName;
+import static com.liuyun.builder.internal.utils.StringUtil.stringHasValue;
+import static com.liuyun.builder.internal.utils.messages.Messages.getString;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-
-import org.mybatis.generator.internal.JDBCConnectionFactory;
-import org.mybatis.generator.internal.PluginAggregator;
-import org.mybatis.generator.internal.db.DatabaseIntrospector;
-
 import com.liuyun.builder.api.ConnectionFactory;
 import com.liuyun.builder.api.GeneratedJavaFile;
 import com.liuyun.builder.api.GeneratedXmlFile;
@@ -24,6 +19,9 @@ import com.liuyun.builder.api.dom.xml.Attribute;
 import com.liuyun.builder.api.dom.xml.XmlElement;
 import com.liuyun.builder.config.PropertyHolder;
 import com.liuyun.builder.config.PropertyRegistry;
+import com.liuyun.builder.internal.JDBCConnectionFactory;
+import com.liuyun.builder.internal.PluginAggregator;
+import com.liuyun.builder.internal.db.DatabaseIntrospector;
 
 //context标签配置
 public class Context extends PropertyHolder {

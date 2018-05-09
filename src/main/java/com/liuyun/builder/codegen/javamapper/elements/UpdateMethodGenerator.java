@@ -9,7 +9,6 @@ import com.liuyun.builder.api.dom.java.JavaVisibility;
 import com.liuyun.builder.api.dom.java.Method;
 import com.liuyun.builder.api.dom.java.Parameter;
 
-
 public class UpdateMethodGenerator extends AbstractJavaMapperMethodGenerator {
 
     public UpdateMethodGenerator() {

@@ -1,7 +1,6 @@
 package com.liuyun.builder.config.xml;
 
-import static org.mybatis.generator.internal.util.messages.Messages.getString;
-
+import static com.liuyun.builder.internal.utils.messages.Messages.getString;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -10,12 +9,9 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-
-import org.mybatis.generator.exception.XMLParserException;
 import org.w3c.dom.Document;
 import org.w3c.dom.DocumentType;
 import org.w3c.dom.Element;
@@ -23,9 +19,9 @@ import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
-
 import com.liuyun.builder.codegen.util.XmlConstants;
 import com.liuyun.builder.config.Configuration;
+import com.liuyun.builder.exception.XMLParserException;
 
 //配置解析器
 public class ConfigurationParser {
