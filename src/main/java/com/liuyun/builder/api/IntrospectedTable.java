@@ -1,21 +1,20 @@
 package com.liuyun.builder.api;
 
-import static org.mybatis.generator.internal.util.StringUtil.isTrue;
-import static org.mybatis.generator.internal.util.StringUtil.stringHasValue;
+import static com.liuyun.builder.internal.utils.StringUtil.isTrue;
+import static com.liuyun.builder.internal.utils.StringUtil.stringHasValue;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
-import org.mybatis.generator.config.PropertyHolder;
-import org.mybatis.generator.config.PropertyRegistry;
-import org.mybatis.generator.config.label.Context;
-import org.mybatis.generator.config.label.JavaMapperConfiguration;
-import org.mybatis.generator.config.label.JavaModelConfiguration;
-import org.mybatis.generator.config.label.TablesConfiguration;
-import org.mybatis.generator.config.label.XmlMapperConfiguration;
-import org.mybatis.generator.internal.rules.Rules;
+import com.liuyun.builder.config.PropertyRegistry;
+import com.liuyun.builder.config.label.Context;
+import com.liuyun.builder.config.label.JavaMapperConfiguration;
+import com.liuyun.builder.config.label.JavaModelConfiguration;
+import com.liuyun.builder.config.label.TablesConfiguration;
+import com.liuyun.builder.config.label.XmlMapperConfiguration;
+import com.liuyun.builder.internal.rules.Rules;
 
 //逆向表
 public abstract class IntrospectedTable {

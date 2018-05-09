@@ -3,14 +3,13 @@ package com.liuyun.builder.api;
 import java.util.List;
 import java.util.Properties;
 
-import org.mybatis.generator.api.dom.xml.Document;
-import org.mybatis.generator.api.dom.xml.XmlElement;
-import org.mybatis.generator.config.label.Context;
-
 import com.liuyun.builder.api.dom.java.Field;
 import com.liuyun.builder.api.dom.java.Interface;
 import com.liuyun.builder.api.dom.java.Method;
 import com.liuyun.builder.api.dom.java.TopLevelClass;
+import com.liuyun.builder.api.dom.xml.Document;
+import com.liuyun.builder.api.dom.xml.XmlElement;
+import com.liuyun.builder.config.label.Context;
 
 //插件适配器
 //采用适配器模式, 用户只需继承该类即可对想要的方法进行覆盖

@@ -1,7 +1,6 @@
 package com.liuyun.builder.codegen.core;
 
-import static org.mybatis.generator.internal.util.messages.Messages.getString;
-
+import static com.liuyun.builder.internal.utils.messages.Messages.getString;
 import java.beans.BeanInfo;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
@@ -9,12 +8,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
-import org.mybatis.generator.internal.ObjectFactory;
-
 import com.liuyun.builder.api.IntrospectedColumn;
-
+import com.liuyun.builder.api.dom.java.FullyQualifiedJavaType;
+import com.liuyun.builder.internal.ObjectFactory;
 
 public class RootClassInfo {
 

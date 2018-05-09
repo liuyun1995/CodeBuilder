@@ -1,8 +1,7 @@
 package com.liuyun.builder.internal.rules;
 
-import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
-
 import com.liuyun.builder.api.IntrospectedTable;
+import com.liuyun.builder.api.dom.java.FullyQualifiedJavaType;
 
 //规则生成接口
 public interface Rules {

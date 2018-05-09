@@ -1,8 +1,7 @@
 package com.liuyun.builder.api;
 
-import static org.mybatis.generator.internal.util.ClassloaderUtil.getCustomClassloader;
-import static org.mybatis.generator.internal.util.messages.Messages.getString;
-
+import static com.liuyun.builder.internal.utils.ClassloaderUtil.getCustomClassloader;
+import static com.liuyun.builder.internal.utils.messages.Messages.getString;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -13,17 +12,16 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import org.mybatis.generator.codegen.core.RootClassInfo;
-import org.mybatis.generator.config.Configuration;
-import org.mybatis.generator.config.MergeConstants;
-import org.mybatis.generator.config.label.Context;
-import org.mybatis.generator.exception.InvalidConfigurationException;
-import org.mybatis.generator.exception.ShellException;
-import org.mybatis.generator.internal.DefaultShellCallback;
-import org.mybatis.generator.internal.NullProgressCallback;
-import org.mybatis.generator.internal.ObjectFactory;
-import org.mybatis.generator.internal.XmlFileMergerJaxp;
+import com.liuyun.builder.codegen.core.RootClassInfo;
+import com.liuyun.builder.config.Configuration;
+import com.liuyun.builder.config.MergeConstants;
+import com.liuyun.builder.config.label.Context;
+import com.liuyun.builder.exception.InvalidConfigurationException;
+import com.liuyun.builder.exception.ShellException;
+import com.liuyun.builder.internal.DefaultShellCallback;
+import com.liuyun.builder.internal.NullProgressCallback;
+import com.liuyun.builder.internal.ObjectFactory;
+import com.liuyun.builder.internal.XmlFileMergerJaxp;
 
 public class MyBatisGenerator {
 

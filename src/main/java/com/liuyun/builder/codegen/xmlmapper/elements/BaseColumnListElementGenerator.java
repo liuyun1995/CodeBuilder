@@ -1,7 +1,6 @@
 package com.liuyun.builder.codegen.xmlmapper.elements;
 
 import java.util.Iterator;
-
 import com.liuyun.builder.api.IntrospectedColumn;
 import com.liuyun.builder.api.dom.xml.Attribute;
 import com.liuyun.builder.api.dom.xml.TextElement;

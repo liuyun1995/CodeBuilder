@@ -1,14 +1,13 @@
 package com.liuyun.builder.internal.db;
 
-import static org.mybatis.generator.internal.util.JavaBeansUtil.getCamelCaseString;
-import static org.mybatis.generator.internal.util.JavaBeansUtil.getValidPropertyName;
-import static org.mybatis.generator.internal.util.StringUtil.composeFullyQualifiedTableName;
-import static org.mybatis.generator.internal.util.StringUtil.isTrue;
-import static org.mybatis.generator.internal.util.StringUtil.stringContainsSQLWildcard;
-import static org.mybatis.generator.internal.util.StringUtil.stringContainsSpace;
-import static org.mybatis.generator.internal.util.StringUtil.stringHasValue;
-import static org.mybatis.generator.internal.util.messages.Messages.getString;
-
+import static com.liuyun.builder.internal.utils.JavaBeansUtil.getCamelCaseString;
+import static com.liuyun.builder.internal.utils.JavaBeansUtil.getValidPropertyName;
+import static com.liuyun.builder.internal.utils.StringUtil.composeFullyQualifiedTableName;
+import static com.liuyun.builder.internal.utils.StringUtil.isTrue;
+import static com.liuyun.builder.internal.utils.StringUtil.stringContainsSQLWildcard;
+import static com.liuyun.builder.internal.utils.StringUtil.stringContainsSpace;
+import static com.liuyun.builder.internal.utils.StringUtil.stringHasValue;
+import static com.liuyun.builder.internal.utils.messages.Messages.getString;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -22,22 +21,18 @@ import java.util.StringTokenizer;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
-import org.mybatis.generator.api.dom.java.JavaReservedWords;
-import org.mybatis.generator.config.ColumnOverride;
-import org.mybatis.generator.logging.Log;
-import org.mybatis.generator.logging.LogFactory;
-
 import com.liuyun.builder.api.FullyQualifiedTable;
 import com.liuyun.builder.api.IntrospectedColumn;
 import com.liuyun.builder.api.IntrospectedTable;
 import com.liuyun.builder.api.JavaTypeResolver;
+import com.liuyun.builder.api.dom.java.FullyQualifiedJavaType;
 import com.liuyun.builder.config.GeneratedKey;
 import com.liuyun.builder.config.PropertyRegistry;
 import com.liuyun.builder.config.label.Context;
 import com.liuyun.builder.config.label.TablesConfiguration;
 import com.liuyun.builder.internal.ObjectFactory;
+import com.liuyun.builder.logging.Log;
+import com.liuyun.builder.logging.LogFactory;
 
 //数据库逆向器
 public class DatabaseIntrospector {
@@ -151,23 +146,19 @@ public class DatabaseIntrospector {
                 }
 
                 FullyQualifiedJavaType fullyQualifiedJavaType = javaTypeResolver.calculateJavaType(introspectedColumn);
-
+                
                 if (fullyQualifiedJavaType != null) {
                     introspectedColumn.setFullyQualifiedJavaType(fullyQualifiedJavaType);
                     introspectedColumn.setJdbcTypeName(javaTypeResolver.calculateJdbcTypeName(introspectedColumn));
                 } else {
-                    // type cannot be resolved. Check for ignored or overridden
                     boolean warn = true;
                     if (tc.isColumnIgnored(introspectedColumn.getActualColumnName())) {
                         warn = false;
                     }
-
                     ColumnOverride co = tc.getColumnOverride(introspectedColumn.getActualColumnName());
                     if (co != null && stringHasValue(co.getJavaType())) {
                         warn = false;
                     }
-
-                    // if the type is not supported, then we'll report a warning
                     if (warn) {
                         introspectedColumn.setFullyQualifiedJavaType(FullyQualifiedJavaType.getObjectInstance());
                         introspectedColumn.setJdbcTypeName("OTHER"); 
@@ -237,7 +228,6 @@ public class DatabaseIntrospector {
     private void calculateIdentityColumns(TablesConfiguration tc, Map<ActualTableName, List<IntrospectedColumn>> columns) {
         GeneratedKey gk = tc.getGeneratedKey();
         if (gk == null) {
-            // no generated key, then no identity or sequence columns
             return;
         }
         for (Map.Entry<ActualTableName, List<IntrospectedColumn>> entry : columns.entrySet()) {
@@ -490,29 +480,29 @@ public class DatabaseIntrospector {
     }
 
     //报告逆向转换的警告信息
-//    private void reportIntrospectionWarnings(IntrospectedTable introspectedTable, TablesConfiguration tableConfiguration, FullyQualifiedTable table) {
-//        for (ColumnOverride columnOverride : tableConfiguration.getColumnOverrides()) {
-//            if (introspectedTable.getColumn(columnOverride.getColumnName()) == null) {
-//                warnings.add(getString("Warning.3", columnOverride.getColumnName(), table.toString()));
-//            }
-//        }
-//        for (String string : tableConfiguration.getIgnoredColumnsInError()) {
-//            warnings.add(getString("Warning.4", string, table.toString()));
-//        }
-//        GeneratedKey generatedKey = tableConfiguration.getGeneratedKey();
-//        if (generatedKey != null && introspectedTable.getColumn(generatedKey.getColumn()) == null) {
-//            if (generatedKey.isIdentity()) {
-//                warnings.add(getString("Warning.5", generatedKey.getColumn(), table.toString()));
-//            } else {
-//                warnings.add(getString("Warning.6", generatedKey.getColumn(), table.toString()));
-//            }
-//        }
-//        for (IntrospectedColumn ic : introspectedTable.getAllColumns()) {
-//            if (JavaReservedWords.containsWord(ic.getJavaProperty())) {
-//                warnings.add(getString("Warning.26", ic.getActualColumnName(), table.toString()));
-//            }
-//        }
-//    }
+    private void reportIntrospectionWarnings(IntrospectedTable introspectedTable, TablesConfiguration tableConfiguration, FullyQualifiedTable table) {
+        for (ColumnOverride columnOverride : tableConfiguration.getColumnOverrides()) {
+            if (introspectedTable.getColumn(columnOverride.getColumnName()) == null) {
+                warnings.add(getString("Warning.3", columnOverride.getColumnName(), table.toString()));
+            }
+        }
+        for (String string : tableConfiguration.getIgnoredColumnsInError()) {
+            warnings.add(getString("Warning.4", string, table.toString()));
+        }
+        GeneratedKey generatedKey = tableConfiguration.getGeneratedKey();
+        if (generatedKey != null && introspectedTable.getColumn(generatedKey.getColumn()) == null) {
+            if (generatedKey.isIdentity()) {
+                warnings.add(getString("Warning.5", generatedKey.getColumn(), table.toString()));
+            } else {
+                warnings.add(getString("Warning.6", generatedKey.getColumn(), table.toString()));
+            }
+        }
+        for (IntrospectedColumn ic : introspectedTable.getAllColumns()) {
+            if (JavaReservedWords.containsWord(ic.getJavaProperty())) {
+                warnings.add(getString("Warning.26", ic.getActualColumnName(), table.toString()));
+            }
+        }
+    }
     
     //是否匹配的列
     private boolean isMatchedColumn(IntrospectedColumn introspectedColumn, GeneratedKey gk) {

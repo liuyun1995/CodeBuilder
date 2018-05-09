@@ -1,22 +1,18 @@
 package com.liuyun.builder.codegen.javamapper.elements.annotated;
 
 import static com.liuyun.builder.api.dom.OutputUtil.javaIndent;
-import static org.mybatis.generator.codegen.util.FormatUtil.getEscapedColumnName;
-import static org.mybatis.generator.codegen.util.FormatUtil.getParameterClause;
-import static org.mybatis.generator.internal.util.StringUtil.escapeStringForJava;
-
+import static com.liuyun.builder.codegen.util.FormatUtil.getEscapedColumnName;
+import static com.liuyun.builder.codegen.util.FormatUtil.getParameterClause;
+import static com.liuyun.builder.internal.utils.StringUtil.escapeStringForJava;
 import java.util.Iterator;
-
-import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
-import org.mybatis.generator.api.dom.java.Interface;
-import org.mybatis.generator.api.dom.java.Method;
-import org.mybatis.generator.codegen.util.ListUtil;
-
 import com.liuyun.builder.api.IntrospectedColumn;
+import com.liuyun.builder.api.dom.java.FullyQualifiedJavaType;
+import com.liuyun.builder.api.dom.java.Interface;
+import com.liuyun.builder.api.dom.java.Method;
 import com.liuyun.builder.codegen.javamapper.elements.UpdateMethodGenerator;
+import com.liuyun.builder.codegen.util.ListUtil;
 
-public class AnnotatedUpdateMethodGenerator
-        extends UpdateMethodGenerator {
+public class AnnotatedUpdateMethodGenerator extends UpdateMethodGenerator {
 
     private boolean isSimple;
 
@@ -27,49 +23,37 @@ public class AnnotatedUpdateMethodGenerator
 
     @Override
     public void addMapperAnnotations(Method method) {
-
-        method.addAnnotation("@Update({"); //$NON-NLS-1$
-
+        method.addAnnotation("@Update({"); 
         StringBuilder sb = new StringBuilder();
         javaIndent(sb, 1);
-        sb.append("\"update "); //$NON-NLS-1$
+        sb.append("\"update "); 
         sb.append(escapeStringForJava(introspectedTable.getFullyQualifiedTableNameAtRuntime()));
-        sb.append("\","); //$NON-NLS-1$
+        sb.append("\","); 
         method.addAnnotation(sb.toString());
-
-        // set up for first column
         sb.setLength(0);
         javaIndent(sb, 1);
-        sb.append("\"set "); //$NON-NLS-1$
-
+        sb.append("\"set "); 
         Iterator<IntrospectedColumn> iter;
         if (isSimple) {
-            iter = ListUtil.removeGeneratedAlwaysColumns(introspectedTable.getNonPrimaryKeyColumns())
-                   .iterator();
+            iter = ListUtil.removeGeneratedAlwaysColumns(introspectedTable.getNonPrimaryKeyColumns()).iterator();
         } else {
-            iter = ListUtil.removeGeneratedAlwaysColumns(introspectedTable.getBaseColumns())
-                   .iterator();
+            iter = ListUtil.removeGeneratedAlwaysColumns(introspectedTable.getBaseColumns()).iterator();
         }
 
         while (iter.hasNext()) {
             IntrospectedColumn introspectedColumn = iter.next();
-
             sb.append(escapeStringForJava(getEscapedColumnName(introspectedColumn)));
-            sb.append(" = "); //$NON-NLS-1$
+            sb.append(" = "); 
             sb.append(getParameterClause(introspectedColumn));
-
             if (iter.hasNext()) {
                 sb.append(',');
             }
-
-            sb.append("\","); //$NON-NLS-1$
+            sb.append("\","); 
             method.addAnnotation(sb.toString());
-
-            // set up for the next column
             if (iter.hasNext()) {
                 sb.setLength(0);
                 javaIndent(sb, 1);
-                sb.append("  \""); //$NON-NLS-1$
+                sb.append("  \""); 
             }
         }
 
@@ -79,15 +63,14 @@ public class AnnotatedUpdateMethodGenerator
             sb.setLength(0);
             javaIndent(sb, 1);
             if (and) {
-                sb.append("  \"and "); //$NON-NLS-1$
+                sb.append("  \"and "); 
             } else {
-                sb.append("\"where "); //$NON-NLS-1$
+                sb.append("\"where "); 
                 and = true;
             }
-
             IntrospectedColumn introspectedColumn = iter.next();
             sb.append(escapeStringForJava(getEscapedColumnName(introspectedColumn)));
-            sb.append(" = "); //$NON-NLS-1$
+            sb.append(" = "); 
             sb.append(getParameterClause(introspectedColumn));
             sb.append('\"');
             if (iter.hasNext()) {
@@ -95,12 +78,12 @@ public class AnnotatedUpdateMethodGenerator
             }
             method.addAnnotation(sb.toString());
         }
-
-        method.addAnnotation("})"); //$NON-NLS-1$
+        method.addAnnotation("})"); 
     }
 
     @Override
     public void addExtraImports(Interface interfaze) {
-        interfaze.addImportedType(new FullyQualifiedJavaType("org.apache.ibatis.annotations.Update")); //$NON-NLS-1$
+        interfaze.addImportedType(new FullyQualifiedJavaType("org.apache.ibatis.annotations.Update")); 
     }
+    
 }

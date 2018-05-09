@@ -4,15 +4,13 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
-import org.mybatis.generator.api.dom.java.Interface;
-import org.mybatis.generator.api.dom.java.JavaVisibility;
-import org.mybatis.generator.api.dom.java.Method;
-import org.mybatis.generator.api.dom.java.Parameter;
-
 import com.liuyun.builder.api.IntrospectedColumn;
+import com.liuyun.builder.api.dom.java.FullyQualifiedJavaType;
+import com.liuyun.builder.api.dom.java.Interface;
+import com.liuyun.builder.api.dom.java.JavaVisibility;
+import com.liuyun.builder.api.dom.java.Method;
+import com.liuyun.builder.api.dom.java.Parameter;
 
-//selectByPrimaryKey
 public class SelectMethodGenerator extends AbstractJavaMapperMethodGenerator {
 
     private boolean isSimple;
@@ -39,10 +37,6 @@ public class SelectMethodGenerator extends AbstractJavaMapperMethodGenerator {
             importedTypes.add(type);
             method.addParameter(new Parameter(type, "key")); 
         } else {
-            // no primary key class - fields are in the base class
-            // if more than one PK field, then we need to annotate the
-            // parameters
-            // for MyBatis3
             List<IntrospectedColumn> introspectedColumns = introspectedTable.getPrimaryKeyColumns();
             boolean annotate = introspectedColumns.size() > 1;
             if (annotate) {
@@ -63,11 +57,8 @@ public class SelectMethodGenerator extends AbstractJavaMapperMethodGenerator {
                 method.addParameter(parameter);
             }
         }
-
         addMapperAnnotations(interfaze, method);
-
         context.getCommentGenerator().addGeneralMethodComment(method, introspectedTable);
-
         if (context.getPlugins().clientSelectByPrimaryKeyMethodGenerated(method, interfaze, introspectedTable)) {
             addExtraImports(interfaze);
             interfaze.addImportedTypes(importedTypes);

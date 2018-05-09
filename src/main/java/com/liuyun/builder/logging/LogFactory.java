@@ -1,13 +1,12 @@
 package com.liuyun.builder.logging;
 
 import static com.liuyun.builder.internal.utils.messages.Messages.getString;
-
-import org.mybatis.generator.logging.commons.JakartaCommonsLoggingLogFactory;
-import org.mybatis.generator.logging.jdk14.Jdk14LoggingLogFactory;
-import org.mybatis.generator.logging.log4j.Log4jLoggingLogFactory;
-import org.mybatis.generator.logging.log4j2.Log4j2LoggingLogFactory;
-import org.mybatis.generator.logging.nologging.NoLoggingLogFactory;
-import org.mybatis.generator.logging.slf4j.Slf4jLoggingLogFactory;
+import com.liuyun.builder.logging.commons.JakartaCommonsLoggingLogFactory;
+import com.liuyun.builder.logging.jdk14.Jdk14LoggingLogFactory;
+import com.liuyun.builder.logging.log4j.Log4jLoggingLogFactory;
+import com.liuyun.builder.logging.log4j2.Log4j2LoggingLogFactory;
+import com.liuyun.builder.logging.nologging.NoLoggingLogFactory;
+import com.liuyun.builder.logging.slf4j.Slf4jLoggingLogFactory;
 
 //日志工厂
 public class LogFactory {
@@ -34,15 +33,7 @@ public class LogFactory {
             throw new RuntimeException(getString("RuntimeError.21", clazz.getName(), t.getMessage()), t);
         }
     }
-
-    /**
-     * This method will switch the logging implementation to Java native
-     * logging. This is useful in situations where you want to use Java native
-     * logging to log activity but Log4J is on the classpath. Note that this
-     * method is only effective for log classes obtained after calling this
-     * method. If you intend to use this method you should call it before
-     * calling any other method.
-     */
+    
     public static synchronized void forceJavaLogging() {
         setImplementation(new Jdk14LoggingLogFactory());
     }

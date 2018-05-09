@@ -8,13 +8,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
-import org.mybatis.generator.internal.util.StringUtil;
-
 import com.liuyun.builder.api.IntrospectedColumn;
 import com.liuyun.builder.api.JavaTypeResolver;
+import com.liuyun.builder.api.dom.java.FullyQualifiedJavaType;
 import com.liuyun.builder.config.PropertyRegistry;
 import com.liuyun.builder.config.label.Context;
+import com.liuyun.builder.internal.utils.StringUtil;
 
 
 public class JavaTypeResolverDefaultImpl implements JavaTypeResolver {

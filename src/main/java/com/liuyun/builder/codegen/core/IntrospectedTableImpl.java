@@ -3,20 +3,17 @@ package com.liuyun.builder.codegen.core;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.mybatis.generator.api.dom.java.CompilationUnit;
-import org.mybatis.generator.codegen.javamapper.JavaMapperGenerator;
-import org.mybatis.generator.codegen.javamapper.MixedClientGenerator;
-import org.mybatis.generator.codegen.javamodel.BaseRecordGenerator;
-import org.mybatis.generator.codegen.javamodel.PrimaryKeyGenerator;
-import org.mybatis.generator.codegen.xmlmapper.XMLMapperGenerator;
-import org.mybatis.generator.config.PropertyRegistry;
-import org.mybatis.generator.internal.ObjectFactory;
-
 import com.liuyun.builder.api.GeneratedJavaFile;
 import com.liuyun.builder.api.GeneratedXmlFile;
 import com.liuyun.builder.api.IntrospectedTable;
 import com.liuyun.builder.api.ProgressCallback;
+import com.liuyun.builder.api.dom.java.CompilationUnit;
 import com.liuyun.builder.api.dom.xml.Document;
+import com.liuyun.builder.codegen.javamapper.JavaMapperGenerator;
+import com.liuyun.builder.codegen.javamodel.BaseRecordGenerator;
+import com.liuyun.builder.codegen.javamodel.PrimaryKeyGenerator;
+import com.liuyun.builder.codegen.xmlmapper.XMLMapperGenerator;
+import com.liuyun.builder.config.PropertyRegistry;
 
 //逆向表的实现
 public class IntrospectedTableImpl extends IntrospectedTable {

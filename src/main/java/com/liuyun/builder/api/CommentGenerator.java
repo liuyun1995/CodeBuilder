@@ -3,8 +3,6 @@ package com.liuyun.builder.api;
 import java.util.Properties;
 import java.util.Set;
 
-import org.mybatis.generator.api.dom.xml.XmlElement;
-
 import com.liuyun.builder.api.dom.java.CompilationUnit;
 import com.liuyun.builder.api.dom.java.Field;
 import com.liuyun.builder.api.dom.java.FullyQualifiedJavaType;
@@ -12,6 +10,7 @@ import com.liuyun.builder.api.dom.java.InnerClass;
 import com.liuyun.builder.api.dom.java.InnerEnum;
 import com.liuyun.builder.api.dom.java.Method;
 import com.liuyun.builder.api.dom.java.TopLevelClass;
+import com.liuyun.builder.api.dom.xml.XmlElement;
 
 public interface CommentGenerator {
 

@@ -1,6 +1,6 @@
 package com.liuyun.builder.internal;
 
-import static org.mybatis.generator.internal.util.messages.Messages.getString;
+import static com.liuyun.builder.internal.utils.messages.Messages.getString;
 
 import java.io.File;
 import java.util.StringTokenizer;

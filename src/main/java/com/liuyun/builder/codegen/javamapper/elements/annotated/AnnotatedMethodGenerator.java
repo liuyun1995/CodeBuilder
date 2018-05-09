@@ -1,18 +1,17 @@
 package com.liuyun.builder.codegen.javamapper.elements.annotated;
 
 import static com.liuyun.builder.api.dom.OutputUtil.javaIndent;
-import static org.mybatis.generator.codegen.util.FormatUtil.getAliasedEscapedColumnName;
-import static org.mybatis.generator.codegen.util.FormatUtil.getParameterClause;
-import static org.mybatis.generator.codegen.util.FormatUtil.getSelectListPhrase;
-import static org.mybatis.generator.internal.util.StringUtil.escapeStringForJava;
+import static com.liuyun.builder.codegen.util.FormatUtil.getAliasedEscapedColumnName;
+import static com.liuyun.builder.codegen.util.FormatUtil.getParameterClause;
+import static com.liuyun.builder.codegen.util.FormatUtil.getSelectListPhrase;
+import static com.liuyun.builder.internal.utils.StringUtil.escapeStringForJava;
 
 import java.util.Iterator;
 
-import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
-import org.mybatis.generator.api.dom.java.Interface;
-import org.mybatis.generator.api.dom.java.Method;
-
 import com.liuyun.builder.api.IntrospectedColumn;
+import com.liuyun.builder.api.dom.java.FullyQualifiedJavaType;
+import com.liuyun.builder.api.dom.java.Interface;
+import com.liuyun.builder.api.dom.java.Method;
 import com.liuyun.builder.codegen.javamapper.elements.SelectMethodGenerator;
 
 public class AnnotatedMethodGenerator extends SelectMethodGenerator {
@@ -26,13 +25,11 @@ public class AnnotatedMethodGenerator extends SelectMethodGenerator {
 
     @Override
     public void addMapperAnnotations(Interface interfaze, Method method) {
-
         StringBuilder sb = new StringBuilder();
         method.addAnnotation("@Select({"); 
         javaIndent(sb, 1);
         sb.append("\"select\","); 
         method.addAnnotation(sb.toString());
-        
         sb.setLength(0);
         javaIndent(sb, 1);
         sb.append('"');
@@ -41,11 +38,9 @@ public class AnnotatedMethodGenerator extends SelectMethodGenerator {
         while (iter.hasNext()) {
             sb.append(escapeStringForJava(getSelectListPhrase(iter.next())));
             hasColumns = true;
-
             if (iter.hasNext()) {
                 sb.append(", "); 
             }
-
             if (sb.length() > 80) {
                 sb.append("\","); 
                 method.addAnnotation(sb.toString());
@@ -56,20 +51,16 @@ public class AnnotatedMethodGenerator extends SelectMethodGenerator {
                 hasColumns = false;
             }
         }
-
         if (hasColumns) {
             sb.append("\","); 
             method.addAnnotation(sb.toString());
         }
-
         sb.setLength(0);
         javaIndent(sb, 1);
         sb.append("\"from "); 
-        sb.append(escapeStringForJava(introspectedTable
-                .getAliasedFullyQualifiedTableNameAtRuntime()));
+        sb.append(escapeStringForJava(introspectedTable.getAliasedFullyQualifiedTableNameAtRuntime()));
         sb.append("\","); 
         method.addAnnotation(sb.toString());
-
         boolean and = false;
         iter = introspectedTable.getPrimaryKeyColumns().iterator();
         while (iter.hasNext()) {
@@ -81,7 +72,6 @@ public class AnnotatedMethodGenerator extends SelectMethodGenerator {
                 sb.append("\"where "); 
                 and = true;
             }
-
             IntrospectedColumn introspectedColumn = iter.next();
             sb.append(escapeStringForJava(getAliasedEscapedColumnName(introspectedColumn)));
             sb.append(" = "); 
@@ -92,9 +82,7 @@ public class AnnotatedMethodGenerator extends SelectMethodGenerator {
             }
             method.addAnnotation(sb.toString());
         }
-
         method.addAnnotation("})"); 
-
         if (useResultMapIfAvailable) {
             if (introspectedTable.getRules().generateResultMap()) {
                 addResultMapAnnotation(method);
@@ -171,4 +159,5 @@ public class AnnotatedMethodGenerator extends SelectMethodGenerator {
             interfaze.addImportedType(new FullyQualifiedJavaType("org.apache.ibatis.annotations.Results")); 
         }
     }
+    
 }

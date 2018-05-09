@@ -2,7 +2,7 @@ package com.liuyun.builder.api.dom.java;
 
 import static com.liuyun.builder.api.dom.OutputUtil.calculateImports;
 import static com.liuyun.builder.api.dom.OutputUtil.newLine;
-import static org.mybatis.generator.internal.util.StringUtil.stringHasValue;
+import static com.liuyun.builder.internal.utils.StringUtil.stringHasValue;
 
 import java.util.ArrayList;
 import java.util.List;

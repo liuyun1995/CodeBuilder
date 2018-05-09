@@ -3,10 +3,9 @@ package com.liuyun.builder.api;
 import java.sql.Types;
 import java.util.Properties;
 
-import org.mybatis.generator.config.label.Context;
-import org.mybatis.generator.internal.util.StringUtil;
-
 import com.liuyun.builder.api.dom.java.FullyQualifiedJavaType;
+import com.liuyun.builder.config.label.Context;
+import com.liuyun.builder.internal.utils.StringUtil;
 
 //逆向列
 public class IntrospectedColumn {

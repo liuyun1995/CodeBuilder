@@ -3,16 +3,15 @@ package com.liuyun.builder.codegen.xmlmapper.elements;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
-import org.mybatis.generator.config.GeneratedKey;
-
 import com.liuyun.builder.api.IntrospectedColumn;
 import com.liuyun.builder.api.dom.OutputUtil;
+import com.liuyun.builder.api.dom.java.FullyQualifiedJavaType;
 import com.liuyun.builder.api.dom.xml.Attribute;
 import com.liuyun.builder.api.dom.xml.TextElement;
 import com.liuyun.builder.api.dom.xml.XmlElement;
 import com.liuyun.builder.codegen.util.FormatUtil;
 import com.liuyun.builder.codegen.util.ListUtil;
+import com.liuyun.builder.config.GeneratedKey;
 
 //insert方法生成器
 public class InsertElementGenerator extends AbstractXmlElementGenerator {

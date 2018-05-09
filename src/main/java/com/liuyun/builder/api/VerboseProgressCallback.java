@@ -1,6 +1,6 @@
 package com.liuyun.builder.api;
 
-import org.mybatis.generator.internal.NullProgressCallback;
+import com.liuyun.builder.internal.NullProgressCallback;
 
 public class VerboseProgressCallback extends NullProgressCallback {
 

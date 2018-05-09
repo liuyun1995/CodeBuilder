@@ -1,8 +1,7 @@
 package com.liuyun.builder.codegen.util;
 
-import static org.mybatis.generator.internal.util.StringUtil.escapeStringForJava;
-import static org.mybatis.generator.internal.util.StringUtil.stringHasValue;
-
+import static com.liuyun.builder.internal.utils.StringUtil.escapeStringForJava;
+import static com.liuyun.builder.internal.utils.StringUtil.stringHasValue;
 import com.liuyun.builder.api.IntrospectedColumn;
 
 public class FormatUtil {

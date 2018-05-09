@@ -1,26 +1,23 @@
 package com.liuyun.builder.codegen.javamapper;
 
-import static org.mybatis.generator.internal.util.StringUtil.stringHasValue;
-import static org.mybatis.generator.internal.util.messages.Messages.getString;
-
+import static com.liuyun.builder.internal.utils.StringUtil.stringHasValue;
+import static com.liuyun.builder.internal.utils.messages.Messages.getString;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.mybatis.generator.api.dom.java.CompilationUnit;
-import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
-import org.mybatis.generator.api.dom.java.Interface;
-import org.mybatis.generator.api.dom.java.JavaVisibility;
-import org.mybatis.generator.codegen.javamapper.elements.AbstractJavaMapperMethodGenerator;
-import org.mybatis.generator.codegen.javamapper.elements.DeleteMethodGenerator;
-import org.mybatis.generator.codegen.javamapper.elements.InsertMethodGenerator;
-import org.mybatis.generator.codegen.javamapper.elements.SelectMethodGenerator;
-import org.mybatis.generator.codegen.javamapper.elements.UpdateMethodGenerator;
-import org.mybatis.generator.codegen.xmlmapper.SimpleXMLMapperGenerator;
-import org.mybatis.generator.config.PropertyRegistry;
-
 import com.liuyun.builder.api.CommentGenerator;
+import com.liuyun.builder.api.dom.java.CompilationUnit;
+import com.liuyun.builder.api.dom.java.FullyQualifiedJavaType;
+import com.liuyun.builder.api.dom.java.Interface;
+import com.liuyun.builder.api.dom.java.JavaVisibility;
 import com.liuyun.builder.codegen.core.AbstractJavaMapperGenerator;
 import com.liuyun.builder.codegen.core.AbstractXmlMapperGenerator;
+import com.liuyun.builder.codegen.javamapper.elements.AbstractJavaMapperMethodGenerator;
+import com.liuyun.builder.codegen.javamapper.elements.DeleteMethodGenerator;
+import com.liuyun.builder.codegen.javamapper.elements.InsertMethodGenerator;
+import com.liuyun.builder.codegen.javamapper.elements.SelectMethodGenerator;
+import com.liuyun.builder.codegen.javamapper.elements.UpdateMethodGenerator;
+import com.liuyun.builder.codegen.xmlmapper.SimpleXMLMapperGenerator;
+import com.liuyun.builder.config.PropertyRegistry;
 
 public class SimpleJavaClientGenerator extends AbstractJavaMapperGenerator {
 

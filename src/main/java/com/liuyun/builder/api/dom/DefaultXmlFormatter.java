@@ -1,9 +1,8 @@
 package com.liuyun.builder.api.dom;
 
-import org.mybatis.generator.api.dom.xml.Document;
-import org.mybatis.generator.config.label.Context;
-
 import com.liuyun.builder.api.XmlFormatter;
+import com.liuyun.builder.api.dom.xml.Document;
+import com.liuyun.builder.config.label.Context;
 
 //生成XML文件的格式器
 public class DefaultXmlFormatter implements XmlFormatter {

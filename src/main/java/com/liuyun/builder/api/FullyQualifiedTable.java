@@ -1,14 +1,14 @@
 package com.liuyun.builder.api;
 
-import static org.mybatis.generator.internal.util.EqualsUtil.areEqual;
-import static org.mybatis.generator.internal.util.HashCodeUtil.SEED;
-import static org.mybatis.generator.internal.util.HashCodeUtil.hash;
-import static org.mybatis.generator.internal.util.JavaBeansUtil.getCamelCaseString;
-import static org.mybatis.generator.internal.util.StringUtil.composeFullyQualifiedTableName;
-import static org.mybatis.generator.internal.util.StringUtil.stringHasValue;
+import static com.liuyun.builder.internal.utils.EqualsUtil.areEqual;
+import static com.liuyun.builder.internal.utils.HashCodeUtil.SEED;
+import static com.liuyun.builder.internal.utils.HashCodeUtil.hash;
+import static com.liuyun.builder.internal.utils.JavaBeansUtil.getCamelCaseString;
+import static com.liuyun.builder.internal.utils.StringUtil.composeFullyQualifiedTableName;
+import static com.liuyun.builder.internal.utils.StringUtil.stringHasValue;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.mybatis.generator.config.label.Context;
+import com.liuyun.builder.config.label.Context;
 
 //全限定表
 public class FullyQualifiedTable {

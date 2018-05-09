@@ -1,13 +1,11 @@
 package com.liuyun.builder.internal;
 
-import static org.mybatis.generator.internal.util.StringUtil.stringHasValue;
-import static org.mybatis.generator.internal.util.messages.Messages.getString;
-
+import static com.liuyun.builder.internal.utils.StringUtil.stringHasValue;
+import static com.liuyun.builder.internal.utils.messages.Messages.getString;
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.SQLException;
 import java.util.Properties;
-
 import com.liuyun.builder.api.ConnectionFactory;
 import com.liuyun.builder.config.label.JDBCConnectionConfiguration;
 

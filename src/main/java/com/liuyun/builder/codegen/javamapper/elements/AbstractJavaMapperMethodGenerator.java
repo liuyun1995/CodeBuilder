@@ -1,15 +1,13 @@
 package com.liuyun.builder.codegen.javamapper.elements;
 
-import static org.mybatis.generator.codegen.util.FormatUtil.getRenamedColumnNameForResultMap;
-import static org.mybatis.generator.internal.util.StringUtil.stringHasValue;
-
-import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
-import org.mybatis.generator.api.dom.java.Interface;
-import org.mybatis.generator.api.dom.java.Method;
-import org.mybatis.generator.config.GeneratedKey;
-
+import static com.liuyun.builder.codegen.util.FormatUtil.getRenamedColumnNameForResultMap;
+import static com.liuyun.builder.internal.utils.StringUtil.stringHasValue;
 import com.liuyun.builder.api.IntrospectedColumn;
+import com.liuyun.builder.api.dom.java.FullyQualifiedJavaType;
+import com.liuyun.builder.api.dom.java.Interface;
+import com.liuyun.builder.api.dom.java.Method;
 import com.liuyun.builder.codegen.core.AbstractGenerator;
+import com.liuyun.builder.config.GeneratedKey;
 
 //抽象的JavaMapper生成器
 public abstract class AbstractJavaMapperMethodGenerator extends AbstractGenerator {

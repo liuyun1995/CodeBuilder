@@ -1,8 +1,7 @@
 package com.liuyun.builder.api;
 
-import org.mybatis.generator.config.label.Context;
-
 import com.liuyun.builder.api.dom.java.CompilationUnit;
+import com.liuyun.builder.config.label.Context;
 
 public interface JavaFormatter {
 	

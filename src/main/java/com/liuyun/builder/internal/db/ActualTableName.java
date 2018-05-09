@@ -1,6 +1,6 @@
 package com.liuyun.builder.internal.db;
 
-import static org.mybatis.generator.internal.util.StringUtil.composeFullyQualifiedTableName;
+import static com.liuyun.builder.internal.utils.StringUtil.composeFullyQualifiedTableName;
 
 //全限定表名
 public class ActualTableName {

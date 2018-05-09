@@ -1,9 +1,8 @@
 package com.liuyun.builder.api.dom;
 
-import org.mybatis.generator.config.label.Context;
-
 import com.liuyun.builder.api.JavaFormatter;
 import com.liuyun.builder.api.dom.java.CompilationUnit;
+import com.liuyun.builder.config.label.Context;
 
 //生成Java文件的格式器
 public class DefaultJavaFormatter implements JavaFormatter {

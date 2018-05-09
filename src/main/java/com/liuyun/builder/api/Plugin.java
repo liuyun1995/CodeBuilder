@@ -3,54 +3,14 @@ package com.liuyun.builder.api;
 import java.util.List;
 import java.util.Properties;
 
-import org.mybatis.generator.api.dom.xml.Document;
-import org.mybatis.generator.api.dom.xml.XmlElement;
-import org.mybatis.generator.config.label.Context;
-
 import com.liuyun.builder.api.dom.java.Field;
 import com.liuyun.builder.api.dom.java.Interface;
 import com.liuyun.builder.api.dom.java.Method;
 import com.liuyun.builder.api.dom.java.TopLevelClass;
+import com.liuyun.builder.api.dom.xml.Document;
+import com.liuyun.builder.api.dom.xml.XmlElement;
+import com.liuyun.builder.config.label.Context;
 
-/**
- * This interface defines methods that will be called at different times during
- * the code generation process. These methods can be used to extend or modify
- * the generated code. Clients may implement this interface in its entirety, or
- * extend the PluginAdapter (highly recommended).
- * 
- * <p>Plugins have a lifecycle. In general, the lifecycle is this:
- * 
- * <ol>
- * <li>The setXXX methods are called one time</li>
- * <li>The validate method is called one time</li>
- * <li>The initialized method is called for each introspected table</li>
- * <li>The clientXXX methods are called for each introspected table</li>
- * <li>The providerXXX methods are called for each introspected table</li>
- * <li>The modelXXX methods are called for each introspected table</li>
- * <li>The sqlMapXXX methods are called for each introspected table</li>
- * <li>The contextGenerateAdditionalJavaFiles(IntrospectedTable) method is
- * called for each introspected table</li>
- * <li>The contextGenerateAdditionalXmlFiles(IntrospectedTable) method is called
- * for each introspected table</li>
- * <li>The contextGenerateAdditionalJavaFiles() method is called one time</li>
- * <li>The contextGenerateAdditionalXmlFiles() method is called one time</li>
- * </ol>
- * 
- * <p>Plugins are related to contexts - so each context will have its own set of
- * plugins. If the same plugin is specified in multiple contexts, then each
- * context will hold a unique instance of the plugin.
- * 
- * <p>Plugins are called, and initialized, in the same order they are specified in
- * the configuration.
- * 
- * <p>The clientXXX, modelXXX, and sqlMapXXX methods are called by the code
- * generators. If you replace the default code generators with other
- * implementations, these methods may not be called.
- * 
- * @author Jeff Butler
- * @see PluginAdapter
- * 
- */
 public interface Plugin {
     
     public enum ModelClassType {

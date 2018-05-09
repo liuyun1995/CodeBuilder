@@ -1,8 +1,7 @@
 package com.liuyun.builder.internal.rules;
 
-import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
-
 import com.liuyun.builder.api.IntrospectedTable;
+import com.liuyun.builder.api.dom.java.FullyQualifiedJavaType;
 import com.liuyun.builder.config.label.TablesConfiguration;
 
 //基础模型规则
@@ -47,6 +46,7 @@ public abstract class BaseRules implements Rules {
         return introspectedTable;
     }
     
+    //计算所有字段的类型
     @Override
     public FullyQualifiedJavaType calculateAllFieldsClass() {
         String answer;

@@ -3,9 +3,8 @@ package com.liuyun.builder.api;
 import java.util.List;
 import java.util.Properties;
 
-import org.mybatis.generator.config.label.Context;
-
 import com.liuyun.builder.api.dom.java.FullyQualifiedJavaType;
+import com.liuyun.builder.config.label.Context;
 
 
 public interface JavaTypeResolver {

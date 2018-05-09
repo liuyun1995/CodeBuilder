@@ -1,7 +1,7 @@
 package com.liuyun.builder.api;
 
-import org.mybatis.generator.api.dom.xml.Document;
-import org.mybatis.generator.config.label.Context;
+import com.liuyun.builder.api.dom.xml.Document;
+import com.liuyun.builder.config.label.Context;
 
 public interface XmlFormatter {
 	

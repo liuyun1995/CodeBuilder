@@ -5,14 +5,13 @@ import static com.liuyun.builder.internal.utils.StringUtil.isTrue;
 import java.util.Locale;
 import java.util.Properties;
 
-import org.mybatis.generator.api.dom.java.Field;
-import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
-import org.mybatis.generator.api.dom.java.JavaVisibility;
-import org.mybatis.generator.api.dom.java.Method;
-import org.mybatis.generator.api.dom.java.Parameter;
-
 import com.liuyun.builder.api.IntrospectedColumn;
 import com.liuyun.builder.api.IntrospectedTable;
+import com.liuyun.builder.api.dom.java.Field;
+import com.liuyun.builder.api.dom.java.FullyQualifiedJavaType;
+import com.liuyun.builder.api.dom.java.JavaVisibility;
+import com.liuyun.builder.api.dom.java.Method;
+import com.liuyun.builder.api.dom.java.Parameter;
 import com.liuyun.builder.config.PropertyRegistry;
 import com.liuyun.builder.config.label.Context;
 import com.liuyun.builder.config.label.TablesConfiguration;

@@ -2,13 +2,12 @@ package com.liuyun.builder.codegen.core;
 
 import java.util.List;
 
-import org.mybatis.generator.codegen.javamapper.SimpleAnnotatedClientGenerator;
-import org.mybatis.generator.codegen.javamapper.SimpleJavaClientGenerator;
-import org.mybatis.generator.codegen.javamodel.SimpleModelGenerator;
-import org.mybatis.generator.codegen.xmlmapper.SimpleXMLMapperGenerator;
-import org.mybatis.generator.internal.ObjectFactory;
-
 import com.liuyun.builder.api.ProgressCallback;
+import com.liuyun.builder.codegen.javamapper.SimpleAnnotatedClientGenerator;
+import com.liuyun.builder.codegen.javamapper.SimpleJavaClientGenerator;
+import com.liuyun.builder.codegen.javamodel.SimpleModelGenerator;
+import com.liuyun.builder.codegen.xmlmapper.SimpleXMLMapperGenerator;
+import com.liuyun.builder.internal.ObjectFactory;
 
 public class IntrospectedTableSimpleImpl extends IntrospectedTableImpl {
     

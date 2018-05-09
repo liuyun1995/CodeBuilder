@@ -3,11 +3,11 @@ package com.liuyun.builder.codegen.javamapper.elements;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
-import org.mybatis.generator.api.dom.java.Interface;
-import org.mybatis.generator.api.dom.java.JavaVisibility;
-import org.mybatis.generator.api.dom.java.Method;
-import org.mybatis.generator.api.dom.java.Parameter;
+import com.liuyun.builder.api.dom.java.FullyQualifiedJavaType;
+import com.liuyun.builder.api.dom.java.Interface;
+import com.liuyun.builder.api.dom.java.JavaVisibility;
+import com.liuyun.builder.api.dom.java.Method;
+import com.liuyun.builder.api.dom.java.Parameter;
 
 public class InsertMethodGenerator extends AbstractJavaMapperMethodGenerator {
 
@@ -40,7 +40,6 @@ public class InsertMethodGenerator extends AbstractJavaMapperMethodGenerator {
         context.getCommentGenerator().addGeneralMethodComment(method, introspectedTable);
         //添加注解
         addMapperAnnotations(method);
-
         if (context.getPlugins().clientInsertMethodGenerated(method, interfaze, introspectedTable)) {
             addExtraImports(interfaze);
             interfaze.addImportedTypes(importedTypes);

@@ -1,12 +1,11 @@
 package com.liuyun.builder.codegen.xmlmapper.elements;
 
-import org.mybatis.generator.config.GeneratedKey;
-
 import com.liuyun.builder.api.IntrospectedColumn;
 import com.liuyun.builder.api.dom.xml.Attribute;
 import com.liuyun.builder.api.dom.xml.TextElement;
 import com.liuyun.builder.api.dom.xml.XmlElement;
 import com.liuyun.builder.codegen.core.AbstractGenerator;
+import com.liuyun.builder.config.GeneratedKey;
 
 //抽象的xml元素生成器
 public abstract class AbstractXmlElementGenerator extends AbstractGenerator {

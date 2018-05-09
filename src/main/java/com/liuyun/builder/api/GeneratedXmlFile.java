@@ -1,6 +1,6 @@
 package com.liuyun.builder.api;
 
-import org.mybatis.generator.api.dom.xml.Document;
+import com.liuyun.builder.api.dom.xml.Document;
 
 //XML文件生成器
 public class GeneratedXmlFile extends GeneratedFile {

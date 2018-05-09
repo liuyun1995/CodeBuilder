@@ -4,16 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import org.mybatis.generator.api.dom.java.Field;
-import org.mybatis.generator.api.dom.java.Interface;
-import org.mybatis.generator.api.dom.java.Method;
-import org.mybatis.generator.api.dom.java.TopLevelClass;
-
 import com.liuyun.builder.api.GeneratedJavaFile;
 import com.liuyun.builder.api.GeneratedXmlFile;
 import com.liuyun.builder.api.IntrospectedColumn;
 import com.liuyun.builder.api.IntrospectedTable;
 import com.liuyun.builder.api.Plugin;
+import com.liuyun.builder.api.dom.java.Field;
+import com.liuyun.builder.api.dom.java.Interface;
+import com.liuyun.builder.api.dom.java.Method;
+import com.liuyun.builder.api.dom.java.TopLevelClass;
 import com.liuyun.builder.api.dom.xml.Document;
 import com.liuyun.builder.api.dom.xml.XmlElement;
 import com.liuyun.builder.config.label.Context;

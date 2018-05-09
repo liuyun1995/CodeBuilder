@@ -2,7 +2,7 @@ package com.liuyun.builder.api;
 
 import java.io.File;
 
-import org.mybatis.generator.exception.ShellException;
+import com.liuyun.builder.exception.ShellException;
 
 //Shell回调
 public interface ShellCallback {

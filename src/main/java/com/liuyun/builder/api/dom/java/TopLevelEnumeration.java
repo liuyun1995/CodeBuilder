@@ -2,8 +2,7 @@ package com.liuyun.builder.api.dom.java;
 
 import static com.liuyun.builder.api.dom.OutputUtil.calculateImports;
 import static com.liuyun.builder.api.dom.OutputUtil.newLine;
-import static org.mybatis.generator.internal.util.messages.Messages.getString;
-
+import static com.liuyun.builder.internal.utils.messages.Messages.getString;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;

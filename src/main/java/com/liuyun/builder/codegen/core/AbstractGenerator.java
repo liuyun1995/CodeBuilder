@@ -2,11 +2,10 @@ package com.liuyun.builder.codegen.core;
 
 import java.util.List;
 
-import org.mybatis.generator.config.label.Context;
-
 import com.liuyun.builder.api.IntrospectedTable;
 import com.liuyun.builder.api.ProgressCallback;
 import com.liuyun.builder.api.dom.xml.XmlElement;
+import com.liuyun.builder.config.label.Context;
 
 //抽象生成器
 public abstract class AbstractGenerator {

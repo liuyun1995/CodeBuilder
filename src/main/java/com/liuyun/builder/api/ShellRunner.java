@@ -1,7 +1,6 @@
 package com.liuyun.builder.api;
 
-import static org.mybatis.generator.internal.util.messages.Messages.getString;
-
+import static com.liuyun.builder.internal.utils.messages.Messages.getString;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -12,13 +11,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
-
-import org.mybatis.generator.config.Configuration;
-import org.mybatis.generator.config.xml.ConfigurationParser;
-import org.mybatis.generator.exception.InvalidConfigurationException;
-import org.mybatis.generator.exception.XMLParserException;
-import org.mybatis.generator.internal.DefaultShellCallback;
-import org.mybatis.generator.logging.LogFactory;
+import com.liuyun.builder.config.Configuration;
+import com.liuyun.builder.config.xml.ConfigurationParser;
+import com.liuyun.builder.exception.InvalidConfigurationException;
+import com.liuyun.builder.exception.XMLParserException;
+import com.liuyun.builder.internal.DefaultShellCallback;
+import com.liuyun.builder.logging.LogFactory;
 
 //命令行入口类
 public class ShellRunner {

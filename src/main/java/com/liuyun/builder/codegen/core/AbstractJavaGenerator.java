@@ -1,16 +1,14 @@
 package com.liuyun.builder.codegen.core;
 
-import static org.mybatis.generator.internal.util.JavaBeansUtil.getGetterMethodName;
-
+import static com.liuyun.builder.internal.utils.JavaBeansUtil.getGetterMethodName;
 import java.util.List;
 import java.util.Properties;
-
-import org.mybatis.generator.api.dom.java.CompilationUnit;
-import org.mybatis.generator.api.dom.java.Field;
-import org.mybatis.generator.api.dom.java.JavaVisibility;
-import org.mybatis.generator.api.dom.java.Method;
-import org.mybatis.generator.api.dom.java.TopLevelClass;
-import org.mybatis.generator.config.PropertyRegistry;
+import com.liuyun.builder.api.dom.java.CompilationUnit;
+import com.liuyun.builder.api.dom.java.Field;
+import com.liuyun.builder.api.dom.java.JavaVisibility;
+import com.liuyun.builder.api.dom.java.Method;
+import com.liuyun.builder.api.dom.java.TopLevelClass;
+import com.liuyun.builder.config.PropertyRegistry;
 
 public abstract class AbstractJavaGenerator extends AbstractGenerator {
 	

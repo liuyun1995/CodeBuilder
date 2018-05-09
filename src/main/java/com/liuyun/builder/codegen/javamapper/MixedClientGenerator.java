@@ -1,14 +1,13 @@
 package com.liuyun.builder.codegen.javamapper;
 
-import org.mybatis.generator.api.dom.java.Interface;
-import org.mybatis.generator.codegen.javamapper.elements.AbstractJavaMapperMethodGenerator;
-import org.mybatis.generator.codegen.javamapper.elements.annotated.AnnotatedDeleteMethodGenerator;
-import org.mybatis.generator.codegen.javamapper.elements.annotated.AnnotatedInsertMethodGenerator;
-import org.mybatis.generator.codegen.javamapper.elements.annotated.AnnotatedMethodGenerator;
-import org.mybatis.generator.codegen.javamapper.elements.annotated.AnnotatedUpdateMethodGenerator;
-import org.mybatis.generator.codegen.xmlmapper.MixedMapperGenerator;
-
+import com.liuyun.builder.api.dom.java.Interface;
 import com.liuyun.builder.codegen.core.AbstractXmlMapperGenerator;
+import com.liuyun.builder.codegen.javamapper.elements.AbstractJavaMapperMethodGenerator;
+import com.liuyun.builder.codegen.javamapper.elements.annotated.AnnotatedDeleteMethodGenerator;
+import com.liuyun.builder.codegen.javamapper.elements.annotated.AnnotatedInsertMethodGenerator;
+import com.liuyun.builder.codegen.javamapper.elements.annotated.AnnotatedMethodGenerator;
+import com.liuyun.builder.codegen.javamapper.elements.annotated.AnnotatedUpdateMethodGenerator;
+import com.liuyun.builder.codegen.xmlmapper.MixedMapperGenerator;
 
 public class MixedClientGenerator extends JavaMapperGenerator {
 

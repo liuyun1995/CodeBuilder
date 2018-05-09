@@ -1,10 +1,8 @@
 package com.liuyun.builder.internal;
 
-import static org.mybatis.generator.internal.util.messages.Messages.getString;
-
+import static com.liuyun.builder.internal.utils.messages.Messages.getString;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-
 import org.w3c.dom.Attr;
 import org.w3c.dom.CDATASection;
 import org.w3c.dom.Comment;

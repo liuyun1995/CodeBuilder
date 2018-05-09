@@ -1,8 +1,7 @@
 package com.liuyun.builder.api.dom.java;
 
-import static org.mybatis.generator.internal.util.StringUtil.stringHasValue;
-import static org.mybatis.generator.internal.util.messages.Messages.getString;
-
+import static com.liuyun.builder.internal.utils.StringUtil.stringHasValue;
+import static com.liuyun.builder.internal.utils.messages.Messages.getString;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -11,46 +10,43 @@ import java.util.StringTokenizer;
 public class FullyQualifiedJavaType implements Comparable<FullyQualifiedJavaType> {
     
     private static final String JAVA_LANG = "java.lang"; 
-
+    
     private static FullyQualifiedJavaType intInstance = null;
-
+    
     private static FullyQualifiedJavaType stringInstance = null;
-
+    
     private static FullyQualifiedJavaType booleanPrimitiveInstance = null;
-
+    
     private static FullyQualifiedJavaType objectInstance = null;
-
+    
     private static FullyQualifiedJavaType dateInstance = null;
-
+    
     private static FullyQualifiedJavaType criteriaInstance = null;
-
+    
     private static FullyQualifiedJavaType generatedCriteriaInstance = null;
-
-    /** The short name without any generic arguments. */
+    
     private String baseShortName;
-
-    /** The fully qualified name without any generic arguments. */
+    
     private String baseQualifiedName;
-
+    
     private boolean explicitlyImported;
-
+    
     private String packageName;
-
+    
     private boolean primitive;
-
+    
     private boolean isArray;
-
+    
     private PrimitiveTypeWrapper primitiveTypeWrapper;
-
+    
     private List<FullyQualifiedJavaType> typeArguments;
-
-    // the following three values are used for dealing with wildcard types
+    
     private boolean wildcardType;
-
+    
     private boolean boundedWildcard;
-
+    
     private boolean extendsBoundedWildcard;
-
+    
     public FullyQualifiedJavaType(String fullTypeSpecification) {
         super();
         typeArguments = new ArrayList<FullyQualifiedJavaType>();
@@ -97,13 +93,7 @@ public class FullyQualifiedJavaType implements Comparable<FullyQualifiedJavaType
     public String getFullyQualifiedNameWithoutTypeParameters() {
         return baseQualifiedName;
     }
-
-    /**
-     * Returns a list of Strings that are the fully qualified names of this type, and any generic type argument
-     * associated with this type.
-     *
-     * @return the import list
-     */
+    
     public List<String> getImportList() {
         List<String> answer = new ArrayList<String>();
         if (isExplicitlyImported()) {
@@ -287,7 +277,6 @@ public class FullyQualifiedJavaType implements Comparable<FullyQualifiedJavaType
 
     private void parse(String fullTypeSpecification) {
         String spec = fullTypeSpecification.trim();
-
         if (spec.startsWith("?")) { 
             wildcardType = true;
             spec = spec.substring(1).trim();
@@ -315,11 +304,6 @@ public class FullyQualifiedJavaType implements Comparable<FullyQualifiedJavaType
                 }
                 genericParse(fullTypeSpecification.substring(index, endIndex + 1));
             }
-
-            // this is far from a perfect test for detecting arrays, but is close
-            // enough for most cases.  It will not detect an improperly specified
-            // array type like byte], but it will detect byte[] and byte[   ]
-            // which are both valid
             isArray = fullTypeSpecification.endsWith("]"); 
         }
     }
@@ -379,7 +363,6 @@ public class FullyQualifiedJavaType implements Comparable<FullyQualifiedJavaType
             throw new RuntimeException(getString("RuntimeError.22", genericSpecification)); 
         }
         String argumentString = genericSpecification.substring(1, lastIndex);
-        // need to find "," outside of a <> bounds
         StringTokenizer st = new StringTokenizer(argumentString, ",<>", true); 
         int openCount = 0;
         StringBuilder sb = new StringBuilder();

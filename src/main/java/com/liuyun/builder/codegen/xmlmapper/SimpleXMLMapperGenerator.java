@@ -1,20 +1,18 @@
 package com.liuyun.builder.codegen.xmlmapper;
 
-import static org.mybatis.generator.internal.util.messages.Messages.getString;
-
-import org.mybatis.generator.codegen.xmlmapper.elements.AbstractXmlElementGenerator;
-import org.mybatis.generator.codegen.xmlmapper.elements.DeleteElementGenerator;
-import org.mybatis.generator.codegen.xmlmapper.elements.InsertElementGenerator;
-import org.mybatis.generator.codegen.xmlmapper.elements.ResultMapElementGenerator;
-import org.mybatis.generator.codegen.xmlmapper.elements.SelectElementGenerator;
-import org.mybatis.generator.codegen.xmlmapper.elements.UpdateElementGenerator;
-
+import static com.liuyun.builder.internal.utils.messages.Messages.getString;
 import com.liuyun.builder.api.FullyQualifiedTable;
 import com.liuyun.builder.api.dom.xml.Attribute;
 import com.liuyun.builder.api.dom.xml.Document;
 import com.liuyun.builder.api.dom.xml.XmlElement;
 import com.liuyun.builder.codegen.core.AbstractXmlMapperGenerator;
 import com.liuyun.builder.codegen.util.XmlConstants;
+import com.liuyun.builder.codegen.xmlmapper.elements.AbstractXmlElementGenerator;
+import com.liuyun.builder.codegen.xmlmapper.elements.DeleteElementGenerator;
+import com.liuyun.builder.codegen.xmlmapper.elements.InsertElementGenerator;
+import com.liuyun.builder.codegen.xmlmapper.elements.ResultMapElementGenerator;
+import com.liuyun.builder.codegen.xmlmapper.elements.SelectElementGenerator;
+import com.liuyun.builder.codegen.xmlmapper.elements.UpdateElementGenerator;
 
 //简单的XMLMapper生成器
 public class SimpleXMLMapperGenerator extends AbstractXmlMapperGenerator {
