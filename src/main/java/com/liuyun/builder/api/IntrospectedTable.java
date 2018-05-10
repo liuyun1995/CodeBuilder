@@ -557,7 +557,7 @@ public abstract class IntrospectedTable {
         StringBuilder sb = new StringBuilder();
         XmlMapperConfiguration config = tablesConfiguration.getXmlMapperConfiguration();
         if (config != null) {
-            sb.append(config.getTarget());
+            sb.append(config.getTargetProject());
             if (stringHasValue(tablesConfiguration.getXmlMapperConfiguration().getName())) {
                 String mapperName = tablesConfiguration.getXmlMapperConfiguration().getName();
                 int ind = mapperName.lastIndexOf('.');

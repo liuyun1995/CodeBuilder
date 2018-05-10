@@ -6,8 +6,11 @@ import static com.liuyun.builder.internal.utils.HashCodeUtil.hash;
 import static com.liuyun.builder.internal.utils.JavaBeansUtil.getCamelCaseString;
 import static com.liuyun.builder.internal.utils.StringUtil.composeFullyQualifiedTableName;
 import static com.liuyun.builder.internal.utils.StringUtil.stringHasValue;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import com.liuyun.builder.config.DomainObjectRenamingRule;
 import com.liuyun.builder.config.label.Context;
 
 //唯一全限定表

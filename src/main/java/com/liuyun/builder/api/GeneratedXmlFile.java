@@ -5,28 +5,17 @@ import com.liuyun.builder.api.dom.xml.Document;
 //XML文件生成器
 public class GeneratedXmlFile extends GeneratedFile {
 
-    //XML文档
-    private Document document;
-
-    //文件名
-    private String fileName;
-
-    //目标路径
-    private String targetPackage;
-
-    //是否合并
-    private boolean isMergeable;
-
-    //XML格式化器
-    private XmlFormatter xmlFormatter;
+    private Document document;           //xml文档
+    private String fileName;             //文件名
+    private boolean isMergeable;        //是否合并
+    private XmlFormatter xmlFormatter;   //格式化器
 
     public GeneratedXmlFile(Document document, String fileName,
-            String targetPackage, String targetProject, boolean isMergeable,
+    		String targetProject, String targetPackage, boolean isMergeable,
             XmlFormatter xmlFormatter) {
-        super(targetProject);
+        super(targetProject, targetPackage);
         this.document = document;
         this.fileName = fileName;
-        this.targetPackage = targetPackage;
         this.isMergeable = isMergeable;
         this.xmlFormatter = xmlFormatter;
     }
@@ -43,7 +32,13 @@ public class GeneratedXmlFile extends GeneratedFile {
         return fileName;
     }
 
-    //获取目标路径
+    //获取项目路径
+    @Override
+	public String getTargetProject() {
+		return targetProject;
+	}
+    
+	//获取包路径
     @Override
     public String getTargetPackage() {
         return targetPackage;

@@ -2,12 +2,14 @@ package com.liuyun.builder.api;
 
 //抽象文件生成器
 public abstract class GeneratedFile {
+	
+	protected String targetProject;  //项目路径
+    protected String targetPackage;  //包路径
 
-    protected String target;
-
-    public GeneratedFile(String target) {
+    public GeneratedFile(String targetProject, String targetPackage) {
         super();
-        this.target = target;
+        this.targetProject = targetProject;
+        this.targetPackage = targetPackage;
     }
 
     //获取格式化文本
@@ -15,16 +17,15 @@ public abstract class GeneratedFile {
     
     //获取文件名
     public abstract String getFileName();
+    
+    //获取项目路径
+    public abstract String getTargetProject();
 
-    //获取目标路径
+    //获取包路径
     public abstract String getTargetPackage();
     
     //是否可以合并
     public abstract boolean isMergeable();
-    
-    public String getTarget() {
-		return target;
-	}
 
 	@Override
     public String toString() {

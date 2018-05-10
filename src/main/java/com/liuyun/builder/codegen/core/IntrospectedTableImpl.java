@@ -38,9 +38,9 @@ public class IntrospectedTableImpl extends IntrospectedTable {
     	//获取JavaModel生成器
         calculateJavaModelGenerators(warnings, progressCallback);
         //获取JavaMapper生成器
-        AbstractJavaMapperGenerator javaClientGenerator = calculateJavaMapperGenerators(warnings, progressCallback);
+        calculateJavaMapperGenerators(warnings, progressCallback);
         //获取XmlMapper生成器
-        calculateXmlMapperGenerator(javaClientGenerator, warnings, progressCallback);
+        calculateXmlMapperGenerator(warnings, progressCallback);
     }
     
     //获取JavaModel生成器
@@ -77,17 +77,8 @@ public class IntrospectedTableImpl extends IntrospectedTable {
     }
 
     //获取XMLMapper生成器
-    protected void calculateXmlMapperGenerator(AbstractJavaMapperGenerator javaClientGenerator, 
-            List<String> warnings, ProgressCallback progressCallback) {
-    	//如果javaClientGenerator为空
-        if (javaClientGenerator == null) {
-            if (tablesConfiguration.getXmlMapperConfiguration() != null) {
-                xmlMapperGenerator = new XMLMapperGenerator();
-            }
-        } else {
-        	//否则就用javaClientGenerator生成
-            xmlMapperGenerator = javaClientGenerator.getMatchedXMLGenerator();
-        }
+    protected void calculateXmlMapperGenerator(List<String> warnings, ProgressCallback progressCallback) {
+        xmlMapperGenerator = new XMLMapperGenerator();
         initializeAbstractGenerator(xmlMapperGenerator, warnings, progressCallback);
     }
 
@@ -111,7 +102,8 @@ public class IntrospectedTableImpl extends IntrospectedTable {
             //构造GeneratedJavaFile
             for (CompilationUnit compilationUnit : compilationUnits) {
                 GeneratedJavaFile gjf = new GeneratedJavaFile(compilationUnit,
-                		        tablesConfiguration.getJavaModelConfiguration().getTarget(),
+                		        tablesConfiguration.getJavaModelConfiguration().getTargetProject(),
+                		        tablesConfiguration.getJavaModelConfiguration().getTargetPackage(),
                                 context.getProperty(PropertyRegistry.CONTEXT_JAVA_FILE_ENCODING),
                                 context.getJavaFormatter());
                 answer.add(gjf);
@@ -122,7 +114,8 @@ public class IntrospectedTableImpl extends IntrospectedTable {
             List<CompilationUnit> compilationUnits = javaGenerator.getCompilationUnits();
             for (CompilationUnit compilationUnit : compilationUnits) {
                 GeneratedJavaFile gjf = new GeneratedJavaFile(compilationUnit,
-                		        tablesConfiguration.getJavaMapperConfiguration().getTarget(),
+                		        tablesConfiguration.getJavaMapperConfiguration().getTargetProject(),
+                		        tablesConfiguration.getJavaMapperConfiguration().getTargetPackage(),
                                 context.getProperty(PropertyRegistry.CONTEXT_JAVA_FILE_ENCODING),
                                 context.getJavaFormatter());
                 answer.add(gjf);
@@ -138,9 +131,9 @@ public class IntrospectedTableImpl extends IntrospectedTable {
         //生获取XmlMapper生成器
         if (xmlMapperGenerator != null) {
             Document document = xmlMapperGenerator.getDocument();
-            GeneratedXmlFile gxf = new GeneratedXmlFile(document,
-                    getXmlMapperFileName(), getXmlMapperPackage(),
-                    tablesConfiguration.getXmlMapperConfiguration().getTarget(),
+            GeneratedXmlFile gxf = new GeneratedXmlFile(document, getXmlMapperFileName(), 
+                    tablesConfiguration.getXmlMapperConfiguration().getTargetProject(),
+                    tablesConfiguration.getXmlMapperConfiguration().getTargetPackage(),
                     true, context.getXmlFormatter());
             if (context.getPlugins().sqlMapGenerated(gxf, this)) {
                 answer.add(gxf);

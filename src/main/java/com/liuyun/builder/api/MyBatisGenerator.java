@@ -164,7 +164,9 @@ public class MyBatisGenerator {
         File targetFile;
         String source;
         try {
+        	//获取生成目录
             File directory = shellCallback.getDirectory(gjf.getTargetProject(), gjf.getTargetPackage());
+            //生成目标文件
             targetFile = new File(directory, gjf.getFileName());
             //如果目标文件已经存在
             if (targetFile.exists()) {
@@ -201,7 +203,7 @@ public class MyBatisGenerator {
         File targetFile;
         String source;
         try {
-        	//获取目录
+        	//获取生成目录
             File directory = shellCallback.getDirectory(gxf.getTargetProject(), gxf.getTargetPackage());
             //生成目标文件
             targetFile = new File(directory, gxf.getFileName());
