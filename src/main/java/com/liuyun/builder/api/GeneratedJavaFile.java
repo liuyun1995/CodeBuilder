@@ -2,7 +2,7 @@ package com.liuyun.builder.api;
 
 import com.liuyun.builder.api.dom.java.CompilationUnit;
 
-//Java文件生成器
+//Java文件生成器(策略模式)
 public class GeneratedJavaFile extends GeneratedFile {
 
     //编译单元

@@ -126,7 +126,7 @@ public class MyBatisGenerator {
         for (Context context : contextsToRun) {
             context.introspectTables(callback, warnings, fullyQualifiedTableNames);
         }
-
+        
         totalSteps = 0;
         for (Context context : contextsToRun) {
             totalSteps += context.getGenerationSteps();
@@ -137,7 +137,6 @@ public class MyBatisGenerator {
         for (Context context : contextsToRun) {
             context.generateFiles(callback, generatedJavaFiles, generatedXmlFiles, warnings);
         }
-
         //下面开始写入文件
         if (writeFiles) {
             callback.saveStarted(generatedXmlFiles.size() + generatedJavaFiles.size());
@@ -189,7 +188,6 @@ public class MyBatisGenerator {
             }
             callback.checkCancel();
             callback.startTask(getString("Progress.15", targetFile.getName()));
-            
             //将字符串写入目标文件
             writeFile(targetFile, source, gjf.getFileEncoding());
         } catch (ShellException e) {
@@ -207,7 +205,6 @@ public class MyBatisGenerator {
             File directory = shellCallback.getDirectory(gxf.getTargetProject(), gxf.getTargetPackage());
             //生成目标文件
             targetFile = new File(directory, gxf.getFileName());
-            
             //如果目标文件已存在
             if (targetFile.exists()) {
             	//如果要合并就合并文件
@@ -228,7 +225,6 @@ public class MyBatisGenerator {
             }
             callback.checkCancel();
             callback.startTask(getString("Progress.15", targetFile.getName())); 
-            
             //将字符串写入目标文件
             writeFile(targetFile, source, "UTF-8"); 
         } catch (ShellException e) {
@@ -250,7 +246,7 @@ public class MyBatisGenerator {
         bw.close();
     }
 
-    //生成唯一的文件名
+    //获取唯一的文件名
     private File getUniqueFileName(File directory, String fileName) {
         File answer = null;
         StringBuilder sb = new StringBuilder();
@@ -281,4 +277,5 @@ public class MyBatisGenerator {
     public List<GeneratedXmlFile> getGeneratedXmlFiles() {
         return generatedXmlFiles;
     }
+    
 }

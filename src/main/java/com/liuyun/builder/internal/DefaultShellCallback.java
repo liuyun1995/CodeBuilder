@@ -41,9 +41,7 @@ public class DefaultShellCallback implements ShellCallback {
     }
 
     @Override
-    public void refreshProject(String project) {
-        // nothing to do in the default shell callback
-    }
+    public void refreshProject(String project) {}
 
     @Override
     public boolean isMergeSupported() {
