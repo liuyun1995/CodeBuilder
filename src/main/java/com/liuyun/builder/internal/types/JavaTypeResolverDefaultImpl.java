@@ -122,13 +122,16 @@ public class JavaTypeResolverDefaultImpl implements JavaTypeResolver {
         useJSR310Types = StringUtil.isTrue(properties.getProperty(PropertyRegistry.TYPE_RESOLVER_USE_JSR310_TYPES));
     }
 
-    //计算指定列所对应的Java类型
+    //计算列对应的Java类型
     @Override
     public FullyQualifiedJavaType calculateJavaType(IntrospectedColumn introspectedColumn) {
         FullyQualifiedJavaType answer = null;
+        //获取该列的JDBC类型信息
         JdbcTypeInformation jdbcTypeInformation = typeMap.get(introspectedColumn.getJdbcType());
         if (jdbcTypeInformation != null) {
+        	//获取对应java类型
             answer = jdbcTypeInformation.getFullyQualifiedJavaType();
+            //执行额外的覆盖操作
             answer = overrideDefaultType(introspectedColumn, answer);
         }
         return answer;
@@ -165,6 +168,7 @@ public class JavaTypeResolverDefaultImpl implements JavaTypeResolver {
     
     protected FullyQualifiedJavaType calculateDateType(IntrospectedColumn column, FullyQualifiedJavaType defaultType) {
         FullyQualifiedJavaType answer;
+        //JSR310是Java8的新的时间API
         if (useJSR310Types) {
             answer = new FullyQualifiedJavaType("java.time.LocalDate"); 
         } else {

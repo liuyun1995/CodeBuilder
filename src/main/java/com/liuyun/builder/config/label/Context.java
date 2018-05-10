@@ -175,14 +175,12 @@ public class Context extends PropertyHolder {
                 if (fullyQualifiedTableNames != null && fullyQualifiedTableNames.size() > 0 && !fullyQualifiedTableNames.contains(tableName)) {
                     continue;
                 }
-                //设置回调状态为：开始执行任务
                 callback.startTask(getString("Progress.1", tableName)); 
                 //获取IntrospectedTable集合
                 List<IntrospectedTable> tables = databaseIntrospector.introspectTables(tc);
                 if (tables != null) {
                     introspectedTables.addAll(tables);
                 }
-                //调用回调器检查是否需要取消操作
                 callback.checkCancel();
             }
         } finally {

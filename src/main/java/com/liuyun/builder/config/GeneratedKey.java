@@ -16,9 +16,9 @@ public class GeneratedKey {
 
     private String runtimeSqlStatement;        //运行时sql声明
 
-    private boolean isIdentity;
+    private boolean isIdentity;               //是否是主键
 
-    private String type;
+    private String type;                       //类型
 
     public GeneratedKey(String column, String configuredSqlStatement,
             boolean isIdentity, String type) {
@@ -27,7 +27,6 @@ public class GeneratedKey {
         this.type = type;
         this.isIdentity = isIdentity;
         this.configuredSqlStatement = configuredSqlStatement;
-        
         DatabaseDialects dialect = DatabaseDialects.getDatabaseDialect(configuredSqlStatement);
         if (dialect == null) {
             this.runtimeSqlStatement = configuredSqlStatement;

@@ -10,20 +10,20 @@ import com.liuyun.builder.internal.utils.StringUtil;
 //逆向列
 public class IntrospectedColumn {
 	
-    protected String actualColumnName;                         //实际的列名
+    protected String actualColumnName;                         //列名
     protected int jdbcType;                                   //jdbc类型
     protected String jdbcTypeName;                             //jdbc类型名
     protected boolean nullable;                               //是否可为空
     protected int length;                                     //列的长度
-    protected int scale;
-    protected boolean identity;
+    protected int scale;                                      //列的精度
+    protected boolean identity;                               //是否是主键
     protected boolean isSequenceColumn;                       //是否是自增列
     protected String javaProperty;                             //java属性名
     protected FullyQualifiedJavaType fullyQualifiedJavaType;   //全限定属性名
     protected String tableAlias;                               //类型别名
     protected String typeHandler;                              //类型处理器
     protected Context context;                                 //配置上下文
-    protected boolean isColumnNameDelimited;                  //是否限制列名
+    protected boolean isColumnNameDelimited;                  //列名是否区分大小写
     protected IntrospectedTable introspectedTable;             //逆向表
     protected Properties properties;                           //属性
     protected String remarks;                                  //备注

@@ -23,6 +23,7 @@ public class JavaBeansUtil {
         super();
     }
     
+    //获取getter方法名
     public static String getGetterMethodName(String property, FullyQualifiedJavaType fullyQualifiedJavaType) {
         StringBuilder sb = new StringBuilder();
         sb.append(property);
@@ -39,6 +40,7 @@ public class JavaBeansUtil {
         return sb.toString();
     }
     
+    //获取setter方法名
     public static String getSetterMethodName(String property) {
         StringBuilder sb = new StringBuilder();
         sb.append(property);
@@ -51,6 +53,7 @@ public class JavaBeansUtil {
         return sb.toString();
     }
 
+    //获取驼峰字符串
     public static String getCamelCaseString(String inputString, boolean firstCharacterUppercase) {
         StringBuilder sb = new StringBuilder();
         boolean nextUpperCase = false;
@@ -85,17 +88,19 @@ public class JavaBeansUtil {
         return sb.toString();
     }
     
+    //获取有效的属性名
     public static String getValidPropertyName(String inputString) {
         String answer;
         if (inputString == null) {
             answer = null;
         } else if (inputString.length() < 2) {
+        	//如果字符串长度小于2则转成小写
             answer = inputString.toLowerCase(Locale.US);
         } else {
-            if (Character.isUpperCase(inputString.charAt(0))
-                    && !Character.isUpperCase(inputString.charAt(1))) {
-                answer = inputString.substring(0, 1).toLowerCase(Locale.US)
-                        + inputString.substring(1);
+        	//如果第一个字符大写, 并且第二个字符小写
+            if (Character.isUpperCase(inputString.charAt(0)) && !Character.isUpperCase(inputString.charAt(1))) {
+                //将第一个字符转成小写
+            	answer = inputString.substring(0, 1).toLowerCase(Locale.US) + inputString.substring(1);
             } else {
                 answer = inputString;
             }

@@ -10,7 +10,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import com.liuyun.builder.config.label.Context;
 
-//全限定表
+//唯一全限定表
 public class FullyQualifiedTable {
 
     private String introspectedCatalog;                          //逆向目录

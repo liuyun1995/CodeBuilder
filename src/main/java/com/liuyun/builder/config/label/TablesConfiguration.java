@@ -6,9 +6,17 @@ import static com.liuyun.builder.internal.utils.HashCodeUtil.hash;
 import static com.liuyun.builder.internal.utils.StringUtil.composeFullyQualifiedTableName;
 import static com.liuyun.builder.internal.utils.StringUtil.stringHasValue;
 import static com.liuyun.builder.internal.utils.messages.Messages.getString;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 import com.liuyun.builder.api.dom.xml.Attribute;
 import com.liuyun.builder.api.dom.xml.XmlElement;
+import com.liuyun.builder.config.ColumnOverride;
+import com.liuyun.builder.config.ColumnRenamingRule;
+import com.liuyun.builder.config.IgnoredColumn;
+import com.liuyun.builder.config.IgnoredColumnPattern;
 import com.liuyun.builder.config.PropertyHolder;
 
 //table标签配置
@@ -23,11 +31,19 @@ public class TablesConfiguration extends PropertyHolder {
     //生成路径
     private String target;
     
+    private List<ColumnOverride> columnOverrides;
+
+    private Map<IgnoredColumn, Boolean> ignoredColumns;
+    
     private JavaModelConfiguration javaModelConfiguration;
     
     private JavaMapperConfiguration javaMapperConfiguration;
     
     private XmlMapperConfiguration xmlMapperConfiguration;
+    
+    private ColumnRenamingRule columnRenamingRule;
+    
+    private List<IgnoredColumnPattern> ignoredColumnPatterns = new ArrayList<IgnoredColumnPattern>();
 
     public TablesConfiguration(Context context) {}
     
@@ -86,6 +102,40 @@ public class TablesConfiguration extends PropertyHolder {
 	public void setXmlMapperConfiguration(XmlMapperConfiguration xmlMapperConfiguration) {
 		this.xmlMapperConfiguration = xmlMapperConfiguration;
 	}
+	
+	public ColumnOverride getColumnOverride(String columnName) {
+        for (ColumnOverride co : columnOverrides) {
+            if (co.isColumnNameDelimited()) {
+                if (columnName.equals(co.getColumnName())) {
+                    return co;
+                }
+            } else {
+                if (columnName.equalsIgnoreCase(co.getColumnName())) {
+                    return co;
+                }
+            }
+        }
+        return null;
+    }
+	
+	public ColumnRenamingRule getColumnRenamingRule() {
+        return columnRenamingRule;
+    }
+	
+	public boolean isColumnIgnored(String columnName) {
+        for (Map.Entry<IgnoredColumn, Boolean> entry : ignoredColumns.entrySet()) {
+            if (entry.getKey().matches(columnName)) {
+                entry.setValue(Boolean.TRUE);
+                return true;
+            }
+        }
+        for (IgnoredColumnPattern ignoredColumnPattern : ignoredColumnPatterns) {
+            if (ignoredColumnPattern.matches(columnName)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 	public XmlElement toXmlElement() {
         XmlElement xmlElement = new XmlElement("table"); 
