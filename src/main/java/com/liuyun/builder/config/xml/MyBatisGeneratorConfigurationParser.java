@@ -172,21 +172,21 @@ public class MyBatisGeneratorConfigurationParser {
     	JavaModelConfiguration javaModelConfiguration = new JavaModelConfiguration();
     	tc.setJavaModelConfiguration(javaModelConfiguration);
     	Properties attributes = parseAttributes(node);
-    	javaModelConfiguration.setTarget(attributes.getProperty("target"));
+    	javaModelConfiguration.setTargetProject(attributes.getProperty("targetProject"));
 	}
     
     private void parseJavaMapper(TablesConfiguration tc, Node node) {
     	JavaMapperConfiguration javaMapperConfiguration = new JavaMapperConfiguration();
     	tc.setJavaMapperConfiguration(javaMapperConfiguration);
     	Properties attributes = parseAttributes(node);
-    	javaMapperConfiguration.setTarget(attributes.getProperty("target"));
+    	javaMapperConfiguration.setTargetProject(attributes.getProperty("targetProject"));
 	}
 
 	private void parseMapperXML(TablesConfiguration tc, Node node) {
 		XmlMapperConfiguration xmlMapperConfiguration = new XmlMapperConfiguration();
     	tc.setXmlMapperConfiguration(xmlMapperConfiguration);
     	Properties attributes = parseAttributes(node);
-    	xmlMapperConfiguration.setTarget(attributes.getProperty("target"));
+    	xmlMapperConfiguration.setTargetProject(attributes.getProperty("targetProject"));
 	}
 
 	//解析jdbcConnection

@@ -1,9 +1,6 @@
 package com.liuyun.builder.internal.utils;
 
-import static com.liuyun.builder.internal.utils.StringUtil.isTrue;
-
 import java.util.Locale;
-import java.util.Properties;
 
 import com.liuyun.builder.api.IntrospectedColumn;
 import com.liuyun.builder.api.IntrospectedTable;
@@ -12,9 +9,7 @@ import com.liuyun.builder.api.dom.java.FullyQualifiedJavaType;
 import com.liuyun.builder.api.dom.java.JavaVisibility;
 import com.liuyun.builder.api.dom.java.Method;
 import com.liuyun.builder.api.dom.java.Parameter;
-import com.liuyun.builder.config.PropertyRegistry;
 import com.liuyun.builder.config.label.Context;
-import com.liuyun.builder.config.label.TablesConfiguration;
 
 
 public class JavaBeansUtil {
@@ -144,8 +139,8 @@ public class JavaBeansUtil {
         method.addParameter(new Parameter(fqjt, property));
         context.getCommentGenerator().addSetterComment(method, introspectedTable, introspectedColumn);
         StringBuilder sb = new StringBuilder();
-        if (introspectedColumn.isStringColumn() && isTrimStringsEnabled(introspectedColumn)) {
-            sb.append("this."); 
+        if (introspectedColumn.isStringColumn()) {
+            sb.append("this.");
             sb.append(property);
             sb.append(" = "); 
             sb.append(property);
@@ -163,27 +158,5 @@ public class JavaBeansUtil {
         }
         return method;
     }
-
-    private static boolean isTrimStringsEnabled(Context context) {
-        Properties properties = context.getJavaModelGeneratorConfiguration().getProperties();
-        boolean rc = isTrue(properties.getProperty(PropertyRegistry.MODEL_GENERATOR_TRIM_STRINGS));
-        return rc;
-    }
-
-    private static boolean isTrimStringsEnabled(IntrospectedTable table) {
-        TablesConfiguration tableConfiguration = table.getTableConfiguration();
-        String trimSpaces = tableConfiguration.getProperties().getProperty(PropertyRegistry.MODEL_GENERATOR_TRIM_STRINGS);
-        if (trimSpaces != null) {
-            return isTrue(trimSpaces); 
-        }
-        return isTrimStringsEnabled(table.getContext());
-    }
-
-    private static boolean isTrimStringsEnabled(IntrospectedColumn column) {
-        String trimSpaces = column.getProperties().getProperty(PropertyRegistry.MODEL_GENERATOR_TRIM_STRINGS);
-        if (trimSpaces != null) {
-            return isTrue(trimSpaces);
-        }
-        return isTrimStringsEnabled(column.getIntrospectedTable());
-    }
+    
 }

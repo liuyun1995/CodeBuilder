@@ -3,11 +3,9 @@ package com.liuyun.builder.codegen.core;
 import java.util.List;
 
 import com.liuyun.builder.api.ProgressCallback;
-import com.liuyun.builder.codegen.javamapper.SimpleAnnotatedClientGenerator;
 import com.liuyun.builder.codegen.javamapper.SimpleJavaClientGenerator;
 import com.liuyun.builder.codegen.javamodel.SimpleModelGenerator;
 import com.liuyun.builder.codegen.xmlmapper.SimpleXMLMapperGenerator;
-import com.liuyun.builder.internal.ObjectFactory;
 
 public class IntrospectedTableSimpleImpl extends IntrospectedTableImpl {
     
@@ -16,17 +14,8 @@ public class IntrospectedTableSimpleImpl extends IntrospectedTableImpl {
     }
 
     @Override
-    protected void calculateXmlMapperGenerator(AbstractJavaMapperGenerator javaClientGenerator, 
-            List<String> warnings,
-            ProgressCallback progressCallback) {
-        if (javaClientGenerator == null) {
-            if (tablesConfiguration.getXmlMapperConfiguration() != null) {
-                xmlMapperGenerator = new SimpleXMLMapperGenerator();
-            }
-        } else {
-            xmlMapperGenerator = javaClientGenerator.getMatchedXMLGenerator();
-        }
-        
+    protected void calculateXmlMapperGenerator( List<String> warnings, ProgressCallback progressCallback) {
+        xmlMapperGenerator = new SimpleXMLMapperGenerator();
         initializeAbstractGenerator(xmlMapperGenerator, warnings, progressCallback);
     }
 

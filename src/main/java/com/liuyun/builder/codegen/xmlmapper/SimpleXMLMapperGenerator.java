@@ -23,18 +23,25 @@ public class SimpleXMLMapperGenerator extends AbstractXmlMapperGenerator {
 
     //获取xml标签元素
     protected XmlElement getSqlMapElement() {
+    	//获取全限定表
         FullyQualifiedTable table = introspectedTable.getFullyQualifiedTable();
-        progressCallback.startTask(getString("Progress.12", table.toString())); 
+        progressCallback.startTask(getString("Progress.12", table.toString()));
+        //生成<mapper>标签
         XmlElement answer = new XmlElement("mapper"); 
+        //设置namespace属性
         String namespace = introspectedTable.getSqlMapNamespace();
         answer.addAttribute(new Attribute("namespace", namespace));
 
         context.getCommentGenerator().addRootComment(answer);
-
+        //添加<resultMap>
         addResultMapElement(answer);
+        //添加<insert>
         addInsertElement(answer);
+        //添加<delete>
         addDeleteElement(answer);
+        //添加<update>
         addUpdateElement(answer);
+        //添加<select>
         addSelectElement(answer);
 
         return answer;

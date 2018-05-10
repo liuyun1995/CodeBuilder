@@ -1,7 +1,6 @@
 package com.liuyun.builder.internal.db;
 
 import static com.liuyun.builder.internal.utils.JavaBeansUtil.getCamelCaseString;
-import static com.liuyun.builder.internal.utils.JavaBeansUtil.getValidPropertyName;
 import static com.liuyun.builder.internal.utils.StringUtil.composeFullyQualifiedTableName;
 import static com.liuyun.builder.internal.utils.StringUtil.isTrue;
 import static com.liuyun.builder.internal.utils.StringUtil.stringContainsSQLWildcard;
@@ -17,7 +16,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.StringTokenizer;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -86,7 +84,7 @@ public class DatabaseIntrospector {
                 iter.remove();
             //报告逆向转换的警告信息
             } else {
-                reportIntrospectionWarnings(introspectedTable, tc, introspectedTable.getFullyQualifiedTable());
+//                reportIntrospectionWarnings(introspectedTable, tc, introspectedTable.getFullyQualifiedTable());
             }
         }
         return introspectedTables;
@@ -259,63 +257,67 @@ public class DatabaseIntrospector {
         String localSchema;
         String localTableName;
         
-        //是否是唯一的标识符
-        boolean delimitIdentifiers = tc.isDelimitIdentifiers()
-                || stringContainsSpace(tc.getCatalog())
-                || stringContainsSpace(tc.getSchema())
-                || stringContainsSpace(tc.getTableName());
+        localCatalog = tc.getCatalog();
+        localSchema = tc.getSchema();
+        localTableName = tc.getTableName();
         
-        //如果是唯一标识符则直接设值
-        if (delimitIdentifiers) {
-            localCatalog = tc.getCatalog();
-            localSchema = tc.getSchema();
-            localTableName = tc.getTableName();
-        //否则转换成小写
-        } else if (databaseMetaData.storesLowerCaseIdentifiers()) {
-            localCatalog = tc.getCatalog() == null ? null : tc.getCatalog().toLowerCase();
-            localSchema = tc.getSchema() == null ? null : tc.getSchema().toLowerCase();
-            localTableName = tc.getTableName() == null ? null : tc.getTableName().toLowerCase();
-        //全部转换成大写
-        } else if (databaseMetaData.storesUpperCaseIdentifiers()) {
-            localCatalog = tc.getCatalog() == null ? null : tc.getCatalog().toUpperCase();
-            localSchema = tc.getSchema() == null ? null : tc.getSchema().toUpperCase();
-            localTableName = tc.getTableName() == null ? null : tc.getTableName().toUpperCase();
-        //否则的话还是设置原值
-        } else {
-            localCatalog = tc.getCatalog();
-            localSchema = tc.getSchema();
-            localTableName = tc.getTableName();
-        }
+//        //是否是唯一的标识符
+//        boolean delimitIdentifiers = tc.isDelimitIdentifiers()
+//                || stringContainsSpace(tc.getCatalog())
+//                || stringContainsSpace(tc.getSchema())
+//                || stringContainsSpace(tc.getTableName());
+//        
+//        //如果是唯一标识符则直接设值
+//        if (delimitIdentifiers) {
+//            localCatalog = tc.getCatalog();
+//            localSchema = tc.getSchema();
+//            localTableName = tc.getTableName();
+//        //否则转换成小写
+//        } else if (databaseMetaData.storesLowerCaseIdentifiers()) {
+//            localCatalog = tc.getCatalog() == null ? null : tc.getCatalog().toLowerCase();
+//            localSchema = tc.getSchema() == null ? null : tc.getSchema().toLowerCase();
+//            localTableName = tc.getTableName() == null ? null : tc.getTableName().toLowerCase();
+//        //全部转换成大写
+//        } else if (databaseMetaData.storesUpperCaseIdentifiers()) {
+//            localCatalog = tc.getCatalog() == null ? null : tc.getCatalog().toUpperCase();
+//            localSchema = tc.getSchema() == null ? null : tc.getSchema().toUpperCase();
+//            localTableName = tc.getTableName() == null ? null : tc.getTableName().toUpperCase();
+//        //否则的话还是设置原值
+//        } else {
+//            localCatalog = tc.getCatalog();
+//            localSchema = tc.getSchema();
+//            localTableName = tc.getTableName();
+//        }
 
-        //是否启用通配符转义
-        if (tc.isWildcardEscapingEnabled()) {
-            String escapeString = databaseMetaData.getSearchStringEscape();
-            StringBuilder sb = new StringBuilder();
-            StringTokenizer st;
-            //将localSchema中的"_"和"%"替换为数据库的通配符
-            if (localSchema != null) {
-                st = new StringTokenizer(localSchema, "_%", true); 
-                while (st.hasMoreTokens()) {
-                    String token = st.nextToken();
-                    if (token.equals("_") || token.equals("%")) { 
-                        sb.append(escapeString);
-                    }
-                    sb.append(token);
-                }
-                localSchema = sb.toString();
-            }
-            //将localTableName中的"_"和"%"替换为数据库的通配符
-            sb.setLength(0);
-            st = new StringTokenizer(localTableName, "_%", true); 
-            while (st.hasMoreTokens()) {
-                String token = st.nextToken();
-                if (token.equals("_") || token.equals("%")) { 
-                    sb.append(escapeString);
-                }
-                sb.append(token);
-            }
-            localTableName = sb.toString();
-        }
+//        //是否启用通配符转义
+//        if (tc.isWildcardEscapingEnabled()) {
+//            String escapeString = databaseMetaData.getSearchStringEscape();
+//            StringBuilder sb = new StringBuilder();
+//            StringTokenizer st;
+//            //将localSchema中的"_"和"%"替换为数据库的通配符
+//            if (localSchema != null) {
+//                st = new StringTokenizer(localSchema, "_%", true); 
+//                while (st.hasMoreTokens()) {
+//                    String token = st.nextToken();
+//                    if (token.equals("_") || token.equals("%")) { 
+//                        sb.append(escapeString);
+//                    }
+//                    sb.append(token);
+//                }
+//                localSchema = sb.toString();
+//            }
+//            //将localTableName中的"_"和"%"替换为数据库的通配符
+//            sb.setLength(0);
+//            st = new StringTokenizer(localTableName, "_%", true); 
+//            while (st.hasMoreTokens()) {
+//                String token = st.nextToken();
+//                if (token.equals("_") || token.equals("%")) { 
+//                    sb.append(escapeString);
+//                }
+//                sb.append(token);
+//            }
+//            localTableName = sb.toString();
+//        }
 
         Map<ActualTableName, List<IntrospectedColumn>> answer = new HashMap<ActualTableName, List<IntrospectedColumn>>();
         
@@ -451,30 +453,30 @@ public class DatabaseIntrospector {
         }
     }
 
-    //报告逆向转换的警告信息
-    private void reportIntrospectionWarnings(IntrospectedTable introspectedTable, TablesConfiguration tableConfiguration, FullyQualifiedTable table) {
-        for (ColumnOverride columnOverride : tableConfiguration.getColumnOverrides()) {
-            if (introspectedTable.getColumn(columnOverride.getColumnName()) == null) {
-                warnings.add(getString("Warning.3", columnOverride.getColumnName(), table.toString()));
-            }
-        }
-        for (String string : tableConfiguration.getIgnoredColumnsInError()) {
-            warnings.add(getString("Warning.4", string, table.toString()));
-        }
-        GeneratedKey generatedKey = tableConfiguration.getGeneratedKey();
-        if (generatedKey != null && introspectedTable.getColumn(generatedKey.getColumn()) == null) {
-            if (generatedKey.isIdentity()) {
-                warnings.add(getString("Warning.5", generatedKey.getColumn(), table.toString()));
-            } else {
-                warnings.add(getString("Warning.6", generatedKey.getColumn(), table.toString()));
-            }
-        }
-        for (IntrospectedColumn ic : introspectedTable.getAllColumns()) {
-            if (JavaReservedWords.containsWord(ic.getJavaProperty())) {
-                warnings.add(getString("Warning.26", ic.getActualColumnName(), table.toString()));
-            }
-        }
-    }
+//    //报告逆向转换的警告信息
+//    private void reportIntrospectionWarnings(IntrospectedTable introspectedTable, TablesConfiguration tableConfiguration, FullyQualifiedTable table) {
+//        for (ColumnOverride columnOverride : tableConfiguration.getColumnOverrides()) {
+//            if (introspectedTable.getColumn(columnOverride.getColumnName()) == null) {
+//                warnings.add(getString("Warning.3", columnOverride.getColumnName(), table.toString()));
+//            }
+//        }
+//        for (String string : tableConfiguration.getIgnoredColumnsInError()) {
+//            warnings.add(getString("Warning.4", string, table.toString()));
+//        }
+//        GeneratedKey generatedKey = tableConfiguration.getGeneratedKey();
+//        if (generatedKey != null && introspectedTable.getColumn(generatedKey.getColumn()) == null) {
+//            if (generatedKey.isIdentity()) {
+//                warnings.add(getString("Warning.5", generatedKey.getColumn(), table.toString()));
+//            } else {
+//                warnings.add(getString("Warning.6", generatedKey.getColumn(), table.toString()));
+//            }
+//        }
+//        for (IntrospectedColumn ic : introspectedTable.getAllColumns()) {
+//            if (JavaReservedWords.containsWord(ic.getJavaProperty())) {
+//                warnings.add(getString("Warning.26", ic.getActualColumnName(), table.toString()));
+//            }
+//        }
+//    }
     
     //判断两个列是否匹配
     private boolean isMatchedColumn(IntrospectedColumn introspectedColumn, GeneratedKey gk) {

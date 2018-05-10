@@ -17,18 +17,23 @@ public class DeleteElementGenerator extends AbstractXmlElementGenerator {
 
     @Override
     public void addElements(XmlElement parentElement) {
+    	//添加<delete>标签
         XmlElement answer = new XmlElement("delete");
+        //设置id属性
         answer.addAttribute(new Attribute("id", introspectedTable.getDeleteStatementId())); 
         String parameterClass;
         if (!isSimple && introspectedTable.getRules().generatePrimaryKeyClass()) {
+        	//获取主键类型
             parameterClass = introspectedTable.getPrimaryKeyType();
         } else {
+        	//如果主键大于1个
             if (introspectedTable.getPrimaryKeyColumns().size() > 1) {
                 parameterClass = "map"; 
             } else {
                 parameterClass = introspectedTable.getPrimaryKeyColumns().get(0).getFullyQualifiedJavaType().toString();
             }
         }
+        //设置parameterType属性
         answer.addAttribute(new Attribute("parameterType", parameterClass));
 
         context.getCommentGenerator().addComment(answer);

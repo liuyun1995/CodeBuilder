@@ -15,6 +15,7 @@ public class SelectElementGenerator extends AbstractXmlElementGenerator {
 
     @Override
     public void addElements(XmlElement parentElement) {
+    	//添加<select>标签
         XmlElement answer = new XmlElement("select");
         //设置id属性
         answer.addAttribute(new Attribute("id", introspectedTable.getSelectStatementId())); 
@@ -22,7 +23,6 @@ public class SelectElementGenerator extends AbstractXmlElementGenerator {
         if (introspectedTable.getRules().generateResultMap()) {
         	answer.addAttribute(new Attribute("resultMap", introspectedTable.getBaseResultMapId()));
         }
-        //设置parameterType属性
         String parameterType;
         if (introspectedTable.getRules().generatePrimaryKeyClass()) {
             parameterType = introspectedTable.getPrimaryKeyType();
@@ -33,11 +33,11 @@ public class SelectElementGenerator extends AbstractXmlElementGenerator {
                 parameterType = introspectedTable.getPrimaryKeyColumns().get(0).getFullyQualifiedJavaType().toString();
             }
         }
+        //设置parameterType属性
         answer.addAttribute(new Attribute("parameterType", parameterType));
         
-        //添加注释
         context.getCommentGenerator().addComment(answer);
-        
+        //添加查询语句
         StringBuilder sb = new StringBuilder();
         sb.append("select "); 
 //        if (stringHasValue(introspectedTable.getSelectByPrimaryKeyQueryId())) {
@@ -53,8 +53,8 @@ public class SelectElementGenerator extends AbstractXmlElementGenerator {
             //answer.addElement(getBlobColumnListElement());
         }
         sb.setLength(0);
-        sb.append("from "); 
-        sb.append(introspectedTable.getAliasedFullyQualifiedTableNameAtRuntime());
+        sb.append("from ");
+        sb.append(introspectedTable.getFullyQualifiedTableNameAtRuntime());
         answer.addElement(new TextElement(sb.toString()));
 
         boolean and = false;
@@ -71,7 +71,6 @@ public class SelectElementGenerator extends AbstractXmlElementGenerator {
             sb.append(FormatUtil.getParameterClause(introspectedColumn));
             answer.addElement(new TextElement(sb.toString()));
         }
-        //插件方法
         if (context.getPlugins().sqlMapSelectByPrimaryKeyElementGenerated(answer, introspectedTable)) {
             parentElement.addElement(answer);
         }

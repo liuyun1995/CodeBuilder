@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import com.liuyun.builder.config.GeneratedKey;
 import com.liuyun.builder.config.PropertyRegistry;
 import com.liuyun.builder.config.label.Context;
 import com.liuyun.builder.config.label.JavaMapperConfiguration;
@@ -274,10 +275,12 @@ public abstract class IntrospectedTable {
         return internalAttributes.get(InternalAttribute.ATTR_DAO_INTERFACE_TYPE);
     }
     
+    //获取主键类型
     public String getPrimaryKeyType() {
         return internalAttributes.get(InternalAttribute.ATTR_PRIMARY_KEY_TYPE);
     }
     
+    //设置主键类型
     public void setPrimaryKeyType(String primaryKeyType) {
         internalAttributes.put(InternalAttribute.ATTR_PRIMARY_KEY_TYPE, primaryKeyType);
     }
@@ -483,7 +486,7 @@ public abstract class IntrospectedTable {
     protected String calculateJavaModelPackage() {
         JavaModelConfiguration config = tablesConfiguration.getJavaModelConfiguration();
         StringBuilder sb = new StringBuilder();
-        sb.append(config.getTarget());
+        sb.append(config.getTargetProject());
         return sb.toString();
     }
 
@@ -517,7 +520,7 @@ public abstract class IntrospectedTable {
             return null;
         }
         StringBuilder sb = new StringBuilder();
-        sb.append(config.getTarget());
+        sb.append(config.getTargetProject());
         return sb.toString();
     }
     
@@ -601,5 +604,17 @@ public abstract class IntrospectedTable {
     public String getTableConfigurationProperty(String property) {
         return tablesConfiguration.getProperty(property);
     }
+
+	public String getSqlMapNamespace() {
+		return null;
+	}
+
+	public Object getFullyQualifiedTableNameAtRuntime() {
+		return null;
+	}
+
+	public GeneratedKey getGeneratedKey() {
+		return null;
+	}
     
 }

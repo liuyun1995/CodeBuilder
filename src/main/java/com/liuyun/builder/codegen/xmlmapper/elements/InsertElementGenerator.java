@@ -26,6 +26,7 @@ public class InsertElementGenerator extends AbstractXmlElementGenerator {
     //添加insert标签元素
     @Override
     public void addElements(XmlElement parentElement) {
+    	//添加<insert>标签
         XmlElement answer = new XmlElement("insert"); 
         //设置id属性
         answer.addAttribute(new Attribute("id", introspectedTable.getInsertStatementId())); 

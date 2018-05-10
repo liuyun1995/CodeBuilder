@@ -15,6 +15,7 @@ import com.liuyun.builder.api.dom.xml.Attribute;
 import com.liuyun.builder.api.dom.xml.XmlElement;
 import com.liuyun.builder.config.ColumnOverride;
 import com.liuyun.builder.config.ColumnRenamingRule;
+import com.liuyun.builder.config.DomainObjectRenamingRule;
 import com.liuyun.builder.config.IgnoredColumn;
 import com.liuyun.builder.config.IgnoredColumnPattern;
 import com.liuyun.builder.config.PropertyHolder;
@@ -181,5 +182,22 @@ public class TablesConfiguration extends PropertyHolder {
         TablesConfiguration other = (TablesConfiguration) obj;
         return areEqual(this.catalog, other.catalog) && areEqual(this.schema, other.schema) && areEqual(this.tableName, other.tableName);
     }
+
+	public String getDomainObjectName() {
+		return null;
+	}
+
+	public DomainObjectRenamingRule getDomainObjectRenamingRule() {
+		return null;
+	}
+
+	public String getAlias() {
+		return null;
+	}
+
+	public boolean isDelimitIdentifiers() {
+		// TODO Auto-generated method stub
+		return false;
+	}
     
 }

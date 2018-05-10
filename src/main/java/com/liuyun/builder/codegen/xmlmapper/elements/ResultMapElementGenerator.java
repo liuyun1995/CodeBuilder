@@ -18,7 +18,9 @@ public class ResultMapElementGenerator extends AbstractXmlElementGenerator {
 
     @Override
     public void addElements(XmlElement parentElement) {
-        XmlElement answer = new XmlElement("resultMap"); 
+    	//添加<resultMap>标签
+        XmlElement answer = new XmlElement("resultMap");
+        //设置id属性
         answer.addAttribute(new Attribute("id", introspectedTable.getBaseResultMapId()));
         String returnType;
         if (isSimple) {
@@ -30,13 +32,13 @@ public class ResultMapElementGenerator extends AbstractXmlElementGenerator {
                 returnType = introspectedTable.getPrimaryKeyType();
             }
         }
+        //设置type属性
         answer.addAttribute(new Attribute("type", returnType));
+        
         context.getCommentGenerator().addComment(answer);
-        if (introspectedTable.isConstructorBased()) {
-            addResultMapConstructorElements(answer);
-        } else {
-            addResultMapElements(answer);
-        }
+        //添加其他子标签
+        addResultMapElements(answer);
+        
         if (context.getPlugins().sqlMapResultMapWithoutBLOBsElementGenerated(answer, introspectedTable)) {
             parentElement.addElement(answer);
         }
@@ -48,13 +50,11 @@ public class ResultMapElementGenerator extends AbstractXmlElementGenerator {
             resultElement.addAttribute(new Attribute("column", FormatUtil.getRenamedColumnNameForResultMap(introspectedColumn))); 
             resultElement.addAttribute(new Attribute("property", introspectedColumn.getJavaProperty())); 
             resultElement.addAttribute(new Attribute("jdbcType", introspectedColumn.getJdbcTypeName()));
-
             if (stringHasValue(introspectedColumn.getTypeHandler())) {
                 resultElement.addAttribute(new Attribute("typeHandler", introspectedColumn.getTypeHandler())); 
             }
             answer.addElement(resultElement);
         }
-
         List<IntrospectedColumn> columns;
         if (isSimple) {
             columns = introspectedTable.getNonPrimaryKeyColumns();
@@ -66,45 +66,11 @@ public class ResultMapElementGenerator extends AbstractXmlElementGenerator {
             resultElement.addAttribute(new Attribute("column", FormatUtil.getRenamedColumnNameForResultMap(introspectedColumn))); 
             resultElement.addAttribute(new Attribute("property", introspectedColumn.getJavaProperty())); 
             resultElement.addAttribute(new Attribute("jdbcType", introspectedColumn.getJdbcTypeName()));
-
             if (stringHasValue(introspectedColumn.getTypeHandler())) {
                 resultElement.addAttribute(new Attribute("typeHandler", introspectedColumn.getTypeHandler())); 
             }
             answer.addElement(resultElement);
         }
     }
-
-    private void addResultMapConstructorElements(XmlElement answer) {
-        XmlElement constructor = new XmlElement("constructor"); 
-        for (IntrospectedColumn introspectedColumn : introspectedTable.getPrimaryKeyColumns()) {
-            XmlElement resultElement = new XmlElement("idArg"); 
-            resultElement.addAttribute(new Attribute("column", FormatUtil.getRenamedColumnNameForResultMap(introspectedColumn))); 
-            resultElement.addAttribute(new Attribute("jdbcType", introspectedColumn.getJdbcTypeName()));
-            resultElement.addAttribute(new Attribute("javaType", introspectedColumn.getFullyQualifiedJavaType().getFullyQualifiedName()));
-
-            if (stringHasValue(introspectedColumn.getTypeHandler())) {
-                resultElement.addAttribute(new Attribute("typeHandler", introspectedColumn.getTypeHandler())); 
-            }
-            constructor.addElement(resultElement);
-        }
-
-        List<IntrospectedColumn> columns;
-        if (isSimple) {
-            columns = introspectedTable.getNonPrimaryKeyColumns();
-        } else {
-            columns = introspectedTable.getBaseColumns();
-        }
-        for (IntrospectedColumn introspectedColumn : columns) {
-            XmlElement resultElement = new XmlElement("arg"); 
-            resultElement.addAttribute(new Attribute("column", FormatUtil.getRenamedColumnNameForResultMap(introspectedColumn))); 
-            resultElement.addAttribute(new Attribute("jdbcType", introspectedColumn.getJdbcTypeName()));
-            resultElement.addAttribute(new Attribute("javaType", introspectedColumn.getFullyQualifiedJavaType().getFullyQualifiedName()));
-
-            if (stringHasValue(introspectedColumn.getTypeHandler())) {
-                resultElement.addAttribute(new Attribute("typeHandler", introspectedColumn.getTypeHandler())); 
-            }
-            constructor.addElement(resultElement);
-        }
-        answer.addElement(constructor);
-    }
+    
 }
