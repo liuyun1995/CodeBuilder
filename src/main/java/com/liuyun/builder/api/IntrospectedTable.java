@@ -2,12 +2,14 @@ package com.liuyun.builder.api;
 
 import static com.liuyun.builder.internal.utils.StringUtil.isTrue;
 import static com.liuyun.builder.internal.utils.StringUtil.stringHasValue;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+
 import com.liuyun.builder.config.PropertyRegistry;
 import com.liuyun.builder.config.label.Context;
 import com.liuyun.builder.config.label.JavaMapperConfiguration;
@@ -36,7 +38,9 @@ public abstract class IntrospectedTable {
         ATTR_SELECT_STATEMENT_ID,
         
         ATTR_BASE_RESULT_MAP_ID,
-        ATTR_BASE_COLUMN_LIST_ID,
+        ATTR_BASE_COLUMN_LIST_ID, 
+        
+        ATTR_PRIMARY_KEY_TYPE,
     }
 
     //表的配置
@@ -270,6 +274,14 @@ public abstract class IntrospectedTable {
         return internalAttributes.get(InternalAttribute.ATTR_DAO_INTERFACE_TYPE);
     }
     
+    public String getPrimaryKeyType() {
+        return internalAttributes.get(InternalAttribute.ATTR_PRIMARY_KEY_TYPE);
+    }
+    
+    public void setPrimaryKeyType(String primaryKeyType) {
+        internalAttributes.put(InternalAttribute.ATTR_PRIMARY_KEY_TYPE, primaryKeyType);
+    }
+    
     //--------------------------------------------------对列的一些操作-------------------------------------------------
     
     //通过列名获取逆向列
@@ -485,8 +497,8 @@ public abstract class IntrospectedTable {
         sb.setLength(0);
         sb.append(calculateJavaMapperPackage());
         sb.append('.');
-        if (stringHasValue(tablesConfiguration.getMapperName())) {
-            sb.append(tablesConfiguration.getMapperName());
+        if (stringHasValue(tablesConfiguration.getJavaMapperConfiguration().getName())) {
+            sb.append(tablesConfiguration.getJavaMapperConfiguration().getName());
         } else {
             if (stringHasValue(fullyQualifiedTable.getDomainObjectSubPackage())) {
                 sb.append(fullyQualifiedTable.getDomainObjectSubPackage());
@@ -524,8 +536,8 @@ public abstract class IntrospectedTable {
     //计算XmlMapper文件名
     protected String calculateXmlMapperFileName() {
         StringBuilder sb = new StringBuilder();
-        if (stringHasValue(tablesConfiguration.getMapperName())) {
-            String mapperName = tablesConfiguration.getMapperName();
+        if (stringHasValue(tablesConfiguration.getXmlMapperConfiguration().getName())) {
+            String mapperName = tablesConfiguration.getXmlMapperConfiguration().getName();
             int ind = mapperName.lastIndexOf('.');
             if (ind == -1) {
                 sb.append(mapperName);
@@ -546,8 +558,8 @@ public abstract class IntrospectedTable {
         XmlMapperConfiguration config = tablesConfiguration.getXmlMapperConfiguration();
         if (config != null) {
             sb.append(config.getTarget());
-            if (stringHasValue(tablesConfiguration.getMapperName())) {
-                String mapperName = tablesConfiguration.getMapperName();
+            if (stringHasValue(tablesConfiguration.getXmlMapperConfiguration().getName())) {
+                String mapperName = tablesConfiguration.getXmlMapperConfiguration().getName();
                 int ind = mapperName.lastIndexOf('.');
                 if (ind != -1) {
                     sb.append('.').append(mapperName.substring(0, ind));
@@ -588,17 +600,6 @@ public abstract class IntrospectedTable {
     //根据属性名获取tablesConfiguration的属性
     public String getTableConfigurationProperty(String property) {
         return tablesConfiguration.getProperty(property);
-    }
-    
-    //是否基于构造器
-    public boolean isConstructorBased() {
-        Properties properties;
-        if (tablesConfiguration.getProperties().containsKey(PropertyRegistry.ANY_CONSTRUCTOR_BASED)) {
-            properties = tablesConfiguration.getProperties();
-        } else {
-            properties = tablesConfiguration.getJavaModelConfiguration().getProperties();
-        }
-        return isTrue(properties.getProperty(PropertyRegistry.ANY_CONSTRUCTOR_BASED));
     }
     
 }

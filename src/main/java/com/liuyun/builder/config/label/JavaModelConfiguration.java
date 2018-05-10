@@ -12,6 +12,8 @@ public class JavaModelConfiguration extends PropertyHolder {
 
     private String target;
     
+    private String name;
+    
     public JavaModelConfiguration() {
         super();
     }
@@ -24,6 +26,14 @@ public class JavaModelConfiguration extends PropertyHolder {
 		this.target = target;
 	}
 	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public XmlElement toXmlElement() {
         XmlElement answer = new XmlElement("javaModelGenerator"); 
         if (target != null) {

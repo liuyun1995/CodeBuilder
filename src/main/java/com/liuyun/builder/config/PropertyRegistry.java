@@ -4,8 +4,7 @@ package com.liuyun.builder.config;
 public class PropertyRegistry {
 
     //分辨于表和Java模型生成器
-    public static final String ANY_ROOT_CLASS = "rootClass"; 
-    public static final String ANY_CONSTRUCTOR_BASED = "constructorBased"; 
+    public static final String ANY_ROOT_CLASS = "rootClass";
 
     //分辨于表和JavaClient生成器
     public static final String ANY_ROOT_INTERFACE = "rootInterface"; 

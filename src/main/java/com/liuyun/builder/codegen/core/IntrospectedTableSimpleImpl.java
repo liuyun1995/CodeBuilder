@@ -36,20 +36,7 @@ public class IntrospectedTableSimpleImpl extends IntrospectedTableImpl {
         if (tablesConfiguration.getJavaMapperConfiguration() == null) {
             return null;
         }
-        
-        String type = tablesConfiguration.getJavaMapperConfiguration().getConfigurationType();
-
-        AbstractJavaMapperGenerator javaGenerator;
-        if ("XMLMAPPER".equalsIgnoreCase(type)) { 
-            javaGenerator = new SimpleJavaClientGenerator();
-        } else if ("ANNOTATEDMAPPER".equalsIgnoreCase(type)) { 
-            javaGenerator = new SimpleAnnotatedClientGenerator();
-        } else if ("MAPPER".equalsIgnoreCase(type)) { 
-            javaGenerator = new SimpleJavaClientGenerator();
-        } else {
-            javaGenerator = (AbstractJavaMapperGenerator) ObjectFactory.createInternalObject(type);
-        }
-        return javaGenerator;
+        return new SimpleJavaClientGenerator();
     }
 
     @Override

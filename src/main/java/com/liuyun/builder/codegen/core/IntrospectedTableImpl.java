@@ -118,11 +118,11 @@ public class IntrospectedTableImpl extends IntrospectedTable {
             }
         }
         //遍历JavaMapper生成器
-        for (AbstractJavaGenerator javaGenerator : clientGenerators) {
+        for (AbstractJavaGenerator javaGenerator : javaMapperGenerators) {
             List<CompilationUnit> compilationUnits = javaGenerator.getCompilationUnits();
             for (CompilationUnit compilationUnit : compilationUnits) {
                 GeneratedJavaFile gjf = new GeneratedJavaFile(compilationUnit,
-                                context.getJavaClientGeneratorConfiguration().getTargetProject(),
+                		        tablesConfiguration.getJavaMapperConfiguration().getTarget(),
                                 context.getProperty(PropertyRegistry.CONTEXT_JAVA_FILE_ENCODING),
                                 context.getJavaFormatter());
                 answer.add(gjf);
@@ -140,7 +140,7 @@ public class IntrospectedTableImpl extends IntrospectedTable {
             Document document = xmlMapperGenerator.getDocument();
             GeneratedXmlFile gxf = new GeneratedXmlFile(document,
                     getXmlMapperFileName(), getXmlMapperPackage(),
-                    context.getSqlMapGeneratorConfiguration().getTargetProject(),
+                    tablesConfiguration.getXmlMapperConfiguration().getTarget(),
                     true, context.getXmlFormatter());
             if (context.getPlugins().sqlMapGenerated(gxf, this)) {
                 answer.add(gxf);

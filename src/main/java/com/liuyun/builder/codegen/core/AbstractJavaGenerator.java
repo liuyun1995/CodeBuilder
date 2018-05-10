@@ -33,7 +33,7 @@ public abstract class AbstractJavaGenerator extends AbstractGenerator {
     public String getRootClass() {
         String rootClass = introspectedTable.getTableConfigurationProperty(PropertyRegistry.ANY_ROOT_CLASS);
         if (rootClass == null) {
-            Properties properties = context.getJavaModelGeneratorConfiguration().getProperties();
+            Properties properties = introspectedTable.getTableConfiguration().getProperties();
             rootClass = properties.getProperty(PropertyRegistry.ANY_ROOT_CLASS);
         }
         return rootClass;

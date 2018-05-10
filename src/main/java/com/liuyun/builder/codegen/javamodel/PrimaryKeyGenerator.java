@@ -4,8 +4,11 @@ import static com.liuyun.builder.internal.utils.JavaBeansUtil.getJavaBeansField;
 import static com.liuyun.builder.internal.utils.JavaBeansUtil.getJavaBeansGetter;
 import static com.liuyun.builder.internal.utils.JavaBeansUtil.getJavaBeansSetter;
 import static com.liuyun.builder.internal.utils.messages.Messages.getString;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import com.liuyun.builder.api.CommentGenerator;
 import com.liuyun.builder.api.FullyQualifiedTable;
 import com.liuyun.builder.api.IntrospectedColumn;
 import com.liuyun.builder.api.Plugin;
@@ -14,7 +17,6 @@ import com.liuyun.builder.api.dom.java.Field;
 import com.liuyun.builder.api.dom.java.FullyQualifiedJavaType;
 import com.liuyun.builder.api.dom.java.JavaVisibility;
 import com.liuyun.builder.api.dom.java.Method;
-import com.liuyun.builder.api.dom.java.Parameter;
 import com.liuyun.builder.api.dom.java.TopLevelClass;
 import com.liuyun.builder.codegen.core.AbstractJavaGenerator;
 import com.liuyun.builder.codegen.core.RootClassInfo;
@@ -31,26 +33,18 @@ public class PrimaryKeyGenerator extends AbstractJavaGenerator {
         FullyQualifiedTable table = introspectedTable.getFullyQualifiedTable();
         progressCallback.startTask(getString("Progress.7", table.toString())); 
         Plugin plugins = context.getPlugins();
-//        CommentGenerator commentGenerator = context.getCommentGenerator();
+        CommentGenerator commentGenerator = context.getCommentGenerator();
 
         TopLevelClass topLevelClass = new TopLevelClass(introspectedTable.getPrimaryKeyType());
         topLevelClass.setVisibility(JavaVisibility.PUBLIC);
-//        commentGenerator.addJavaFileComment(topLevelClass);
+        commentGenerator.addJavaFileComment(topLevelClass);
 
         String rootClass = getRootClass();
         if (rootClass != null) {
             topLevelClass.setSuperClass(new FullyQualifiedJavaType(rootClass));
             topLevelClass.addImportedType(topLevelClass.getSuperClass());
         }
-
-        if (introspectedTable.isConstructorBased()) {
-            addParameterizedConstructor(topLevelClass);
-            if (!introspectedTable.isImmutable()) {
-                addDefaultConstructor(topLevelClass);
-            }
-        }
-
-//        commentGenerator.addModelClassComment(topLevelClass, introspectedTable);
+        commentGenerator.addModelClassComment(topLevelClass, introspectedTable);
 
         //遍历主键集合
         for (IntrospectedColumn introspectedColumn : introspectedTable.getPrimaryKeyColumns()) {
@@ -88,26 +82,5 @@ public class PrimaryKeyGenerator extends AbstractJavaGenerator {
         }
         return answer;
     }
-
-    private void addParameterizedConstructor(TopLevelClass topLevelClass) {
-        Method method = new Method();
-        method.setVisibility(JavaVisibility.PUBLIC);
-        method.setConstructor(true);
-        method.setName(topLevelClass.getType().getShortName());
-        context.getCommentGenerator().addGeneralMethodComment(method, introspectedTable);
-
-        StringBuilder sb = new StringBuilder();
-        for (IntrospectedColumn introspectedColumn : introspectedTable.getPrimaryKeyColumns()) {
-            method.addParameter(new Parameter(introspectedColumn.getFullyQualifiedJavaType(),
-            		introspectedColumn.getJavaProperty()));
-            sb.setLength(0);
-            sb.append("this.");
-            sb.append(introspectedColumn.getJavaProperty());
-            sb.append(" = ");
-            sb.append(introspectedColumn.getJavaProperty());
-            sb.append(';');
-            method.addBodyLine(sb.toString());
-        }
-        topLevelClass.addMethod(method);
-    }
+    
 }

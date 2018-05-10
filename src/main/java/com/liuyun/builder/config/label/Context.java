@@ -15,9 +15,11 @@ import com.liuyun.builder.api.ConnectionFactory;
 import com.liuyun.builder.api.GeneratedJavaFile;
 import com.liuyun.builder.api.GeneratedXmlFile;
 import com.liuyun.builder.api.IntrospectedTable;
+import com.liuyun.builder.api.JavaFormatter;
 import com.liuyun.builder.api.JavaTypeResolver;
 import com.liuyun.builder.api.Plugin;
 import com.liuyun.builder.api.ProgressCallback;
+import com.liuyun.builder.api.XmlFormatter;
 import com.liuyun.builder.api.dom.xml.Attribute;
 import com.liuyun.builder.api.dom.xml.XmlElement;
 import com.liuyun.builder.config.PropertyHolder;
@@ -53,6 +55,10 @@ public class Context extends PropertyHolder {
     private String beginningDelimiter = "\"";
 
     private String endingDelimiter = "\"";
+    
+    private JavaFormatter javaFormatter;
+
+    private XmlFormatter xmlFormatter;
     
     //逆向表集合
     private List<IntrospectedTable> introspectedTables;
@@ -110,6 +116,20 @@ public class Context extends PropertyHolder {
     
     public void setCommentGeneratorConfiguration(CommentGeneratorConfiguration commentGeneratorConfiguration) {
         this.commentGeneratorConfiguration = commentGeneratorConfiguration;
+    }
+    
+    public JavaFormatter getJavaFormatter() {
+        if (javaFormatter == null) {
+            javaFormatter = ObjectFactory.createJavaFormatter(this);
+        }
+        return javaFormatter;
+    }
+    
+    public XmlFormatter getXmlFormatter() {
+        if (xmlFormatter == null) {
+            xmlFormatter = ObjectFactory.createXmlFormatter(this);
+        }
+        return xmlFormatter;
     }
     
     //---------------------------------------------------------------------------------------------------------

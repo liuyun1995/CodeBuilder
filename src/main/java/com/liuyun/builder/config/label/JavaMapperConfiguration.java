@@ -11,6 +11,8 @@ import com.liuyun.builder.config.PropertyHolder;
 public class JavaMapperConfiguration extends PropertyHolder {
     
 	private String target;
+	
+	private String name;
     
     public JavaMapperConfiguration() {
         super();
@@ -22,6 +24,14 @@ public class JavaMapperConfiguration extends PropertyHolder {
     
 	public void setTarget(String target) {
 		this.target = target;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public XmlElement toXmlElement() {
