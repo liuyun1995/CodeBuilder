@@ -9,7 +9,7 @@ import org.xml.sax.SAXException;
 
 import com.liuyun.builder.codegen.util.XmlConstants;
 
-//属性解析器
+//xml解析实例处理器
 public class ParserEntityResolver implements EntityResolver {
 
     public ParserEntityResolver() {
@@ -18,8 +18,8 @@ public class ParserEntityResolver implements EntityResolver {
 
     @Override
     public InputSource resolveEntity(String publicId, String systemId) throws SAXException, IOException {
-        if (XmlConstants.MYBATIS_GENERATOR_CONFIG_PUBLIC_ID.equalsIgnoreCase(publicId)) {
-            InputStream is = getClass().getClassLoader().getResourceAsStream("org/mybatis/generator/config/xml/mybatis-generator-config_1_0.dtd"); 
+        if (XmlConstants.code_builder_id.equalsIgnoreCase(systemId)) {
+            InputStream is = getClass().getClassLoader().getResourceAsStream("src/main/resources/codebuilder.dtd"); 
             InputSource ins = new InputSource(is);
             return ins;
         } else {

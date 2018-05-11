@@ -39,12 +39,14 @@ public class ShellRunner {
 
         Map<String, String> arguments = parseCommandLine(args);
 
+        //打印用例信息
         if (arguments.containsKey(HELP_1)) {
             usage();
             System.exit(0);
             return;
         }
 
+        //如果没指定配置文件则报错
         if (!arguments.containsKey(CONFIG_FILE)) {
             writeLine(getString("RuntimeError.0")); 
             return;
@@ -52,7 +54,7 @@ public class ShellRunner {
 
         List<String> warnings = new ArrayList<String>();
 
-        //获取configfile参数
+        //获取配置文件路径
         String configfile = arguments.get(CONFIG_FILE);
         File configurationFile = new File(configfile);
         if (!configurationFile.exists()) {

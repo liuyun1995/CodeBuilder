@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT codeBuilder (properties?, jdbcDriver, context+)>
+
+<!ELEMENT jdbcDriver EMPTY>
+<!ATTLIST jdbcDriver location CDATA #REQUIRED>
+
+<!ELEMENT context (jdbcConnection, tables+)>
+<!ATTLIST context id ID #REQUIRED>
+
+<!ELEMENT jdbcConnection EMPTY>
+<!ATTLIST jdbcConnection driverClass CDATA #REQUIRED
+                         connectionURL CDATA #REQUIRED
+                         userId CDATA #IMPLIED
+                         password CDATA #IMPLIED>
+
+<!ELEMENT tables (javaModel?, javaMapper?, xmlMapper?)>
+<!ATTLIST tables tableName ID #REQUIRED
+                 targetProject CDATA #IMPLIED
+                 targetPackage CDATA #IMPLIED>
+                 
+<!ELEMENT javaModel EMPTY>
+<!ATTLIST javaModel targetProject CDATA #IMPLIED
+                    targetPackage CDATA #IMPLIED>
+
+<!ELEMENT javaMapper EMPTY>
+<!ATTLIST javaMapper targetProject CDATA #IMPLIED
+                     targetPackage CDATA #IMPLIED>
+
+<!ELEMENT xmlMapper EMPTY>
+<!ATTLIST xmlMapper targetProject CDATA #IMPLIED
+                    targetPackage CDATA #IMPLIED>

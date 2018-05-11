@@ -111,8 +111,8 @@ public class MyBatisGenerator {
         }
         
         //加载ClassPathEntries配置的数据库驱动
-        if (configuration.getClassPathEntries().size() > 0) {
-            ClassLoader classLoader = getCustomClassloader(configuration.getClassPathEntries());
+        if (configuration.getJdbcDrivers().size() > 0) {
+            ClassLoader classLoader = getCustomClassloader(configuration.getJdbcDrivers());
             ObjectFactory.addExternalClassLoader(classLoader);
         }
         

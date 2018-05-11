@@ -55,9 +55,9 @@ public class MyBatisGeneratorConfigurationParser {
             if ("properties".equals(childNode.getNodeName())) { 
             	//解析<properties>
                 parseProperties(configuration, childNode);
-            } else if ("classPathEntry".equals(childNode.getNodeName())) {
+            } else if ("jdbcDriver".equals(childNode.getNodeName())) {
             	//解析<classPathEntry>
-                parseClassPathEntry(configuration, childNode);
+            	parseJdbcDrivers(configuration, childNode);
             } else if ("context".equals(childNode.getNodeName())) {
             	//解析<context>
                 parseContext(configuration, childNode);
@@ -220,9 +220,9 @@ public class MyBatisGeneratorConfigurationParser {
     }
 
     //解析<classPathEntry>
-    protected void parseClassPathEntry(Configuration configuration, Node node) {
+    protected void parseJdbcDrivers(Configuration configuration, Node node) {
         Properties attributes = parseAttributes(node);
-        configuration.addClasspathEntry(attributes.getProperty("location")); 
+        configuration.addJdbcDrivers(attributes.getProperty("location")); 
     }
 
     //将结点属性解析为Properties

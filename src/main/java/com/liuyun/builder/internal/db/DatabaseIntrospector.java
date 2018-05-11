@@ -89,8 +89,7 @@ public class DatabaseIntrospector {
             for (IntrospectedColumn introspectedColumn : entry.getValue()) {
             	
             	//转换成驼峰命名
-                String calculatedColumnName = introspectedColumn.getActualColumnName();
-                introspectedColumn.setJavaProperty(getCamelCaseString(calculatedColumnName, false));
+                introspectedColumn.setJavaProperty(getCamelCaseString(introspectedColumn.getActualColumnName(), false));
 
                 //获取该列对应的java类型(使用传入的类型转换器)
                 FullyQualifiedJavaType fullyQualifiedJavaType = javaTypeResolver.calculateJavaType(introspectedColumn);
@@ -128,8 +127,8 @@ public class DatabaseIntrospector {
             ActualTableName atn = entry.getKey();
             //生成全限定唯一表对象
             FullyQualifiedTable table = new FullyQualifiedTable(
-                    stringHasValue(tc.getCatalog()) ? atn.getCatalog() : null,
-                    stringHasValue(tc.getSchema()) ? atn.getSchema() : null,
+                    atn.getCatalog(),
+                    atn.getSchema(),
                     atn.getTableName(),
                     tc.getDomainObjectName(),
                     tc.getAlias(),

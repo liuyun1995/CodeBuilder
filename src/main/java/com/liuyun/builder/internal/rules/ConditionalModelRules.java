@@ -8,29 +8,31 @@ public class ConditionalModelRules extends BaseRules {
         super(introspectedTable);
     }
     
+    //生成只包含主键的类
     @Override
     public boolean generatePrimaryKeyClass() {
         return introspectedTable.getPrimaryKeyColumns().size() > 1;
     }
     
+    //生成包含基础字段的类
+    @Override
+	public boolean generateBaseRecordClass() {
+		return false;
+	}
+    
 	@Override
 	public boolean generateResultMap() {
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean generateBaseColumnList() {
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean generateJavaClient() {
-		return false;
-	}
-
-	@Override
-	public boolean generateBaseRecordClass() {
-		return false;
+		return true;
 	}
     
 }

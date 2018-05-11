@@ -6,6 +6,7 @@ import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
+//xml解析错误处理器
 public class ParserErrorHandler implements ErrorHandler {
 	
     private List<String> warnings;

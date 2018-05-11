@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!ELEMENT codeBuilder (properties?, driverPath*, context+)>
-<!ELEMENT context (jdbcConnection, tables+)>
-<!ATTLIST context id ID #REQUIRED>
-<!ELEMENT tables (javaModel, javaMapper, xmlMapper)>
-<!ATTLIST tables tableName ID #REQUIRED
-                 targetProject CDATA #IMPLIED
-                 targetPackage CDATA #IMPLIED>

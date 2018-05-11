@@ -66,6 +66,7 @@ public class Context extends PropertyHolder {
     public Context() {
         super();
         tablesConfigurations = new ArrayList<TablesConfiguration>();
+        pluginConfigurations = new ArrayList<PluginConfiguration>();
     }
     
     //---------------------------------------------getter和setter方法--------------------------------------------

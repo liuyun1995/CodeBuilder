@@ -10,8 +10,7 @@ import com.liuyun.builder.api.ProgressCallback;
 import com.liuyun.builder.api.dom.java.CompilationUnit;
 import com.liuyun.builder.api.dom.xml.Document;
 import com.liuyun.builder.codegen.javamapper.JavaMapperGenerator;
-import com.liuyun.builder.codegen.javamodel.BaseRecordGenerator;
-import com.liuyun.builder.codegen.javamodel.PrimaryKeyGenerator;
+import com.liuyun.builder.codegen.javamodel.SimpleModelGenerator;
 import com.liuyun.builder.codegen.xmlmapper.XMLMapperGenerator;
 import com.liuyun.builder.config.PropertyRegistry;
 
@@ -45,37 +44,18 @@ public class IntrospectedTableImpl extends IntrospectedTable {
     
     //获取JavaModel生成器
     protected void calculateJavaModelGenerators(List<String> warnings, ProgressCallback progressCallback) {
-        if (getRules().generatePrimaryKeyClass()) {
-            AbstractJavaGenerator javaGenerator = new PrimaryKeyGenerator();
-            initializeAbstractGenerator(javaGenerator, warnings, progressCallback);
-            javaModelGenerators.add(javaGenerator);
-        }
-        if (getRules().generateBaseRecordClass()) {
-            AbstractJavaGenerator javaGenerator = new BaseRecordGenerator();
-            initializeAbstractGenerator(javaGenerator, warnings, progressCallback);
-            javaModelGenerators.add(javaGenerator);
-        }
+    	AbstractJavaGenerator javaGenerator = new SimpleModelGenerator();
+        initializeAbstractGenerator(javaGenerator, warnings, progressCallback);
+        javaModelGenerators.add(javaGenerator);
     }
     
     //获取JavaMapper生成器
-    protected AbstractJavaMapperGenerator calculateJavaMapperGenerators(List<String> warnings, ProgressCallback progressCallback) {
-        if (!rules.generateJavaClient()) {
-            return null;
-        }
-        AbstractJavaMapperGenerator javaGenerator = createJavaClientGenerator();
-        if (javaGenerator == null) {
-            return null;
-        }
-        initializeAbstractGenerator(javaGenerator, warnings, progressCallback);
-        javaMapperGenerators.add(javaGenerator);
-        return javaGenerator;
+    protected void calculateJavaMapperGenerators(List<String> warnings, ProgressCallback progressCallback) {
+        AbstractJavaMapperGenerator javaMapperGenerator = new JavaMapperGenerator();
+        initializeAbstractGenerator(javaMapperGenerator, warnings, progressCallback);
+        javaMapperGenerators.add(javaMapperGenerator);
     }
     
-    //创建JavaClient生成器
-    protected AbstractJavaMapperGenerator createJavaClientGenerator() {
-        return new JavaMapperGenerator();
-    }
-
     //获取XMLMapper生成器
     protected void calculateXmlMapperGenerator(List<String> warnings, ProgressCallback progressCallback) {
         xmlMapperGenerator = new XMLMapperGenerator();

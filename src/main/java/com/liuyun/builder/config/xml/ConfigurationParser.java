@@ -95,15 +95,9 @@ public class ConfigurationParser {
             Configuration config;
             //获取根结点
             Element rootNode = document.getDocumentElement();
-            //获取Document类型
-            DocumentType docType = document.getDoctype();
-            //根据DOCTYPE决定使用哪个解析
-            if (rootNode.getNodeType() == Node.ELEMENT_NODE 
-            		&& docType.getPublicId().equals(XmlConstants.MYBATIS_GENERATOR_CONFIG_PUBLIC_ID)) {
-            	config = parseConfiguration(rootNode);
-            } else {
-                throw new XMLParserException(getString("RuntimeError.5")); 
-            }
+            
+            config = parseConfiguration(rootNode);
+            
             if (parseErrors.size() > 0) {
                 throw new XMLParserException(parseErrors);
             }

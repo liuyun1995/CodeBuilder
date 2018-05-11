@@ -19,7 +19,7 @@ import com.liuyun.builder.codegen.javamapper.elements.UpdateMethodGenerator;
 import com.liuyun.builder.codegen.xmlmapper.XMLMapperGenerator;
 import com.liuyun.builder.config.PropertyRegistry;
 
-//Java Mapper生成器
+//JavaMapper生成器
 public class JavaMapperGenerator extends AbstractJavaMapperGenerator {
 
     public JavaMapperGenerator() {
