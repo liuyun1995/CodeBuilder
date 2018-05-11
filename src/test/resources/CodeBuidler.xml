@@ -10,11 +10,7 @@
                         userId="itf"
                         password="|1|nxlc6h0IKF7DMfSq64Z2IsXB7kc=|" />
         
-        <tables tableName="itf_pur_returns_vmi_exp" targetProject="" targetPackage="">
-			<javaModel targetProject="" targetPackage="" />
-			<javaMapper targetProject="" targetPackage="" />
-			<xmlMapper targetProject="" targetPackage="" />
-		</tables>
+        <tables tableName="itf_pur_returns_vmi_exp" targetProject="E:\CodeBuilder" targetPackage="com.liuyun"/>
 		
     </context>
 	

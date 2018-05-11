@@ -486,7 +486,11 @@ public abstract class IntrospectedTable {
     protected String calculateJavaModelPackage() {
         JavaModelConfiguration config = tablesConfiguration.getJavaModelConfiguration();
         StringBuilder sb = new StringBuilder();
-        sb.append(config.getTargetProject());
+        if(!stringHasValue(config.getTargetPackage())) {
+        	sb.append(config.getTargetPackage());
+        } else {
+        	sb.append(tablesConfiguration.getTargetPackage());
+        }
         return sb.toString();
     }
 
@@ -516,11 +520,12 @@ public abstract class IntrospectedTable {
     //获取JavaMapper的包
     protected String calculateJavaMapperPackage() {
         JavaMapperConfiguration config = tablesConfiguration.getJavaMapperConfiguration();
-        if (config == null) {
-            return null;
-        }
         StringBuilder sb = new StringBuilder();
-        sb.append(config.getTargetProject());
+        if(!stringHasValue(config.getTargetPackage())) {
+        	sb.append(config.getTargetPackage());
+        } else {
+        	sb.append(tablesConfiguration.getTargetPackage());
+        }
         return sb.toString();
     }
     

@@ -56,7 +56,7 @@ public class MyBatisGeneratorConfigurationParser {
             	//解析<properties>
                 parseProperties(configuration, childNode);
             } else if ("jdbcDriver".equals(childNode.getNodeName())) {
-            	//解析<classPathEntry>
+            	//解析<jdbcDrivers>
             	parseJdbcDrivers(configuration, childNode);
             } else if ("context".equals(childNode.getNodeName())) {
             	//解析<context>
@@ -146,14 +146,15 @@ public class MyBatisGeneratorConfigurationParser {
         if (stringHasValue(tableName)) {
             tc.setTableName(tableName);
         }
-        //设置生成路径
+        //设置项目路径
         String targetProject = attributes.getProperty("targetProject"); 
         if (stringHasValue(targetProject)) {
-            tc.setTableName(targetProject);
+            tc.setTargetProject(targetProject);
         }
+        //设置包路径
         String targetPackage = attributes.getProperty("targetPackage"); 
         if (stringHasValue(targetPackage)) {
-            tc.setTableName(targetPackage);
+            tc.setTargetPackage(targetPackage);
         }
         //解析子结点
         NodeList nodeList = node.getChildNodes();
