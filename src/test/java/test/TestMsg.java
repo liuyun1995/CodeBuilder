@@ -1,18 +1,14 @@
 package test;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 public class TestMsg {
 
 	public static void main(String[] args) {
 		//System.out.println(Messages.getString("ValidationError.18", "123", "789"));
 		
-		List<String> m = new ArrayList<String>();
+		HashMap<String, String> map;
 		
-		for(String s : m) {
-			System.out.println(s);
-		}
 	}
 
 }

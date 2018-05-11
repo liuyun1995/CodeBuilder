@@ -29,6 +29,7 @@ public class GeneratedJavaFile extends GeneratedFile {
     //获取文件名
     @Override
     public String getFileName() {
+    	//根据编译单元生成文件名, 因为java类名需要和文件名相同
         return compilationUnit.getType().getShortNameWithoutTypeArguments() + ".java";
     }
 
@@ -59,7 +60,5 @@ public class GeneratedJavaFile extends GeneratedFile {
     public String getFileEncoding() {
         return fileEncoding;
     }
-
-	
     
 }

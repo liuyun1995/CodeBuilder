@@ -10,89 +10,35 @@ import java.util.StringTokenizer;
 public class FullyQualifiedJavaType implements Comparable<FullyQualifiedJavaType> {
     
     private static final String JAVA_LANG = "java.lang"; 
-    
     private static FullyQualifiedJavaType intInstance = null;
-    
     private static FullyQualifiedJavaType stringInstance = null;
-    
     private static FullyQualifiedJavaType booleanPrimitiveInstance = null;
-    
     private static FullyQualifiedJavaType objectInstance = null;
-    
     private static FullyQualifiedJavaType dateInstance = null;
-    
     private static FullyQualifiedJavaType criteriaInstance = null;
-    
     private static FullyQualifiedJavaType generatedCriteriaInstance = null;
-    
-    private String baseShortName;
-    
-    private String baseQualifiedName;
-    
-    private boolean explicitlyImported;
-    
-    private String packageName;
-    
-    private boolean primitive;
-    
-    private boolean isArray;
-    
-    private PrimitiveTypeWrapper primitiveTypeWrapper;
-    
-    private List<FullyQualifiedJavaType> typeArguments;
-    
-    private boolean wildcardType;
-    
-    private boolean boundedWildcard;
-    
-    private boolean extendsBoundedWildcard;
+    private String baseShortName;                        //简单名称(带类型参数)
+    private String baseQualifiedName;                    //全限定名称(不带类型参数)
+    private boolean explicitlyImported;                 //是否是具体的导入
+    private String packageName;                          //包名
+    private boolean primitive;                          //是否是基本类型
+    private boolean isArray;                            //是否是数组类型
+    private PrimitiveTypeWrapper primitiveTypeWrapper;   //基础类型包装器
+    private List<FullyQualifiedJavaType> typeArguments;  //类型参数集合
+    private boolean wildcardType;                       //是否是泛型类型
+    private boolean boundedWildcard;                    //是否是有界泛型类型
+    private boolean extendsBoundedWildcard;             //是否是继承的有界泛型类型
     
     public FullyQualifiedJavaType(String fullTypeSpecification) {
         super();
         typeArguments = new ArrayList<FullyQualifiedJavaType>();
+        //解析全限定类名
         parse(fullTypeSpecification);
     }
 
+    //是否是具体的导入
     public boolean isExplicitlyImported() {
         return explicitlyImported;
-    }
-
-    //返回全限定名
-    public String getFullyQualifiedName() {
-        StringBuilder sb = new StringBuilder();
-        if (wildcardType) {
-            sb.append('?');
-            if (boundedWildcard) {
-                if (extendsBoundedWildcard) {
-                    sb.append(" extends "); 
-                } else {
-                    sb.append(" super "); 
-                }
-                sb.append(baseQualifiedName);
-            }
-        } else {
-            sb.append(baseQualifiedName);
-        }
-
-        if (typeArguments.size() > 0) {
-            boolean first = true;
-            sb.append('<');
-            for (FullyQualifiedJavaType fqjt : typeArguments) {
-                if (first) {
-                    first = false;
-                } else {
-                    sb.append(", "); 
-                }
-                sb.append(fqjt.getFullyQualifiedName());
-            }
-            sb.append('>');
-        }
-        return sb.toString();
-    }
-
-    //获取没有类型参数的全限定名
-    public String getFullyQualifiedNameWithoutTypeParameters() {
-        return baseQualifiedName;
     }
     
     //获取导入集合
@@ -133,7 +79,7 @@ public class FullyQualifiedJavaType implements Comparable<FullyQualifiedJavaType
         return packageName;
     }
     
-    //获取简单名称
+    //获取简单名称(带类型参数)
     public String getShortName() {
         StringBuilder sb = new StringBuilder();
         if (wildcardType) {
@@ -165,9 +111,46 @@ public class FullyQualifiedJavaType implements Comparable<FullyQualifiedJavaType
         return sb.toString();
     }
 
-    //获取简短名称
+    //获取简单名称(不带类型参数)
     public String getShortNameWithoutTypeArguments() {
         return baseShortName;
+    }
+    
+    //返回全限定名(带类型参数)
+    public String getFullyQualifiedName() {
+        StringBuilder sb = new StringBuilder();
+        if (wildcardType) {
+            sb.append('?');
+            if (boundedWildcard) {
+                if (extendsBoundedWildcard) {
+                    sb.append(" extends "); 
+                } else {
+                    sb.append(" super "); 
+                }
+                sb.append(baseQualifiedName);
+            }
+        } else {
+            sb.append(baseQualifiedName);
+        }
+        if (typeArguments.size() > 0) {
+            boolean first = true;
+            sb.append('<');
+            for (FullyQualifiedJavaType fqjt : typeArguments) {
+                if (first) {
+                    first = false;
+                } else {
+                    sb.append(", "); 
+                }
+                sb.append(fqjt.getFullyQualifiedName());
+            }
+            sb.append('>');
+        }
+        return sb.toString();
+    }
+
+    //获取全限定名(不带类型参数)
+    public String getFullyQualifiedNameWithoutTypeParameters() {
+        return baseQualifiedName;
     }
 
     @Override
@@ -202,6 +185,7 @@ public class FullyQualifiedJavaType implements Comparable<FullyQualifiedJavaType
         return primitiveTypeWrapper;
     }
 
+    //获取int实例
     public static final FullyQualifiedJavaType getIntInstance() {
         if (intInstance == null) {
             intInstance = new FullyQualifiedJavaType("int"); 
@@ -209,61 +193,72 @@ public class FullyQualifiedJavaType implements Comparable<FullyQualifiedJavaType
         return intInstance;
     }
 
+    //获取Map实例
     public static final FullyQualifiedJavaType getNewMapInstance() {
         return new FullyQualifiedJavaType("java.util.Map"); 
     }
 
+    //获取List实例
     public static final FullyQualifiedJavaType getNewListInstance() {
         return new FullyQualifiedJavaType("java.util.List"); 
     }
 
+    //获取HashMap实例
     public static final FullyQualifiedJavaType getNewHashMapInstance() {
         return new FullyQualifiedJavaType("java.util.HashMap"); 
     }
 
+    //获取ArrayList实例
     public static final FullyQualifiedJavaType getNewArrayListInstance() {
-        return new FullyQualifiedJavaType("java.util.ArrayList"); 
+        return new FullyQualifiedJavaType("java.util.ArrayList");
     }
 
+    //获取Iterator实例
     public static final FullyQualifiedJavaType getNewIteratorInstance() {
-        return new FullyQualifiedJavaType("java.util.Iterator"); 
+        return new FullyQualifiedJavaType("java.util.Iterator");
     }
 
+    //获取String实例
     public static final FullyQualifiedJavaType getStringInstance() {
         if (stringInstance == null) {
-            stringInstance = new FullyQualifiedJavaType("java.lang.String"); 
+            stringInstance = new FullyQualifiedJavaType("java.lang.String");
         }
         return stringInstance;
     }
 
+    //获取Boolean实例
     public static final FullyQualifiedJavaType getBooleanPrimitiveInstance() {
         if (booleanPrimitiveInstance == null) {
-            booleanPrimitiveInstance = new FullyQualifiedJavaType("boolean"); 
+            booleanPrimitiveInstance = new FullyQualifiedJavaType("boolean");
         }
         return booleanPrimitiveInstance;
     }
 
+    //获取Object实例
     public static final FullyQualifiedJavaType getObjectInstance() {
         if (objectInstance == null) {
-            objectInstance = new FullyQualifiedJavaType("java.lang.Object"); 
+            objectInstance = new FullyQualifiedJavaType("java.lang.Object");
         }
         return objectInstance;
     }
 
+    //获取Date实例
     public static final FullyQualifiedJavaType getDateInstance() {
         if (dateInstance == null) {
-            dateInstance = new FullyQualifiedJavaType("java.util.Date"); 
+            dateInstance = new FullyQualifiedJavaType("java.util.Date");
         }
         return dateInstance;
     }
 
+    //获取Criteria实例
     public static final FullyQualifiedJavaType getCriteriaInstance() {
         if (criteriaInstance == null) {
-            criteriaInstance = new FullyQualifiedJavaType("Criteria"); 
+            criteriaInstance = new FullyQualifiedJavaType("Criteria");
         }
         return criteriaInstance;
     }
 
+    //获取GeneratedCriteria实例
     public static final FullyQualifiedJavaType getGeneratedCriteriaInstance() {
         if (generatedCriteriaInstance == null) {
             generatedCriteriaInstance = new FullyQualifiedJavaType("GeneratedCriteria"); 
@@ -285,7 +280,8 @@ public class FullyQualifiedJavaType implements Comparable<FullyQualifiedJavaType
     	//去除前后空格
         String spec = fullTypeSpecification.trim();
         //是否是？开头
-        if (spec.startsWith("?")) { 
+        if (spec.startsWith("?")) {
+        	//通配符类型
             wildcardType = true;
             //裁去？并去掉前后空格
             spec = spec.substring(1).trim();
@@ -302,13 +298,16 @@ public class FullyQualifiedJavaType implements Comparable<FullyQualifiedJavaType
                 //裁去"super "
                 spec = spec.substring(6);
             } else {
+            	//非有界泛型
                 boundedWildcard = false;
             }
             parse(spec);
         } else {
         	//获取"<"的位置
             int index = fullTypeSpecification.indexOf('<');
+            //如果没有"<"就表明不是泛型类型
             if (index == -1) {
+            	//使用简单解析
                 simpleParse(fullTypeSpecification);
             } else {
                 simpleParse(fullTypeSpecification.substring(0, index));

@@ -77,7 +77,6 @@ public class IntrospectedTableImpl extends IntrospectedTable {
         List<GeneratedJavaFile> answer = new ArrayList<GeneratedJavaFile>();
         //遍历JavaModel生成器
         for (AbstractJavaGenerator javaGenerator : javaModelGenerators) {
-        	//获取编译单元
             List<CompilationUnit> compilationUnits = javaGenerator.getCompilationUnits();
             //构造GeneratedJavaFile
             for (CompilationUnit compilationUnit : compilationUnits) {
@@ -127,16 +126,6 @@ public class IntrospectedTableImpl extends IntrospectedTable {
     @Override
     public int getGenerationSteps() {
         return javaModelGenerators.size() + javaMapperGenerators.size() + (xmlMapperGenerator == null ? 0 : 1);
-    }
-
-    @Override
-    public boolean requiresXMLGenerator() {
-        AbstractJavaMapperGenerator javaClientGenerator = createJavaClientGenerator();
-        if (javaClientGenerator == null) {
-            return false;
-        } else {
-            return javaClientGenerator.requiresXMLGenerator();
-        }
     }
     
 }

@@ -583,8 +583,6 @@ public abstract class IntrospectedTable {
     public abstract List<GeneratedXmlFile> getGeneratedXmlFiles();
 
     public abstract int getGenerationSteps();
-
-    public abstract boolean requiresXMLGenerator();
     
     //-----------------------------------------------其他方法----------------------------------------------------
 

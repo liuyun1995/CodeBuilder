@@ -24,16 +24,16 @@ public interface CompilationUnit {
     //是否是枚举类
     boolean isJavaEnumeration();
 
-    //获取实现的接口集合
+    //获取接口集合
     Set<FullyQualifiedJavaType> getSuperInterfaceTypes();
 
-    //获取本类类型
+    //获取编译单元类型
     FullyQualifiedJavaType getType();
 
-    //添加一个导入类型
+    //添加导入类型
     void addImportedType(FullyQualifiedJavaType importedType);
 
-    //添加全部导入类型
+    //添加导入类型
     void addImportedTypes(Set<FullyQualifiedJavaType> importedTypes);
 
     //添加静态导入类型

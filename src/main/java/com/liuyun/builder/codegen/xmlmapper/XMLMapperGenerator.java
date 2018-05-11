@@ -28,9 +28,8 @@ public class XMLMapperGenerator extends AbstractXmlMapperGenerator {
         XmlElement answer = new XmlElement("mapper"); 
         String namespace = introspectedTable.getSqlMapNamespace();
         answer.addAttribute(new Attribute("namespace", namespace));
-
+        //添加备注
         context.getCommentGenerator().addRootComment(answer);
-
         //添加各种元素
         addResultMapElement(answer);
         addBaseColumnListElement(answer);
@@ -38,10 +37,10 @@ public class XMLMapperGenerator extends AbstractXmlMapperGenerator {
         addDeleteElement(answer);
         addUpdateElement(answer);
         addSelectElement(answer);
-
         return answer;
     }
 
+    //添加ResultMap元素
     protected void addResultMapElement(XmlElement parentElement) {
         if (introspectedTable.getRules().generateResultMap()) {
             AbstractXmlElementGenerator elementGenerator = new ResultMapElementGenerator(false);
@@ -49,6 +48,7 @@ public class XMLMapperGenerator extends AbstractXmlMapperGenerator {
         }
     }
     
+    //添加BaseColumnList元素
     protected void addBaseColumnListElement(XmlElement parentElement) {
         if (introspectedTable.getRules().generateBaseColumnList()) {
             AbstractXmlElementGenerator elementGenerator = new BaseColumnListElementGenerator();
@@ -56,6 +56,7 @@ public class XMLMapperGenerator extends AbstractXmlMapperGenerator {
         }
     }
 
+    //添加insert元素
     protected void addInsertElement(XmlElement parentElement) {
         if (introspectedTable.getRules().generateInsert()) {
             AbstractXmlElementGenerator elementGenerator = new InsertElementGenerator(false);
@@ -63,6 +64,7 @@ public class XMLMapperGenerator extends AbstractXmlMapperGenerator {
         }
     }
 
+    //添加delete元素
     protected void addDeleteElement(XmlElement parentElement) {
         if (introspectedTable.getRules().generateDelete()) {
             AbstractXmlElementGenerator elementGenerator = new DeleteElementGenerator(false);
@@ -70,6 +72,7 @@ public class XMLMapperGenerator extends AbstractXmlMapperGenerator {
         }
     }
 
+    //添加update元素
     protected void addUpdateElement(XmlElement parentElement) {
         if (introspectedTable.getRules().generateUpdate()) {
             AbstractXmlElementGenerator elementGenerator = new UpdateElementGenerator(false);
@@ -77,6 +80,7 @@ public class XMLMapperGenerator extends AbstractXmlMapperGenerator {
         }
     }
 
+    //添加select元素
     protected void addSelectElement(XmlElement parentElement) {
         if (introspectedTable.getRules().generateSelect()) {
             AbstractXmlElementGenerator elementGenerator = new SelectElementGenerator();
@@ -84,6 +88,7 @@ public class XMLMapperGenerator extends AbstractXmlMapperGenerator {
         }
     }
     
+    //初始化生成器
     protected void initializeAndExecuteGenerator(AbstractXmlElementGenerator elementGenerator, XmlElement parentElement) {
         elementGenerator.setContext(context);
         elementGenerator.setIntrospectedTable(introspectedTable);
@@ -92,15 +97,16 @@ public class XMLMapperGenerator extends AbstractXmlMapperGenerator {
         elementGenerator.addElements(parentElement);
     }
 
+    //获取xml文档
     @Override
     public Document getDocument() {
+    	//新建Document
         Document document = new Document(XmlConstants.MYBATIS3_MAPPER_PUBLIC_ID, XmlConstants.MYBATIS3_MAPPER_SYSTEM_ID);
+        //设置全部元素
         document.setRootElement(getSqlMapElement());
-
         if (!context.getPlugins().sqlMapDocumentGenerated(document, introspectedTable)) {
             document = null;
         }
-
         return document;
     }
 }
