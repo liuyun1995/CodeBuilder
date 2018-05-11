@@ -1,6 +1,5 @@
 package com.liuyun.builder.codegen.xmlmapper.elements;
 
-import static com.liuyun.builder.internal.utils.StringUtil.stringHasValue;
 import com.liuyun.builder.api.IntrospectedColumn;
 import com.liuyun.builder.api.dom.xml.Attribute;
 import com.liuyun.builder.api.dom.xml.TextElement;

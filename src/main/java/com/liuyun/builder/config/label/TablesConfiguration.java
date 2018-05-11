@@ -7,17 +7,10 @@ import static com.liuyun.builder.internal.utils.StringUtil.composeFullyQualified
 import static com.liuyun.builder.internal.utils.StringUtil.stringHasValue;
 import static com.liuyun.builder.internal.utils.messages.Messages.getString;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import com.liuyun.builder.api.dom.xml.Attribute;
 import com.liuyun.builder.api.dom.xml.XmlElement;
-import com.liuyun.builder.config.ColumnOverride;
-import com.liuyun.builder.config.ColumnRenamingRule;
-import com.liuyun.builder.config.DomainObjectRenamingRule;
-import com.liuyun.builder.config.IgnoredColumn;
-import com.liuyun.builder.config.IgnoredColumnPattern;
 import com.liuyun.builder.config.PropertyHolder;
 
 //table标签配置
@@ -29,12 +22,10 @@ public class TablesConfiguration extends PropertyHolder {
     private String schema;
     //表名
     private String tableName;
-    //生成路径
-    private String target;
-    
-    private List<ColumnOverride> columnOverrides;
-
-    private Map<IgnoredColumn, Boolean> ignoredColumns;
+    //项目路径
+    private String targetProject;
+    //包路径
+    private String targetPackage;
     
     private JavaModelConfiguration javaModelConfiguration;
     
@@ -42,9 +33,9 @@ public class TablesConfiguration extends PropertyHolder {
     
     private XmlMapperConfiguration xmlMapperConfiguration;
     
-    private ColumnRenamingRule columnRenamingRule;
+    private boolean delimitIdentifiers;
     
-    private List<IgnoredColumnPattern> ignoredColumnPatterns = new ArrayList<IgnoredColumnPattern>();
+    private String alias;
 
     public TablesConfiguration(Context context) {}
     
@@ -71,13 +62,21 @@ public class TablesConfiguration extends PropertyHolder {
     public void setTableName(String tableName) {
         this.tableName = tableName;
     }
-    
-    public String getTarget() {
-		return target;
+
+	public String getTargetProject() {
+		return targetProject;
 	}
 
-	public void setTarget(String target) {
-		this.target = target;
+	public void setTargetProject(String targetProject) {
+		this.targetProject = targetProject;
+	}
+
+	public String getTargetPackage() {
+		return targetPackage;
+	}
+
+	public void setTargetPackage(String targetPackage) {
+		this.targetPackage = targetPackage;
 	}
 
 	public JavaModelConfiguration getJavaModelConfiguration() {
@@ -103,40 +102,6 @@ public class TablesConfiguration extends PropertyHolder {
 	public void setXmlMapperConfiguration(XmlMapperConfiguration xmlMapperConfiguration) {
 		this.xmlMapperConfiguration = xmlMapperConfiguration;
 	}
-	
-	public ColumnOverride getColumnOverride(String columnName) {
-        for (ColumnOverride co : columnOverrides) {
-            if (co.isColumnNameDelimited()) {
-                if (columnName.equals(co.getColumnName())) {
-                    return co;
-                }
-            } else {
-                if (columnName.equalsIgnoreCase(co.getColumnName())) {
-                    return co;
-                }
-            }
-        }
-        return null;
-    }
-	
-	public ColumnRenamingRule getColumnRenamingRule() {
-        return columnRenamingRule;
-    }
-	
-	public boolean isColumnIgnored(String columnName) {
-        for (Map.Entry<IgnoredColumn, Boolean> entry : ignoredColumns.entrySet()) {
-            if (entry.getKey().matches(columnName)) {
-                entry.setValue(Boolean.TRUE);
-                return true;
-            }
-        }
-        for (IgnoredColumnPattern ignoredColumnPattern : ignoredColumnPatterns) {
-            if (ignoredColumnPattern.matches(columnName)) {
-                return true;
-            }
-        }
-        return false;
-    }
 
 	public XmlElement toXmlElement() {
         XmlElement xmlElement = new XmlElement("table"); 
@@ -187,17 +152,12 @@ public class TablesConfiguration extends PropertyHolder {
 		return null;
 	}
 
-	public DomainObjectRenamingRule getDomainObjectRenamingRule() {
-		return null;
-	}
+	public boolean isDelimitIdentifiers() {
+        return delimitIdentifiers;
+    }
 
 	public String getAlias() {
-		return null;
-	}
-
-	public boolean isDelimitIdentifiers() {
-		// TODO Auto-generated method stub
-		return false;
+		return alias;
 	}
     
 }

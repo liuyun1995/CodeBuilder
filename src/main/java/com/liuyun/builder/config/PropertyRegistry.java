@@ -28,11 +28,5 @@ public class PropertyRegistry {
     public static final String COMMENT_GENERATOR_SUPPRESS_ALL_COMMENTS = "suppressAllComments"; 
     public static final String COMMENT_GENERATOR_ADD_REMARK_COMMENTS = "addRemarkComments"; 
     public static final String COMMENT_GENERATOR_DATE_FORMAT = "dateFormat";
-
-    //构造FullyQualifiedTable时使用
-	public static final String TABLE_RUNTIME_CATALOG = null;
-	public static final String TABLE_RUNTIME_SCHEMA = null;
-	public static final String TABLE_RUNTIME_TABLE_NAME = null;
-	public static final String TABLE_IGNORE_QUALIFIERS_AT_RUNTIME = null; 
     
 }

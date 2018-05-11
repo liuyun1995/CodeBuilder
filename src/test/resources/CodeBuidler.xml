@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE codeBuilder SYSTEM "codebuilder.dtd">
+<codeBuilder>
+
+    <driverPath location="E:\Tools\mybatisGenerator\mysql-connector-java-5.1.6.jar"/>
+    
+    <context id="mysql">
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://192.168.7.54:8635/srm_interface" 
+                        userId="itf"
+                        password="|1|nxlc6h0IKF7DMfSq64Z2IsXB7kc=|">
+        </jdbcConnection>
+        
+        <tables tableName="itf_pur_returns_vmi_exp" targetProject="" targetPackage="">
+			<javaModel targetProject="" targetPackage=""/>
+			<javaMapper targetProject="" targetPackage=""/>
+			<xmlMapper targetProject="" targetPackage=""/>
+		</tables>
+		
+    </context>
+	
+</codeBuilder>

@@ -147,9 +147,13 @@ public class MyBatisGeneratorConfigurationParser {
             tc.setTableName(tableName);
         }
         //设置生成路径
-        String target = attributes.getProperty("target"); 
-        if (stringHasValue(target)) {
-            tc.setTableName(target);
+        String targetProject = attributes.getProperty("targetProject"); 
+        if (stringHasValue(targetProject)) {
+            tc.setTableName(targetProject);
+        }
+        String targetPackage = attributes.getProperty("targetPackage"); 
+        if (stringHasValue(targetPackage)) {
+            tc.setTableName(targetPackage);
         }
         //解析子结点
         NodeList nodeList = node.getChildNodes();
@@ -162,8 +166,8 @@ public class MyBatisGeneratorConfigurationParser {
                 parseJavaModel(tc, childNode);
             } else if ("javaMapper".equals(childNode.getNodeName())) { 
                 parseJavaMapper(tc, childNode);
-            } else if ("mapperXML".equals(childNode.getNodeName())) {
-            	parseMapperXML(tc, childNode);
+            } else if ("xmlMapper".equals(childNode.getNodeName())) {
+            	parseXmlMapper(tc, childNode);
             }
         }
     }
@@ -173,6 +177,7 @@ public class MyBatisGeneratorConfigurationParser {
     	tc.setJavaModelConfiguration(javaModelConfiguration);
     	Properties attributes = parseAttributes(node);
     	javaModelConfiguration.setTargetProject(attributes.getProperty("targetProject"));
+    	javaModelConfiguration.setTargetPackage(attributes.getProperty("targetPackage"));
 	}
     
     private void parseJavaMapper(TablesConfiguration tc, Node node) {
@@ -180,13 +185,15 @@ public class MyBatisGeneratorConfigurationParser {
     	tc.setJavaMapperConfiguration(javaMapperConfiguration);
     	Properties attributes = parseAttributes(node);
     	javaMapperConfiguration.setTargetProject(attributes.getProperty("targetProject"));
+    	javaMapperConfiguration.setTargetPackage(attributes.getProperty("targetPackage"));
 	}
 
-	private void parseMapperXML(TablesConfiguration tc, Node node) {
+	private void parseXmlMapper(TablesConfiguration tc, Node node) {
 		XmlMapperConfiguration xmlMapperConfiguration = new XmlMapperConfiguration();
     	tc.setXmlMapperConfiguration(xmlMapperConfiguration);
     	Properties attributes = parseAttributes(node);
     	xmlMapperConfiguration.setTargetProject(attributes.getProperty("targetProject"));
+    	xmlMapperConfiguration.setTargetPackage(attributes.getProperty("targetPackage"));
 	}
 
 	//解析jdbcConnection

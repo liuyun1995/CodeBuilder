@@ -119,7 +119,8 @@ public class ShellRunner {
         } catch (InterruptedException e) {
             // ignore (will never happen with the DefaultShellCallback)
         }
-        //在控制台打印警告信息
+        
+        //在控制台打印警告信息(由于warnings初始化了, 不为null, 所以不会报错)
         for (String warning : warnings) {
             writeLine(warning);
         }
@@ -150,9 +151,11 @@ public class ShellRunner {
 
     //解析命令行参数
     private static Map<String, String> parseCommandLine(String[] args) {
+    	//新建错误列表
         List<String> errors = new ArrayList<String>();
+        //新建参数映射表
         Map<String, String> arguments = new HashMap<String, String>();
-
+        //遍历参数数组
         for (int i = 0; i < args.length; i++) {
             if (CONFIG_FILE.equalsIgnoreCase(args[i])) {
                 if ((i + 1) < args.length) {

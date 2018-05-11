@@ -7,10 +7,6 @@ import static com.liuyun.builder.internal.utils.JavaBeansUtil.getCamelCaseString
 import static com.liuyun.builder.internal.utils.StringUtil.composeFullyQualifiedTableName;
 import static com.liuyun.builder.internal.utils.StringUtil.stringHasValue;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import com.liuyun.builder.config.DomainObjectRenamingRule;
 import com.liuyun.builder.config.label.Context;
 
 //唯一全限定表
@@ -19,33 +15,24 @@ public class FullyQualifiedTable {
     private String introspectedCatalog;                          //逆向目录
     private String introspectedSchema;                           //逆向概要
     private String introspectedTableName;                        //逆向表名
-    private String runtimeCatalog;                               //运行时目录
-    private String runtimeSchema;                                //运行时概要
-    private String runtimeTableName;                             //运行时表名
     private String domainObjectName;                             //JavaBean名
     private String domainObjectSubPackage;                       //JavaBean的子包
     private String alias;                                        //表的别名
-    private boolean ignoreQualifiersAtRuntime;                   //运行时忽略特定的表
     private String beginningDelimiter;                           //开始的分隔符
     private String endingDelimiter;                              //结尾的分隔符
-    private DomainObjectRenamingRule domainObjectRenamingRule;   //JavaBean重命名规则
     
     public FullyQualifiedTable(String introspectedCatalog,
-            String introspectedSchema, String introspectedTableName,
-            String domainObjectName, String alias,
-            boolean ignoreQualifiersAtRuntime, String runtimeCatalog,
-            String runtimeSchema, String runtimeTableName,
-            boolean delimitIdentifiers, DomainObjectRenamingRule domainObjectRenamingRule,
-            Context context) {
+            				   String introspectedSchema, 
+                               String introspectedTableName,
+                               String domainObjectName, 
+                               String alias,
+                               boolean delimitIdentifiers, 
+                               Context context) {
         super();
         this.introspectedCatalog = introspectedCatalog;
         this.introspectedSchema = introspectedSchema;
         this.introspectedTableName = introspectedTableName;
-        this.ignoreQualifiersAtRuntime = ignoreQualifiersAtRuntime;
-        this.runtimeCatalog = runtimeCatalog;
-        this.runtimeSchema = runtimeSchema;
-        this.runtimeTableName = runtimeTableName;
-        this.domainObjectRenamingRule = domainObjectRenamingRule;
+        
         if (stringHasValue(domainObjectName)) {
             int index = domainObjectName.lastIndexOf('.');
             if (index == -1) {
@@ -55,11 +42,13 @@ public class FullyQualifiedTable {
                 this.domainObjectSubPackage = domainObjectName.substring(0, index);
             }
         }
+        
         if (alias == null) {
             this.alias = null;
         } else {
             this.alias = alias.trim();
         }
+        
         beginningDelimiter = delimitIdentifiers ? context.getBeginningDelimiter() : ""; 
         endingDelimiter = delimitIdentifiers ? context.getEndingDelimiter() : ""; 
     }
@@ -76,36 +65,24 @@ public class FullyQualifiedTable {
         return introspectedTableName;
     }
     
-    //运行时获取表名
+    //运行时获取全限定表名
     public String getFullyQualifiedTableNameAtRuntime() {
         StringBuilder localCatalog = new StringBuilder();
-        if (!ignoreQualifiersAtRuntime) {
-            if (stringHasValue(runtimeCatalog)) {
-                localCatalog.append(runtimeCatalog);
-            } else if (stringHasValue(introspectedCatalog)) {
-                localCatalog.append(introspectedCatalog);
-            }
+        if (stringHasValue(introspectedCatalog)) {
+        	localCatalog.append(introspectedCatalog);
         }
         if (localCatalog.length() > 0) {
             addDelimiters(localCatalog);
         }
         StringBuilder localSchema = new StringBuilder();
-        if (!ignoreQualifiersAtRuntime) {
-            if (stringHasValue(runtimeSchema)) {
-                localSchema.append(runtimeSchema);
-            } else if (stringHasValue(introspectedSchema)) {
-                localSchema.append(introspectedSchema);
-            }
+        if (stringHasValue(introspectedSchema)) {
+        	localSchema.append(introspectedSchema);
         }
         if (localSchema.length() > 0) {
             addDelimiters(localSchema);
         }
         StringBuilder localTableName = new StringBuilder();
-        if (stringHasValue(runtimeTableName)) {
-            localTableName.append(runtimeTableName);
-        } else {
-            localTableName.append(introspectedTableName);
-        }
+        localTableName.append(introspectedTableName);
         addDelimiters(localTableName);
         return composeFullyQualifiedTableName(localCatalog.toString(), localSchema.toString(), localTableName.toString(), '.');
     }
@@ -126,20 +103,7 @@ public class FullyQualifiedTable {
         if (stringHasValue(domainObjectName)) {
             return domainObjectName;
         }
-        String finalDomainObjectName;
-        if (stringHasValue(runtimeTableName)) {
-            finalDomainObjectName =  getCamelCaseString(runtimeTableName, true);
-        } else {
-            finalDomainObjectName =  getCamelCaseString(introspectedTableName, true);
-        }
-        if (domainObjectRenamingRule != null) {
-            Pattern pattern = Pattern.compile(domainObjectRenamingRule.getSearchString());
-            String replaceString = domainObjectRenamingRule.getReplaceString();
-            replaceString = replaceString == null ? "" : replaceString; 
-            Matcher matcher = pattern.matcher(finalDomainObjectName);
-            finalDomainObjectName = matcher.replaceAll(replaceString);
-        }
-        return finalDomainObjectName;
+        return getCamelCaseString(introspectedTableName, true);
     }
     
     public String getAlias() {
