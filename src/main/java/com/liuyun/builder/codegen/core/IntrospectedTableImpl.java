@@ -81,8 +81,8 @@ public class IntrospectedTableImpl extends IntrospectedTable {
             //构造GeneratedJavaFile
             for (CompilationUnit compilationUnit : compilationUnits) {
                 GeneratedJavaFile gjf = new GeneratedJavaFile(compilationUnit,
-                		        tablesConfiguration.getJavaModelConfiguration().getTargetProject(),
-                		        tablesConfiguration.getJavaModelConfiguration().getTargetPackage(),
+                		        tablesConfiguration.getTargetProject(),
+                		        tablesConfiguration.getTargetPackage(),
                                 context.getProperty(PropertyRegistry.CONTEXT_JAVA_FILE_ENCODING),
                                 context.getJavaFormatter());
                 answer.add(gjf);
@@ -93,8 +93,8 @@ public class IntrospectedTableImpl extends IntrospectedTable {
             List<CompilationUnit> compilationUnits = javaGenerator.getCompilationUnits();
             for (CompilationUnit compilationUnit : compilationUnits) {
                 GeneratedJavaFile gjf = new GeneratedJavaFile(compilationUnit,
-                		        tablesConfiguration.getJavaMapperConfiguration().getTargetProject(),
-                		        tablesConfiguration.getJavaMapperConfiguration().getTargetPackage(),
+                		        tablesConfiguration.getTargetProject(),
+                		        tablesConfiguration.getTargetPackage(),
                                 context.getProperty(PropertyRegistry.CONTEXT_JAVA_FILE_ENCODING),
                                 context.getJavaFormatter());
                 answer.add(gjf);
