@@ -485,13 +485,10 @@ public abstract class IntrospectedTable {
     //获取JavaModel的包
     protected String calculateJavaModelPackage() {
         JavaModelConfiguration config = tablesConfiguration.getJavaModelConfiguration();
-        StringBuilder sb = new StringBuilder();
-        if(!stringHasValue(config.getTargetPackage())) {
-        	sb.append(config.getTargetPackage());
-        } else {
-        	sb.append(tablesConfiguration.getTargetPackage());
+        if(config != null && !stringHasValue(config.getTargetPackage())) {
+        	return config.getTargetPackage();
         }
-        return sb.toString();
+        return tablesConfiguration.getTargetPackage();
     }
 
     //计算JavaMapper属性
@@ -501,7 +498,7 @@ public abstract class IntrospectedTable {
         }
         StringBuilder sb = new StringBuilder();
         //设置JavaMapper
-        sb.setLength(0);
+        sb.setLength(0); 
         sb.append(calculateJavaMapperPackage());
         sb.append('.');
         if (stringHasValue(tablesConfiguration.getJavaMapperConfiguration().getName())) {
@@ -520,13 +517,10 @@ public abstract class IntrospectedTable {
     //获取JavaMapper的包
     protected String calculateJavaMapperPackage() {
         JavaMapperConfiguration config = tablesConfiguration.getJavaMapperConfiguration();
-        StringBuilder sb = new StringBuilder();
-        if(!stringHasValue(config.getTargetPackage())) {
-        	sb.append(config.getTargetPackage());
-        } else {
-        	sb.append(tablesConfiguration.getTargetPackage());
+        if(config != null && !stringHasValue(config.getTargetPackage())) {
+        	return config.getTargetPackage();
         }
-        return sb.toString();
+        return tablesConfiguration.getTargetPackage();
     }
     
     //计算xmlMapper属性
@@ -544,8 +538,9 @@ public abstract class IntrospectedTable {
     //计算XmlMapper文件名
     protected String calculateXmlMapperFileName() {
         StringBuilder sb = new StringBuilder();
-        if (stringHasValue(tablesConfiguration.getXmlMapperConfiguration().getName())) {
-            String mapperName = tablesConfiguration.getXmlMapperConfiguration().getName();
+        XmlMapperConfiguration config = tablesConfiguration.getXmlMapperConfiguration();
+        if (config != null && stringHasValue(config.getName())) {
+            String mapperName = config.getName();
             int ind = mapperName.lastIndexOf('.');
             if (ind == -1) {
                 sb.append(mapperName);
