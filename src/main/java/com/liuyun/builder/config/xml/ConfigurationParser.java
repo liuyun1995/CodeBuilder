@@ -1,6 +1,5 @@
 package com.liuyun.builder.config.xml;
 
-import static com.liuyun.builder.internal.utils.messages.Messages.getString;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -13,13 +12,10 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
-import org.w3c.dom.DocumentType;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
-import com.liuyun.builder.codegen.util.XmlConstants;
 import com.liuyun.builder.config.Configuration;
 import com.liuyun.builder.exception.XMLParserException;
 
@@ -111,7 +107,7 @@ public class ConfigurationParser {
     //解析配置方法
     private Configuration parseConfiguration(Element rootNode) throws XMLParserException {
     	//新建MyBatisGenerator配置解析器
-        MyBatisGeneratorConfigurationParser parser = new MyBatisGeneratorConfigurationParser(extraProperties);
+        CodeBuilderConfigurationParser parser = new CodeBuilderConfigurationParser(extraProperties);
         //调用解析方法从根结点开始解析
         return parser.parseConfiguration(rootNode);
     }

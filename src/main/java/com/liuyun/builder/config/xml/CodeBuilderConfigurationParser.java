@@ -24,14 +24,14 @@ import com.liuyun.builder.exception.XMLParserException;
 import com.liuyun.builder.internal.ObjectFactory;
 
 //配置解析器
-public class MyBatisGeneratorConfigurationParser {
+public class CodeBuilderConfigurationParser {
 	
 	//额外属性
     private Properties extraProperties;
     //配置属性
     private Properties configurationProperties;
 
-    public MyBatisGeneratorConfigurationParser(Properties extraProperties) {
+    public CodeBuilderConfigurationParser(Properties extraProperties) {
         super();
         if (extraProperties == null) {
             this.extraProperties = new Properties();
