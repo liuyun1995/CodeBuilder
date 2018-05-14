@@ -196,12 +196,15 @@ public class ObjectFactory {
     
     //创建注释生成器
     public static CommentGenerator createCommentGenerator(Context context) {
+    	//获取注释生成器配置
         CommentGeneratorConfiguration config = context.getCommentGeneratorConfiguration();
         CommentGenerator answer;
         String type;
         if (config == null || config.getConfigurationType() == null) {
-            type = DefaultCommentGenerator.class.getName();
+        	//如果为空则用默认注释生成器
+            type = NullCommentGenerator.class.getName();
         } else {
+        	//否则使用配置的注释生成器
             type = config.getConfigurationType();
         }
         answer = (CommentGenerator) createInternalObject(type);

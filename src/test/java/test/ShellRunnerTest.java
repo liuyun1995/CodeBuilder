@@ -8,7 +8,7 @@ public class ShellRunnerTest {
 		
 		String[] args1 = {"-configfile", "src/test/resources/CodeBuidler.xml"};
 		String[] args2 = {"-configfile", "src/test/resources/CodeBuidler2.xml"};
-		ShellRunner.main(args2);
+		ShellRunner.main(args1);
 		
 	}
 

@@ -111,8 +111,8 @@ public class IntrospectedTableImpl extends IntrospectedTable {
         if (xmlMapperGenerator != null) {
             Document document = xmlMapperGenerator.getDocument();
             GeneratedXmlFile gxf = new GeneratedXmlFile(document, getXmlMapperFileName(), 
-                    tablesConfiguration.getXmlMapperConfiguration().getTargetProject(),
-                    tablesConfiguration.getXmlMapperConfiguration().getTargetPackage(),
+                    tablesConfiguration.getTargetProject(),
+                    tablesConfiguration.getTargetPackage(),
                     true, context.getXmlFormatter());
             if (context.getPlugins().sqlMapGenerated(gxf, this)) {
                 answer.add(gxf);

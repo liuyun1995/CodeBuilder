@@ -26,8 +26,9 @@ public class SelectMethodGenerator extends AbstractJavaMapperMethodGenerator {
         Set<FullyQualifiedJavaType> importedTypes = new TreeSet<FullyQualifiedJavaType>();
         Method method = new Method();
         method.setVisibility(JavaVisibility.PUBLIC);
-
-        FullyQualifiedJavaType returnType = introspectedTable.getRules().calculateAllFieldsClass();
+        
+        FullyQualifiedJavaType returnType = new FullyQualifiedJavaType(introspectedTable.getBaseRecordType());
+        //FullyQualifiedJavaType returnType = introspectedTable.getRules().calculateAllFieldsClass();
         method.setReturnType(returnType);
         importedTypes.add(returnType);
         method.setName(introspectedTable.getSelectStatementId());
@@ -37,6 +38,7 @@ public class SelectMethodGenerator extends AbstractJavaMapperMethodGenerator {
             importedTypes.add(type);
             method.addParameter(new Parameter(type, "key")); 
         } else {
+        	//遍历主键列, 设置参数
             List<IntrospectedColumn> introspectedColumns = introspectedTable.getPrimaryKeyColumns();
             boolean annotate = introspectedColumns.size() > 1;
             if (annotate) {

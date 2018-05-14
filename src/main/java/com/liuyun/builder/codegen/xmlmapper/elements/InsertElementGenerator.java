@@ -31,12 +31,7 @@ public class InsertElementGenerator extends AbstractXmlElementGenerator {
         //设置id属性
         answer.addAttribute(new Attribute("id", introspectedTable.getInsertStatementId())); 
         //设置parameterType属性
-        FullyQualifiedJavaType parameterType;
-        if (isSimple) {
-            parameterType = new FullyQualifiedJavaType(introspectedTable.getBaseRecordType());
-        } else {
-            parameterType = introspectedTable.getRules().calculateAllFieldsClass();
-        }
+        FullyQualifiedJavaType parameterType = new FullyQualifiedJavaType(introspectedTable.getBaseRecordType());
         answer.addAttribute(new Attribute("parameterType", parameterType.getFullyQualifiedName()));
         //添加注释
         context.getCommentGenerator().addComment(answer);

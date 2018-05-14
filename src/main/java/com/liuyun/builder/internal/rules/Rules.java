@@ -18,19 +18,19 @@ public interface Rules {
     //生成select方法
     boolean generateSelect();
     
-    //生成resultMap(xmlMapper)
+    //生成resultMap
     boolean generateResultMap();
 
-    //生成BaseColumnList(xmlMapper)
+    //生成BaseColumnList
     boolean generateBaseColumnList();
     
-    //是否是主键(javaModel)
+    //生成主键类
     boolean generatePrimaryKeyClass();
 
-    //是否是基础字段(javaModel)
+    //生成基础字段类
     boolean generateBaseRecordClass();
     
-    //是否是javaClient
+    //生成javaClient
     boolean generateJavaClient();
 
     //获取逆向表

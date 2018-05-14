@@ -17,7 +17,7 @@ import com.liuyun.builder.config.label.JavaMapperConfiguration;
 import com.liuyun.builder.config.label.JavaModelConfiguration;
 import com.liuyun.builder.config.label.TablesConfiguration;
 import com.liuyun.builder.config.label.XmlMapperConfiguration;
-import com.liuyun.builder.internal.rules.ConditionalModelRules;
+import com.liuyun.builder.internal.rules.SimpleModelRules;
 import com.liuyun.builder.internal.rules.Rules;
 
 //逆向表
@@ -467,7 +467,7 @@ public abstract class IntrospectedTable {
     	calculateJavaModelAttributes();        //计算JavaModel属性
         calculateXmlMapperAttributes();        //计算XmlMapper属性
         //根据类型获取不同的规则实例
-        rules = new ConditionalModelRules(this);
+        rules = new SimpleModelRules(this);
         context.getPlugins().initialized(this);
     }
     
@@ -493,15 +493,11 @@ public abstract class IntrospectedTable {
 
     //计算JavaMapper属性
     protected void calculateJavaMapperAttributes() {
-        if (tablesConfiguration.getJavaMapperConfiguration() == null) {
-            return;
-        }
-        StringBuilder sb = new StringBuilder();
-        //设置JavaMapper
-        sb.setLength(0); 
+    	StringBuilder sb = new StringBuilder();
         sb.append(calculateJavaMapperPackage());
         sb.append('.');
-        if (stringHasValue(tablesConfiguration.getJavaMapperConfiguration().getName())) {
+        JavaMapperConfiguration config = tablesConfiguration.getJavaMapperConfiguration();
+        if (config != null && stringHasValue(config.getName())) {
             sb.append(tablesConfiguration.getJavaMapperConfiguration().getName());
         } else {
             if (stringHasValue(fullyQualifiedTable.getDomainObjectSubPackage())) {

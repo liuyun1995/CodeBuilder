@@ -50,9 +50,12 @@ public abstract class BaseRules implements Rules {
     @Override
     public FullyQualifiedJavaType calculateAllFieldsClass() {
         String answer;
+        //是否生成基础记录类
         if (generateBaseRecordClass()) {
+        	//获取基础记录类型
             answer = introspectedTable.getBaseRecordType();
         } else {
+        	//获取主键类型
             answer = introspectedTable.getPrimaryKeyType();
         }
         return new FullyQualifiedJavaType(answer);

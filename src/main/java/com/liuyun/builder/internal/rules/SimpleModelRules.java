@@ -2,19 +2,19 @@ package com.liuyun.builder.internal.rules;
 
 import com.liuyun.builder.api.IntrospectedTable;
 
-public class ConditionalModelRules extends BaseRules {
+public class SimpleModelRules extends BaseRules {
 	
-    public ConditionalModelRules(IntrospectedTable introspectedTable) {
+    public SimpleModelRules(IntrospectedTable introspectedTable) {
         super(introspectedTable);
     }
     
-    //生成只包含主键的类
+    //生成主键类
     @Override
     public boolean generatePrimaryKeyClass() {
         return introspectedTable.getPrimaryKeyColumns().size() > 1;
     }
     
-    //生成包含基础字段的类
+    //生成基础记录类
     @Override
 	public boolean generateBaseRecordClass() {
 		return false;

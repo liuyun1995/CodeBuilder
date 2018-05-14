@@ -25,13 +25,10 @@ public class InsertMethodGenerator extends AbstractJavaMapperMethodGenerator {
         method.setVisibility(JavaVisibility.PUBLIC);                    //设置访问标志
         method.setName(introspectedTable.getInsertStatementId());       //设置方法名称
 
-        FullyQualifiedJavaType parameterType;
-        if (isSimple) {
-            parameterType = new FullyQualifiedJavaType(introspectedTable.getBaseRecordType());
-        } else {
-            parameterType = introspectedTable.getRules().calculateAllFieldsClass();
-        }
-
+        //获取insert方法参数类型
+        FullyQualifiedJavaType parameterType = new FullyQualifiedJavaType(introspectedTable.getBaseRecordType());
+        
+        //添加进导入类型集合
         Set<FullyQualifiedJavaType> importedTypes = new TreeSet<FullyQualifiedJavaType>();
         importedTypes.add(parameterType);                              //添加导入类型
         method.addParameter(new Parameter(parameterType, "record"));   //设置方法参数
