@@ -93,12 +93,12 @@ public class ShellRunner {
             Configuration config = cp.parseConfiguration(configurationFile);
             //获取shell回调器
             DefaultShellCallback shellCallback = new DefaultShellCallback(arguments.containsKey(OVERWRITE));
-            //构造MyBatisGenerator
-            MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, shellCallback, warnings);
+            //构造CodeBuilder
+            CodeBuilder codeBuilder = new CodeBuilder(config, shellCallback, warnings);
             //获取进程回调器
             ProgressCallback progressCallback = arguments.containsKey(VERBOSE) ? new VerboseProgressCallback() : null;
             //调用生成文件的方法
-            myBatisGenerator.generate(progressCallback, contexts, fullyqualifiedTables);
+            codeBuilder.generate(progressCallback, contexts, fullyqualifiedTables);
         } catch (XMLParserException e) {
             writeLine(getString("Progress.3")); 
             writeLine();

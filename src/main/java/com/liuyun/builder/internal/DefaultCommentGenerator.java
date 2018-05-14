@@ -11,7 +11,7 @@ import com.liuyun.builder.internal.utils.StringUtil;
 import com.liuyun.builder.api.CommentGenerator;
 import com.liuyun.builder.api.IntrospectedColumn;
 import com.liuyun.builder.api.IntrospectedTable;
-import com.liuyun.builder.api.MyBatisGenerator;
+import com.liuyun.builder.api.CodeBuilder;
 import com.liuyun.builder.api.dom.java.CompilationUnit;
 import com.liuyun.builder.api.dom.java.Field;
 import com.liuyun.builder.api.dom.java.FullyQualifiedJavaType;
@@ -357,7 +357,7 @@ public class DefaultCommentGenerator implements CommentGenerator {
 		} else {
 			buffer.append("value=\""); 
 		}
-		buffer.append(MyBatisGenerator.class.getName());
+		buffer.append(CodeBuilder.class.getName());
 		buffer.append('\"');
 		if (!suppressDate && !suppressAllComments) {
 			buffer.append(", date=\""); 

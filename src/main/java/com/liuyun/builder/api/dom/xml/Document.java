@@ -7,8 +7,7 @@ public class Document {
     private String publicId;
     
     private String systemId;
-
-    //根结点
+    
     private XmlElement rootElement;
     
     public Document(String publicId, String systemId) {

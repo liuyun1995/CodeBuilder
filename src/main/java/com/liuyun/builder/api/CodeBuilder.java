@@ -23,7 +23,7 @@ import com.liuyun.builder.internal.NullProgressCallback;
 import com.liuyun.builder.internal.ObjectFactory;
 import com.liuyun.builder.internal.XmlFileMergerJaxp;
 
-public class MyBatisGenerator {
+public class CodeBuilder {
 
     //配置类
     private Configuration configuration;
@@ -43,7 +43,7 @@ public class MyBatisGenerator {
     //projects集合
     private Set<String> projects;
 
-    public MyBatisGenerator(Configuration configuration, ShellCallback shellCallback,
+    public CodeBuilder(Configuration configuration, ShellCallback shellCallback,
             List<String> warnings) throws InvalidConfigurationException {
         super();
         if (configuration == null) {
