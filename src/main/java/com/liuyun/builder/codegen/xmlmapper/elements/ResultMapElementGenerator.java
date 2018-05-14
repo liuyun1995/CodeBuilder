@@ -22,16 +22,10 @@ public class ResultMapElementGenerator extends AbstractXmlElementGenerator {
         XmlElement answer = new XmlElement("resultMap");
         //设置id属性
         answer.addAttribute(new Attribute("id", introspectedTable.getBaseResultMapId()));
-        String returnType;
-        if (isSimple) {
-            returnType = introspectedTable.getBaseRecordType();
-        } else {
-            if (introspectedTable.getRules().generateBaseRecordClass()) {
-                returnType = introspectedTable.getBaseRecordType();
-            } else {
-                returnType = introspectedTable.getPrimaryKeyType();
-            }
-        }
+        
+        //获取返回类型
+        String returnType = introspectedTable.getBaseRecordType();
+        
         //设置type属性
         answer.addAttribute(new Attribute("type", returnType));
         

@@ -66,7 +66,7 @@ public class FullyQualifiedTable {
     }
     
     //运行时获取全限定表名
-    public String getFullyQualifiedTableNameAtRuntime() {
+    public String getFullyQualifiedTableName() {
         StringBuilder localCatalog = new StringBuilder();
         if (stringHasValue(introspectedCatalog)) {
         	localCatalog.append(introspectedCatalog);

@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import org.mybatis.generator.api.IntrospectedTable.InternalAttribute;
+
 import com.liuyun.builder.config.GeneratedKey;
 import com.liuyun.builder.config.PropertyRegistry;
 import com.liuyun.builder.config.label.Context;
@@ -42,6 +44,7 @@ public abstract class IntrospectedTable {
         ATTR_BASE_COLUMN_LIST_ID, 
         
         ATTR_PRIMARY_KEY_TYPE,
+        ATTR_FULLY_QUALIFIED_TABLE_NAME,
     }
 
     //表的配置
@@ -521,6 +524,7 @@ public abstract class IntrospectedTable {
     
     //计算xmlMapper属性
     protected void calculateXmlMapperAttributes() {
+    	setSqlMapFullyQualifiedRuntimeTableName(calculateFullyQualifiedTableName());
         setXmlMapperFileName(calculateXmlMapperFileName());
         setXmlMapperPackage(calculateXmlMapperPackage());
         setInsertStatementId("insert");
@@ -603,9 +607,17 @@ public abstract class IntrospectedTable {
 		return null;
 	}
 
-	public Object getFullyQualifiedTableNameAtRuntime() {
-		return null;
+	public Object getFullyQualifiedTableName() {
+		return internalAttributes.get(InternalAttribute.ATTR_FULLY_QUALIFIED_TABLE_NAME);
 	}
+	
+	public void setFullyQualifiedTableName(String fullyQualifiedTableName) {
+        internalAttributes.put(InternalAttribute.ATTR_FULLY_QUALIFIED_TABLE_NAME, fullyQualifiedTableName);
+    }
+	
+	protected String calculateFullyQualifiedTableName() {
+        return fullyQualifiedTable.getFullyQualifiedTableName();
+    }
 
 	public GeneratedKey getGeneratedKey() {
 		return null;

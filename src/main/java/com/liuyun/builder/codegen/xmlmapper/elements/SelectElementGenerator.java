@@ -53,7 +53,7 @@ public class SelectElementGenerator extends AbstractXmlElementGenerator {
         }
         sb.setLength(0);
         sb.append("from ");
-        sb.append(introspectedTable.getFullyQualifiedTableNameAtRuntime());
+        sb.append(introspectedTable.getFullyQualifiedTableName());
         answer.addElement(new TextElement(sb.toString()));
 
         boolean and = false;

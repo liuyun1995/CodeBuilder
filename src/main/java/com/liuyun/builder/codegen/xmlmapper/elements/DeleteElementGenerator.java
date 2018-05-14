@@ -40,7 +40,7 @@ public class DeleteElementGenerator extends AbstractXmlElementGenerator {
 
         StringBuilder sb = new StringBuilder();
         sb.append("delete from "); 
-        sb.append(introspectedTable.getFullyQualifiedTableNameAtRuntime());
+        sb.append(introspectedTable.getFullyQualifiedTableName());
         answer.addElement(new TextElement(sb.toString()));
 
         boolean and = false;
