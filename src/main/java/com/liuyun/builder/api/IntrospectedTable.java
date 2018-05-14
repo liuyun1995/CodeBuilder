@@ -1,26 +1,19 @@
 package com.liuyun.builder.api;
 
-import static com.liuyun.builder.internal.utils.StringUtil.isTrue;
 import static com.liuyun.builder.internal.utils.StringUtil.stringHasValue;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
-
-import org.mybatis.generator.api.IntrospectedTable.InternalAttribute;
-
 import com.liuyun.builder.config.GeneratedKey;
-import com.liuyun.builder.config.PropertyRegistry;
 import com.liuyun.builder.config.label.Context;
 import com.liuyun.builder.config.label.JavaMapperConfiguration;
 import com.liuyun.builder.config.label.JavaModelConfiguration;
 import com.liuyun.builder.config.label.TablesConfiguration;
 import com.liuyun.builder.config.label.XmlMapperConfiguration;
-import com.liuyun.builder.internal.rules.SimpleModelRules;
 import com.liuyun.builder.internal.rules.Rules;
+import com.liuyun.builder.internal.rules.SimpleModelRules;
 
 //逆向表
 public abstract class IntrospectedTable {
@@ -524,7 +517,7 @@ public abstract class IntrospectedTable {
     
     //计算xmlMapper属性
     protected void calculateXmlMapperAttributes() {
-    	setSqlMapFullyQualifiedRuntimeTableName(calculateFullyQualifiedTableName());
+    	setFullyQualifiedTableName(calculateFullyQualifiedTableName());
         setXmlMapperFileName(calculateXmlMapperFileName());
         setXmlMapperPackage(calculateXmlMapperPackage());
         setInsertStatementId("insert");

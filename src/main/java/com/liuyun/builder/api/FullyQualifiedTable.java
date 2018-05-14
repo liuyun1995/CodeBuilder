@@ -90,7 +90,7 @@ public class FullyQualifiedTable {
     //运行时获取表别名
     public String getAliasedFullyQualifiedTableNameAtRuntime() {
         StringBuilder sb = new StringBuilder();
-        sb.append(getFullyQualifiedTableNameAtRuntime());
+        sb.append(getFullyQualifiedTableName());
         if (stringHasValue(alias)) {
             sb.append(' ');
             sb.append(alias);
