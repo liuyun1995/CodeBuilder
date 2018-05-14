@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE codeBuilder SYSTEM "src/main/resources/codebuilder.dtd">
+<!DOCTYPE codeBuilder SYSTEM "codebuilder.dtd">
 <codeBuilder>
 
     <jdbcDriver location="E:\Tools\mybatisGenerator\mysql-connector-java-5.1.6.jar"/>
@@ -10,7 +10,10 @@
                         userId="itf"
                         password="|1|nxlc6h0IKF7DMfSq64Z2IsXB7kc=|" />
         
-        <tables tableName="itf_pur_returns_vmi_exp" targetProject="E:\CodeBuilder" targetPackage="com.liuyun"/>
+        <tables tableName="pur_purchase_info_records" targetProject="E:\CodeBuilder" targetPackage="mysql"/>
+		<tables tableName="itf_fnd_coop_vendor_exp" targetProject="E:\CodeBuilder" targetPackage="mysql"/>
+		<tables tableName="itf_pur_rfx_vendor_allot" targetProject="E:\CodeBuilder" targetPackage="mysql"/>
+		<tables tableName="itf_pur_vendors" targetProject="E:\CodeBuilder" targetPackage="mysql"/>
 		
     </context>
 	

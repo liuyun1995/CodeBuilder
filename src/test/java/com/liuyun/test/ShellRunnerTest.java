@@ -1,4 +1,4 @@
-package test;
+package com.liuyun.test;
 
 import com.liuyun.builder.api.ShellRunner;
 

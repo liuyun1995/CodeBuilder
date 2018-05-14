@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE codeBuilder SYSTEM "codebuilder.dtd">
+<codeBuilder>
+
+	<jdbcDriver location="E:\Tools\mybatisGenerator\ojdbc6.jar"/>
+    
+    <context id="mysql">
+		<jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+                        connectionURL="jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS_LIST=(LOAD_BALANCE=YES)(FAILOVER=YES)
+                        (ADDRESS=(PROTOCOL=tcp)(HOST=192.168.4.48)(PORT=1521))
+                        (ADDRESS=(PROTOCOL=tcp)(HOST=192.168.4.49)(PORT=1521))
+                        (ADDRESS=(PROTOCOL=tcp)(HOST=192.168.4.50)(PORT=1521)))
+	                    (CONNECT_DATA=(SERVER = DEDICATED)(SERVICE_NAME = HONGHE)))"
+                        userId="srm"
+                        password="srm"/>
+        
+        <tables tableName="pur_purchase_info_records" targetProject="E:\CodeBuilder" targetPackage="oracle"/>
+		
+    </context>
+	
+</codeBuilder>
