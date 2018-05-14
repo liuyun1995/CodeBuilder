@@ -1,4 +1,4 @@
-package com.liuyun.builder.config;
+package com.liuyun.builder.config.label;
 
 import static com.liuyun.builder.internal.utils.StringUtil.stringHasValue;
 import static com.liuyun.builder.internal.utils.messages.Messages.getString;

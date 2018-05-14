@@ -1,4 +1,4 @@
-package com.liuyun.builder.config;
+package com.liuyun.builder.config.label;
 
 import static com.liuyun.builder.internal.utils.StringUtil.stringContainsSpace;
 import static com.liuyun.builder.internal.utils.StringUtil.stringHasValue;
@@ -6,6 +6,7 @@ import static com.liuyun.builder.internal.utils.messages.Messages.getString;
 import java.util.List;
 import com.liuyun.builder.api.dom.xml.Attribute;
 import com.liuyun.builder.api.dom.xml.XmlElement;
+import com.liuyun.builder.config.PropertyHolder;
 
 public class ColumnOverride extends PropertyHolder {
 	
