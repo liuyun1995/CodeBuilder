@@ -8,7 +8,7 @@ public class ShellRunnerTest {
 		
 		String[] args1 = {"-configfile", "src/test/resources/MySqlConfig.xml"};
 		String[] args2 = {"-configfile", "src/test/resources/OracleConfig.xml"};
-		ShellRunner.main(args1);
+		ShellRunner.main(args2);
 		
 	}
 

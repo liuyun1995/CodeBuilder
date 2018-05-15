@@ -151,72 +151,9 @@ public class DatabaseIntrospector {
     
     //获取列名
     private Map<ActualTableName, List<IntrospectedColumn>> getColumns(TablesConfiguration tc) throws SQLException {
-    	String localCatalog;
-        String localSchema;
-        String localTableName;
-        
-        localCatalog = tc.getCatalog();
-        localSchema = tc.getSchema();
-        localTableName = tc.getTableName();
-        
-//        //是否是唯一的标识符
-//        boolean delimitIdentifiers = tc.isDelimitIdentifiers()
-//                || stringContainsSpace(tc.getCatalog())
-//                || stringContainsSpace(tc.getSchema())
-//                || stringContainsSpace(tc.getTableName());
-//        
-//        //如果是唯一标识符则直接设值
-//        if (delimitIdentifiers) {
-//            localCatalog = tc.getCatalog();
-//            localSchema = tc.getSchema();
-//            localTableName = tc.getTableName();
-//        //否则转换成小写
-//        } else if (databaseMetaData.storesLowerCaseIdentifiers()) {
-//            localCatalog = tc.getCatalog() == null ? null : tc.getCatalog().toLowerCase();
-//            localSchema = tc.getSchema() == null ? null : tc.getSchema().toLowerCase();
-//            localTableName = tc.getTableName() == null ? null : tc.getTableName().toLowerCase();
-//        //全部转换成大写
-//        } else if (databaseMetaData.storesUpperCaseIdentifiers()) {
-//            localCatalog = tc.getCatalog() == null ? null : tc.getCatalog().toUpperCase();
-//            localSchema = tc.getSchema() == null ? null : tc.getSchema().toUpperCase();
-//            localTableName = tc.getTableName() == null ? null : tc.getTableName().toUpperCase();
-//        //否则的话还是设置原值
-//        } else {
-//            localCatalog = tc.getCatalog();
-//            localSchema = tc.getSchema();
-//            localTableName = tc.getTableName();
-//        }
-
-//        //是否启用通配符转义
-//        if (tc.isWildcardEscapingEnabled()) {
-//            String escapeString = databaseMetaData.getSearchStringEscape();
-//            StringBuilder sb = new StringBuilder();
-//            StringTokenizer st;
-//            //将localSchema中的"_"和"%"替换为数据库的通配符
-//            if (localSchema != null) {
-//                st = new StringTokenizer(localSchema, "_%", true); 
-//                while (st.hasMoreTokens()) {
-//                    String token = st.nextToken();
-//                    if (token.equals("_") || token.equals("%")) { 
-//                        sb.append(escapeString);
-//                    }
-//                    sb.append(token);
-//                }
-//                localSchema = sb.toString();
-//            }
-//            //将localTableName中的"_"和"%"替换为数据库的通配符
-//            sb.setLength(0);
-//            st = new StringTokenizer(localTableName, "_%", true); 
-//            while (st.hasMoreTokens()) {
-//                String token = st.nextToken();
-//                if (token.equals("_") || token.equals("%")) { 
-//                    sb.append(escapeString);
-//                }
-//                sb.append(token);
-//            }
-//            localTableName = sb.toString();
-//        }
-
+    	String localCatalog = tc.getCatalog();
+        String localSchema = tc.getSchema();
+        String localTableName = tc.getTableName();
         Map<ActualTableName, List<IntrospectedColumn>> answer = new HashMap<ActualTableName, List<IntrospectedColumn>>();
         
         if (logger.isDebugEnabled()) {
@@ -224,7 +161,7 @@ public class DatabaseIntrospector {
             logger.debug(getString("Tracing.1", fullTableName)); 
         }
         
-        ResultSet rs = databaseMetaData.getColumns(localCatalog, localSchema, localTableName, "%");
+        ResultSet rs = databaseMetaData.getColumns(null, "%", localTableName, "%");
         
         boolean supportsIsAutoIncrement = false;
         boolean supportsIsGeneratedColumn = false;
