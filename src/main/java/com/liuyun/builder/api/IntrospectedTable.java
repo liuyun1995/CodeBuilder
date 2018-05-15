@@ -27,6 +27,7 @@ public abstract class IntrospectedTable {
         ATTR_XML_MAPPER_PACKAGE,
         ATTR_XML_MAPPER_FILE_NAME,
         ATTR_JAVA_MAPPER_TYPE,
+        ATTR_XML_MAPPER_NAMESPACE,
         
         ATTR_INSERT_STATEMENT_ID,
         ATTR_DELETE_STATEMENT_ID,
@@ -38,6 +39,7 @@ public abstract class IntrospectedTable {
         
         ATTR_PRIMARY_KEY_TYPE,
         ATTR_FULLY_QUALIFIED_TABLE_NAME,
+        ATTR_ACTUAL_TABLE_NAME
     }
 
     //表的配置
@@ -257,8 +259,18 @@ public abstract class IntrospectedTable {
     }
 
     //设置xmlMapper文件名
-    public void setXmlMapperFileName(String XmlMapperFileName) {
-        internalAttributes.put(InternalAttribute.ATTR_XML_MAPPER_FILE_NAME, XmlMapperFileName);
+    public void setXmlMapperFileName(String xmlMapperFileName) {
+        internalAttributes.put(InternalAttribute.ATTR_XML_MAPPER_FILE_NAME, xmlMapperFileName);
+    }
+    
+    //获取namespace
+    public String getXmlMapperNamespace() {
+    	return internalAttributes.get(InternalAttribute.ATTR_XML_MAPPER_NAMESPACE);
+    }
+    
+    //设置namespace
+    public void setXmlMapperNamespace(String xmlMapperNamespace) {
+    	internalAttributes.put(InternalAttribute.ATTR_XML_MAPPER_NAMESPACE, xmlMapperNamespace);
     }
     
     //获取DAO实现类类型
@@ -280,6 +292,24 @@ public abstract class IntrospectedTable {
     public void setPrimaryKeyType(String primaryKeyType) {
         internalAttributes.put(InternalAttribute.ATTR_PRIMARY_KEY_TYPE, primaryKeyType);
     }
+    
+    //获取全限定表名
+    public String getFullyQualifiedTableName() {
+		return internalAttributes.get(InternalAttribute.ATTR_FULLY_QUALIFIED_TABLE_NAME);
+	}
+	
+    //设置全限定表名
+	public void setFullyQualifiedTableName(String fullyQualifiedTableName) {
+        internalAttributes.put(InternalAttribute.ATTR_FULLY_QUALIFIED_TABLE_NAME, fullyQualifiedTableName);
+    }
+	
+	public String getActualTableName() {
+		return internalAttributes.get(InternalAttribute.ATTR_ACTUAL_TABLE_NAME);
+	}
+	
+	public void setActualTableName(String actualTableName) {
+		internalAttributes.put(InternalAttribute.ATTR_ACTUAL_TABLE_NAME, actualTableName);
+	}
     
     //--------------------------------------------------对列的一些操作-------------------------------------------------
     
@@ -517,9 +547,12 @@ public abstract class IntrospectedTable {
     
     //计算xmlMapper属性
     protected void calculateXmlMapperAttributes() {
+    	setActualTableName(tablesConfiguration.getTableName().toUpperCase());
     	setFullyQualifiedTableName(calculateFullyQualifiedTableName());
         setXmlMapperFileName(calculateXmlMapperFileName());
         setXmlMapperPackage(calculateXmlMapperPackage());
+        setXmlMapperNamespace(calculateXmlMapperNamespace());
+        
         setInsertStatementId("insert");
         setDeleteStatementId("delete");
         setUpdateStatementId("update");
@@ -595,18 +628,6 @@ public abstract class IntrospectedTable {
     public String getTableConfigurationProperty(String property) {
         return tablesConfiguration.getProperty(property);
     }
-
-	public String getSqlMapNamespace() {
-		return null;
-	}
-
-	public Object getFullyQualifiedTableName() {
-		return internalAttributes.get(InternalAttribute.ATTR_FULLY_QUALIFIED_TABLE_NAME);
-	}
-	
-	public void setFullyQualifiedTableName(String fullyQualifiedTableName) {
-        internalAttributes.put(InternalAttribute.ATTR_FULLY_QUALIFIED_TABLE_NAME, fullyQualifiedTableName);
-    }
 	
 	protected String calculateFullyQualifiedTableName() {
         return fullyQualifiedTable.getFullyQualifiedTableName();
@@ -615,5 +636,19 @@ public abstract class IntrospectedTable {
 	public GeneratedKey getGeneratedKey() {
 		return null;
 	}
-    
+	
+	protected String calculateXmlMapperNamespace() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(calculateXmlMapperPackage());
+        sb.append('.');
+        JavaMapperConfiguration config = tablesConfiguration.getJavaMapperConfiguration();
+        if (config != null && stringHasValue(config.getName())) {
+            sb.append(config.getName());
+        } else {
+            sb.append(fullyQualifiedTable.getDomainObjectName());
+            sb.append("Mapper"); 
+        }
+        return sb.toString();
+    }
+	
 }

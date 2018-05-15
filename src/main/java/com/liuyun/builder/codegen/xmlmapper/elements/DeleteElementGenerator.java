@@ -39,8 +39,8 @@ public class DeleteElementGenerator extends AbstractXmlElementGenerator {
         context.getCommentGenerator().addComment(answer);
 
         StringBuilder sb = new StringBuilder();
-        sb.append("delete from "); 
-        sb.append(introspectedTable.getFullyQualifiedTableName());
+        sb.append("delete from ");
+        sb.append(introspectedTable.getActualTableName());
         answer.addElement(new TextElement(sb.toString()));
 
         boolean and = false;

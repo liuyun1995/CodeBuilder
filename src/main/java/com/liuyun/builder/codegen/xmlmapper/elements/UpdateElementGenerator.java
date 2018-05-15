@@ -32,7 +32,7 @@ public class UpdateElementGenerator extends AbstractXmlElementGenerator {
 
         StringBuilder sb = new StringBuilder();
         sb.append("update ");
-        sb.append(introspectedTable.getFullyQualifiedTableName());
+        sb.append(introspectedTable.getActualTableName());
         answer.addElement(new TextElement(sb.toString()));
         
         sb.setLength(0);

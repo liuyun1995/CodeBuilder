@@ -161,7 +161,7 @@ public class DatabaseIntrospector {
             logger.debug(getString("Tracing.1", fullTableName)); 
         }
         
-        ResultSet rs = databaseMetaData.getColumns(null, "%", localTableName, "%");
+        ResultSet rs = databaseMetaData.getColumns(null, "%", localTableName.toUpperCase(), "%");
         
         boolean supportsIsAutoIncrement = false;
         boolean supportsIsGeneratedColumn = false;
@@ -263,8 +263,8 @@ public class DatabaseIntrospector {
     private void calculatePrimaryKey(FullyQualifiedTable table, IntrospectedTable introspectedTable) {
         ResultSet rs = null;
         try {
-            rs = databaseMetaData.getPrimaryKeys(table.getIntrospectedCatalog(), 
-                    table.getIntrospectedSchema(), table.getIntrospectedTableName());
+            rs = databaseMetaData.getPrimaryKeys(table.getIntrospectedCatalog(),
+                    table.getIntrospectedSchema(), table.getIntrospectedTableName().toUpperCase());
         } catch (SQLException e) {
             closeResultSet(rs);
             warnings.add(getString("Warning.15")); 

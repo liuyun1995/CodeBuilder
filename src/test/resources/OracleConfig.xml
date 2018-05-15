@@ -12,9 +12,9 @@
                         (ADDRESS=(PROTOCOL=tcp)(HOST=192.168.4.50)(PORT=1521)))
 	                    (CONNECT_DATA=(SERVER = DEDICATED)(SERVICE_NAME = HONGHE)))"
                         userId="srm"
-                        password="srm"/>
+                        password="srm" />
         
-        <tables tableName="pur_purchase_info_records" targetProject="E:\CodeBuilder" targetPackage="oracle"/>
+        <tables tableName="pur_vendor_life_cycle" targetProject="E:\CodeBuilder" targetPackage="oracle"/>
 		
     </context>
 	

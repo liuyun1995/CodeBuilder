@@ -26,7 +26,7 @@ public class XMLMapperGenerator extends AbstractXmlMapperGenerator {
         FullyQualifiedTable table = introspectedTable.getFullyQualifiedTable();
         progressCallback.startTask(getString("Progress.12", table.toString())); 
         XmlElement answer = new XmlElement("mapper"); 
-        String namespace = introspectedTable.getSqlMapNamespace();
+        String namespace = introspectedTable.getXmlMapperNamespace();
         answer.addAttribute(new Attribute("namespace", namespace));
         //添加备注
         context.getCommentGenerator().addRootComment(answer);

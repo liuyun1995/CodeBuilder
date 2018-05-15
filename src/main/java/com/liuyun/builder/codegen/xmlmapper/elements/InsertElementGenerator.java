@@ -52,7 +52,7 @@ public class InsertElementGenerator extends AbstractXmlElementGenerator {
         StringBuilder insertClause = new StringBuilder();
         insertClause.append("insert into ");
         //插入表名
-        insertClause.append(introspectedTable.getFullyQualifiedTableName());
+        insertClause.append(introspectedTable.getActualTableName());
         insertClause.append(" ("); 
         StringBuilder valuesClause = new StringBuilder();
         valuesClause.append("values ("); 

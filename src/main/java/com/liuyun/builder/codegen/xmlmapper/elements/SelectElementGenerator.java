@@ -39,21 +39,12 @@ public class SelectElementGenerator extends AbstractXmlElementGenerator {
         //添加查询语句
         StringBuilder sb = new StringBuilder();
         sb.append("select "); 
-//        if (stringHasValue(introspectedTable.getSelectByPrimaryKeyQueryId())) {
-//            sb.append('\'');
-//            sb.append(introspectedTable.getSelectByPrimaryKeyQueryId());
-//            sb.append("' as QUERYID,"); 
-//        }
         answer.addElement(new TextElement(sb.toString()));
         //获取基础列元素
         answer.addElement(getBaseColumnListElement());
-        if (introspectedTable.hasBLOBColumns()) {
-            //answer.addElement(new TextElement(",")); 
-            //answer.addElement(getBlobColumnListElement());
-        }
         sb.setLength(0);
         sb.append("from ");
-        sb.append(introspectedTable.getFullyQualifiedTableName());
+        sb.append(introspectedTable.getActualTableName());
         answer.addElement(new TextElement(sb.toString()));
 
         boolean and = false;

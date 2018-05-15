@@ -10,7 +10,6 @@
                         userId="itf"
                         password="|1|nxlc6h0IKF7DMfSq64Z2IsXB7kc=|" />
         
-        <tables tableName="pur_purchase_info_records" targetProject="E:\CodeBuilder" targetPackage="mysql"/>
 		<tables tableName="itf_fnd_coop_vendor_exp" targetProject="E:\CodeBuilder" targetPackage="mysql"/>
 		<tables tableName="itf_pur_rfx_vendor_allot" targetProject="E:\CodeBuilder" targetPackage="mysql"/>
 		<tables tableName="itf_pur_vendors" targetProject="E:\CodeBuilder" targetPackage="mysql"/>
