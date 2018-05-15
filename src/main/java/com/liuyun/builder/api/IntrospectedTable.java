@@ -1,11 +1,13 @@
 package com.liuyun.builder.api;
 
 import static com.liuyun.builder.internal.utils.StringUtil.stringHasValue;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
 import com.liuyun.builder.config.GeneratedKey;
 import com.liuyun.builder.config.label.Context;
 import com.liuyun.builder.config.label.JavaMapperConfiguration;
@@ -20,11 +22,8 @@ public abstract class IntrospectedTable {
 
     //内置属性
     protected enum InternalAttribute {
-        ATTR_DAO_IMPLEMENTATION_TYPE,
-        ATTR_DAO_INTERFACE_TYPE,
         ATTR_BASE_RECORD_TYPE,
         
-        ATTR_XML_MAPPER_PACKAGE,
         ATTR_XML_MAPPER_FILE_NAME,
         ATTR_JAVA_MAPPER_TYPE,
         ATTR_XML_MAPPER_NAMESPACE,
@@ -243,16 +242,6 @@ public abstract class IntrospectedTable {
         internalAttributes.put(InternalAttribute.ATTR_JAVA_MAPPER_TYPE, JavaMapperType);
     }
     
-    //获取xmlMapper包
-    public String getXmlMapperPackage() {
-        return internalAttributes.get(InternalAttribute.ATTR_XML_MAPPER_PACKAGE);
-    }
-
-    //设置xmlMapper包
-    public void setXmlMapperPackage(String XmlMapperPackage) {
-        internalAttributes.put(InternalAttribute.ATTR_XML_MAPPER_PACKAGE, XmlMapperPackage);
-    }
-    
     //获取xmlMapper文件名
     public String getXmlMapperFileName() {
         return internalAttributes.get(InternalAttribute.ATTR_XML_MAPPER_FILE_NAME);
@@ -271,16 +260,6 @@ public abstract class IntrospectedTable {
     //设置namespace
     public void setXmlMapperNamespace(String xmlMapperNamespace) {
     	internalAttributes.put(InternalAttribute.ATTR_XML_MAPPER_NAMESPACE, xmlMapperNamespace);
-    }
-    
-    //获取DAO实现类类型
-    public String getDAOImplementationType() {
-        return internalAttributes.get(InternalAttribute.ATTR_DAO_IMPLEMENTATION_TYPE);
-    }
-
-    //获取DAO接口类型
-    public String getDAOInterfaceType() {
-        return internalAttributes.get(InternalAttribute.ATTR_DAO_INTERFACE_TYPE);
     }
     
     //获取主键类型
@@ -303,10 +282,12 @@ public abstract class IntrospectedTable {
         internalAttributes.put(InternalAttribute.ATTR_FULLY_QUALIFIED_TABLE_NAME, fullyQualifiedTableName);
     }
 	
+	//获取实际表名
 	public String getActualTableName() {
 		return internalAttributes.get(InternalAttribute.ATTR_ACTUAL_TABLE_NAME);
 	}
 	
+	//设置实际表名
 	public void setActualTableName(String actualTableName) {
 		internalAttributes.put(InternalAttribute.ATTR_ACTUAL_TABLE_NAME, actualTableName);
 	}
@@ -550,15 +531,14 @@ public abstract class IntrospectedTable {
     	setActualTableName(tablesConfiguration.getTableName().toUpperCase());
     	setFullyQualifiedTableName(calculateFullyQualifiedTableName());
         setXmlMapperFileName(calculateXmlMapperFileName());
-        setXmlMapperPackage(calculateXmlMapperPackage());
         setXmlMapperNamespace(calculateXmlMapperNamespace());
         
+        setBaseResultMapId("BaseResultMap");
+        setBaseColumnListId("Base_Column_List");
         setInsertStatementId("insert");
         setDeleteStatementId("delete");
         setUpdateStatementId("update");
         setSelectStatementId("select");
-        setBaseResultMapId("BaseResultMap");
-        setBaseColumnListId("Base_Column_List");
     }
     
     //计算XmlMapper文件名
@@ -577,25 +557,6 @@ public abstract class IntrospectedTable {
         } else {
             sb.append(fullyQualifiedTable.getDomainObjectName());
             sb.append("Mapper.xml");
-        }
-        return sb.toString();
-    }
-    
-    //获取xmlMapper的包
-    protected String calculateXmlMapperPackage() {
-        StringBuilder sb = new StringBuilder();
-        XmlMapperConfiguration config = tablesConfiguration.getXmlMapperConfiguration();
-        if (config != null) {
-            sb.append(config.getTargetProject());
-            if (stringHasValue(tablesConfiguration.getXmlMapperConfiguration().getName())) {
-                String mapperName = tablesConfiguration.getXmlMapperConfiguration().getName();
-                int ind = mapperName.lastIndexOf('.');
-                if (ind != -1) {
-                    sb.append('.').append(mapperName.substring(0, ind));
-                }
-            } else if (stringHasValue(fullyQualifiedTable.getDomainObjectSubPackage())) {
-                sb.append('.').append(fullyQualifiedTable.getDomainObjectSubPackage());
-            }
         }
         return sb.toString();
     }
@@ -639,12 +600,14 @@ public abstract class IntrospectedTable {
 	
 	protected String calculateXmlMapperNamespace() {
         StringBuilder sb = new StringBuilder();
-        sb.append(calculateXmlMapperPackage());
-        sb.append('.');
         JavaMapperConfiguration config = tablesConfiguration.getJavaMapperConfiguration();
         if (config != null && stringHasValue(config.getName())) {
+        	sb.append(config.getTargetPackage());
+        	sb.append('.');
             sb.append(config.getName());
         } else {
+        	sb.append(tablesConfiguration.getTargetPackage());
+        	sb.append('.');
             sb.append(fullyQualifiedTable.getDomainObjectName());
             sb.append("Mapper"); 
         }

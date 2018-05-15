@@ -14,7 +14,7 @@
                         userId="srm"
                         password="srm" />
         
-        <tables tableName="pur_vendor_life_cycle" targetProject="E:\CodeBuilder" targetPackage="oracle"/>
+        <tables tableName="pur_vendor_life_cycle" targetProject="E:\CodeBuilder\Oracle" targetPackage="temp"/>
 		
     </context>
 	
